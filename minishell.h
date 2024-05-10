@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 20:30:32 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:45:56 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # include <termios.h>
 # include <string.h>
 # include <dirent.h>
+
+typedef struct command
+{
+	char		**cmd;
+	char		*cmd_path;
+	int			in_fd;
+	int			out_fd;
+	int			redir_type; // 0 - infile; 1 - outfile; 2 - append; I actually don't need it if I get from parsing ready fd
+	char		*delimiter;
+}	t_cmd
 
 typedef struct s_data
 {
