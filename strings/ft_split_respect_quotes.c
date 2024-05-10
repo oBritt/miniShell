@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 20:16:06 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/09 10:41:49 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:00:01 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,22 @@ static int	copy(char *words[], t_space *space, char *str, int before)
 	return (1);
 }
 
-static void	check_if_new_quotes_s(t_space *space, char **words, char c, \
+static int	check_if_new_quotes_s(t_space *space, char **words, char c, \
 int *before)
 {
 	if (space->str[space->pointer1] == 39)
 		space->one = 1;
-	if (space->str[space->pointer2] == 34)
+	if (space->str[space->pointer1] == 34)
 		space->two = 1;
 	if (space->str[space->pointer1] == c)
 	{
-		if (before)
+		if (*before)
 			if (!copy(words, space, \
 			space->str + space->pointer1 - *before, *before))
 				return (0);
-		before = -1;
+		*before = -1;
 	}
+	return (1);
 }
 
 static int	solve(char *words[], char *str, char c)
@@ -63,7 +64,8 @@ static int	solve(char *words[], char *str, char c)
 		if (space.one || space.two)
 			validate_quotes_split(&space, str);
 		else
-			check_if_new_quotes_s(&space, words, c, &before);
+			if (!check_if_new_quotes_s(&space, words, c, &before))
+				return (0);
 		before++;
 		space.pointer1 += 1;
 	}
@@ -78,7 +80,7 @@ char	**ft_split_respect_quotes(char const *s, char c)
 	char	**words;
 	int		len;
 
-	len = count_words((char *)s, c);
+	len = count_words_split((char *)s, c);
 	words = malloc((len + 1) * sizeof(char *));
 	if (!words)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:05:00 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/09 10:43:07 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:51:39 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int *before)
 {
 	if (s[space->pointer1] == 39)
 		space->one = 1;
-	if (s[space->pointer2] == 34)
+	if (s[space->pointer1] == 34)
 		space->two = 1;
 	if (s[space->pointer1] == c)
 	{

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:21:58 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/08 15:33:46 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:06:07 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static void	space_two(t_space *space)
 
 static void	either(t_space *space)
 {
-	if (space->str[space->pointer2] == ' ' && space->pointer2 == 0)
+	if (is_white_space(space->str[space->pointer2]) && space->pointer2 == 0)
 		space->pointer2 += 1;
-	else if (space->str[space->pointer2] == ' ' && \
+	else if (is_white_space(space->str[space->pointer2]) && \
 	space->str[space->pointer2 - 1] == ' ')
 		space->pointer2 += 1;
 	else
@@ -54,6 +54,8 @@ static void	either(t_space *space)
 			space->one = 1;
 		else if (space->str[space->pointer2] == 34)
 			space->two = 1;
+		if (is_white_space(space->str[space->pointer1]))
+			space->str[space->pointer1] = ' ';
 		space->pointer1 += 1;
 		space->pointer2 += 1;
 	}

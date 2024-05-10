@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 12:21:48 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/08 21:40:34 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:20:11 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*ft_str_dup(char *str)
 {
 	int		len;
 	char	*output;
-
 
 	len = str_len(str);
 	output = malloc((len + 1) * sizeof(char));

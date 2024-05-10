@@ -6,11 +6,13 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/08 22:29:30 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:06:37 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	exit_signal = 0;
 
 static char	*copy(char *str)
 {
@@ -40,6 +42,8 @@ void	handle_signals(int status)
 	rl_replace_line(str, 1);
 	rl_redisplay();
 	write(1, "\n", 1);
+	exit_signal = 1;
+	//loop forever signal not 0 to do
 	rl_on_new_line();
 	rl_replace_line("", 1);
 	rl_redisplay();
@@ -49,9 +53,8 @@ void	handle_signals(int status)
 void	loop(t_data *data)
 {
 	char	*input;
-	//char	*temp;
-	data += 0;
 
+	data->exit_signal = &exit_signal;
 	rl_catch_signals = 1;
 	if (signal(SIGINT, handle_signals) == SIG_ERR)
 	{
@@ -68,11 +71,9 @@ void	loop(t_data *data)
 		}
 		add_history(input);
 		remove_useless_spaces(input);
-
-		write(1, input, str_len(input));
-		write(1, "\n", 1);
+		builtin_echo(data, input);
+		// write(1, input, str_len(input));
 		free(input);
-		break ;
 	}
 	clear_history();
 }
