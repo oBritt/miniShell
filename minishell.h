@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/09 10:37:50 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:30:32 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <signal.h>
 # include <termios.h>
 # include <string.h>
+# include <dirent.h>
 
 typedef struct s_data
 {
@@ -29,11 +30,13 @@ typedef struct s_data
 	int		redirect_output;
 	char	*redirect_output_to;
 	int		redirect_output_append;
+	char	*cwd;
 	char	**comands;
 	char	**env;
 	char	*home;
 	char	**original_env;
 	char	*last;
+	int		*exit_signal;
 }	t_data;
 
 typedef struct s_space
@@ -76,4 +79,32 @@ int			double_quotes(t_data *data, char **str);
 char		**ft_split_respect_quotes(char const *s, char c);
 int			count_words_split(char *s, char c);
 void		validate_quotes_split(t_space *space, char *s);
+int			count_words_split(char *s, char c);
+int			count_len_quotes(char *str);
+int			full_handle_quotes(t_data *data, char **str);
+int			find_first_full_handle(char *str, char app);
+int			builtin_echo(t_data *data, char *str);
+char		*transform_to_1d_space(char **array);
+int			trans_dol(t_data *data, char **array, int *i, char *str);
+int			transform_path_variable(t_data *data, char **str);
+int			is_alpha(char c);
+int			is_number(char c);
+int			evaluate_dollar(char **array, char *str, int *i, int *ptr);
+int			is_number_or_question(char c);
+void		special_freeing(char **array, int ind);
+int			fill_2d_array(char **array, char *str, int i);
+int			update_all_dollars(t_data *data, char **array);
+int			final_transformation(char **array, char **str);
+int			no_quotes(t_data *data, char **str);
+int			get_untill_dollar(char **array, char *str, int *i, int *ptr);
+int			is_white_space(char c);
+int			check_wild_card(t_data *data, char **str);
+int			find_nth_app_back_slash(char *str, int number);
+int			count_amount_path_back(char *str);
+char		**get_folders_in_that_dir(void);
+int			len_2d_array(char **array);
+int			check_if_same_wild(char *posible, char *wild);
+char		get_last_char(char *str);
+int			index_equal(char *original, char *find);
+int			is_compare_strings_len(char *str1, char *str2, int len);
 #endif
