@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"minishell.h": "c",
+		"__tuple": "c",
+		"array": "c",
+		"stdlib.h": "c"
+	}
+}

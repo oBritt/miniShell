@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:52:52 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 14:40:38 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:11:57 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	check_syntaxes(t_data *data, char *input)
 {
+	data += 0;
 	remove_useless_spaces(input);
-
+	return (0);
 }

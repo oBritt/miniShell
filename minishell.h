@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 20:45:56 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:39:19 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct command
 	int			out_fd;
 	int			redir_type; // 0 - infile; 1 - outfile; 2 - append; I actually don't need it if I get from parsing ready fd
 	char		*delimiter;
-}	t_cmd
+}	t_cmd;
 
 typedef struct s_data
 {
@@ -108,7 +108,7 @@ int			final_transformation(char **array, char **str);
 int			no_quotes(t_data *data, char **str);
 int			get_untill_dollar(char **array, char *str, int *i, int *ptr);
 int			is_white_space(char c);
-int			check_wild_card(t_data *data, char **str);
+int			check_wild_card(char **str);
 int			find_nth_app_back_slash(char *str, int number);
 int			count_amount_path_back(char *str);
 char		**get_folders_in_that_dir(void);
@@ -117,4 +117,5 @@ int			check_if_same_wild(char *posible, char *wild);
 char		get_last_char(char *str);
 int			index_equal(char *original, char *find);
 int			is_compare_strings_len(char *str1, char *str2, int len);
+char		**ft_split(char const *s, char c);
 #endif

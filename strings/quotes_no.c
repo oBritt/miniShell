@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 20:57:07 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 18:37:32 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:34:48 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	no_quotes(t_data *data, char **str)
 
 	input = *str;
 	i = 0;
-	if (!check_wild_card(data, str))
-		return (0);
 	while (input[i])
 		i++;
 	out = malloc(i + 3);
@@ -39,6 +37,8 @@ int	no_quotes(t_data *data, char **str)
 	free(*str);
 	*str = out;
 	if (!double_quotes(data, str))
+		return (0);
+	if (!check_wild_card(str))
 		return (0);
 	return (1);
 }

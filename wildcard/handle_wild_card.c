@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:26:00 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 20:00:11 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:52:29 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**get_only_the_same(char **dirs, char *str, int ptr1, int ptr2)
 	}
 	while (dirs[ptr2])
 	{
-		//can retunr - 1 to do fix memory leaks 
+		//can retunr - 1 to do fix memory leaks
 		if (check_if_same_wild(dirs[ptr2], str))
 		{
 			output[ptr1] = ft_str_dup(dirs[ptr2]);
@@ -38,10 +38,11 @@ char	**get_only_the_same(char **dirs, char *str, int ptr1, int ptr2)
 		}
 		ptr2++;
 	}
+	freeing(dirs);
 	return (output);
 }
 
-int	check_wild_card(t_data *data, char **str)
+int	check_wild_card(char **str)
 {
 	// int		i;
 	// char	*copy;
@@ -57,6 +58,8 @@ int	check_wild_card(t_data *data, char **str)
 	char	**directories;
 	char	*copy;
 
+	if (find_first_app(*str, '*', 0, 0) == str_len(*str))
+		return (1);
 	directories = get_folders_in_that_dir();
 	if (!directories)
 		return (0);
@@ -72,7 +75,9 @@ int	check_wild_card(t_data *data, char **str)
 		free(copy);
 		return (0);
 	}
+	free(*str);
+	*str = transform_to_1d_space(directories);
+	if (!*str)
+		return (0);
 	return (1);
-
-
 }

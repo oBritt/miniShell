@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:26:01 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 18:44:45 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:10:25 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	get_cwd_my(t_data *data)
 
 int	init_data(t_data *data, char **env)
 {
-	char	cwd[100000];
 	data->original_env = allocate(env);
 	if (!data->original_env)
 		return (0);
