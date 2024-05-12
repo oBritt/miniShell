@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   absolute_full_handle.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 12:15:00 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/07 16:19:48 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/11 19:11:35 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/12 12:11:48 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	parser(char	*str, t_data *data)
+int	absolute_handle(t_data *data, char **str)
 {
-	str += 0;
-	data += 0;
+	int	*array;
+
+	array = full_handle_quotes(data, str);
+	if (!array)
+		return (0);
+	if (!check_wild_card(str, array))
+	{
+		free(array);
+		return (0);
+	}
+	free(array);
+	return (1);
 }

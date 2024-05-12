@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:36:02 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/09 17:50:02 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/12 12:48:11 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,16 @@ int	count_len_quotes(char *str)
 		if (space.one || space.two)
 		{
 			go_further(&space, str);
-			counter += 2;
+			counter += 1;
 		}
 		space.pointer1 += 1;
 	}
 	return (counter);
+}
+
+int	*freeing_stuff(char **array, int *out)
+{
+	freeing(array);
+	free(out);
+	return (NULL);
 }

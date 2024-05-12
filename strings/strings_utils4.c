@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_no.c                                        :+:      :+:    :+:   */
+/*   strings_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 20:57:07 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/11 21:44:34 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/11 20:12:59 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/11 20:15:00 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	no_quotes(t_data *data, char **str)
+int	count_app_in2d_array(char **array, char c)
 {
-	int		i;
-	char	*out;
-	char	*input;
+	int	y;
+	int	x;
+	int	counter;
 
-	input = *str;
-	i = 0;
-	while (input[i])
-		i++;
-	out = malloc(i + 3);
-	if (!out)
-		return (0);
-	i = 0;
-	while (input[i])
+	y = 0;
+	counter = 0;
+	while (array[y])
 	{
-		out[i + 1] = input[i];
-		i++;
+		x = 0;
+		while (array[y][x])
+		{
+			if (array[y][x] == c)
+				counter++;
+			x++;
+		}
+		y++;
 	}
-	out[0] = 34;
-	out[i + 1] = 34;
-	out[i + 2] = 0;
-	free(*str);
-	*str = out;
-	if (!double_quotes(data, str))
-		return (0);
-	return (1);
+	return (counter);
 }

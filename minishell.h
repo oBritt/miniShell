@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 21:39:19 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:49:13 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,14 @@
 typedef struct command
 {
 	char		**cmd;
+	char		**input_redirect;
+	int			*is_ambigious_input;
+	char		*output_redirect;
+	int			*is_ambigious_output;
 	char		*cmd_path;
 	int			in_fd;
 	int			out_fd;
+	int			consists_only_of_path_variable;
 	int			redir_type; // 0 - infile; 1 - outfile; 2 - append; I actually don't need it if I get from parsing ready fd
 	char		*delimiter;
 }	t_cmd;
@@ -91,7 +96,7 @@ int			count_words_split(char *s, char c);
 void		validate_quotes_split(t_space *space, char *s);
 int			count_words_split(char *s, char c);
 int			count_len_quotes(char *str);
-int			full_handle_quotes(t_data *data, char **str);
+int			*full_handle_quotes(t_data *data, char **str);
 int			find_first_full_handle(char *str, char app);
 int			builtin_echo(t_data *data, char *str);
 char		*transform_to_1d_space(char **array);
@@ -108,14 +113,20 @@ int			final_transformation(char **array, char **str);
 int			no_quotes(t_data *data, char **str);
 int			get_untill_dollar(char **array, char *str, int *i, int *ptr);
 int			is_white_space(char c);
-int			check_wild_card(char **str);
+int			check_wild_card(char **str, int *inf);
 int			find_nth_app_back_slash(char *str, int number);
 int			count_amount_path_back(char *str);
 char		**get_folders_in_that_dir(void);
 int			len_2d_array(char **array);
-int			check_if_same_wild(char *posible, char *wild);
+int			check_if_same_wild(char *posible, char *wild, int *splitable);
 char		get_last_char(char *str);
 int			index_equal(char *original, char *find);
 int			is_compare_strings_len(char *str1, char *str2, int len);
 char		**ft_split(char const *s, char c);
+int			*freeing_stuff(char **array, int *out);
+int			count_app_in2d_array(char **array, char c);
+int			*get_array_used_stars(int *information, char **array);
+char		**ft_split_wildcard(char *str, int *is_splitable);
+int			absolute_handle(t_data *data, char **str);
+void		remove_useless_dollar(char *str);
 #endif

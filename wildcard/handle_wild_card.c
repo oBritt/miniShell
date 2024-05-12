@@ -6,16 +6,20 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:26:00 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 21:52:29 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/12 11:03:16 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**get_only_the_same(char **dirs, char *str, int ptr1, int ptr2)
+char	**get_only_the_same(char **dirs, char *str, int *wild)
 {
 	char	**output;
+	int		ptr1;
+	int		ptr2;
 
+	ptr1 = 0;
+	ptr2 = 0;
 	output = malloc((len_2d_array(dirs) + 1) * sizeof(char *));
 	if (!output)
 	{
@@ -25,7 +29,7 @@ char	**get_only_the_same(char **dirs, char *str, int ptr1, int ptr2)
 	while (dirs[ptr2])
 	{
 		//can retunr - 1 to do fix memory leaks
-		if (check_if_same_wild(dirs[ptr2], str))
+		if (check_if_same_wild(dirs[ptr2], str, wild))
 		{
 			output[ptr1] = ft_str_dup(dirs[ptr2]);
 			if (!output[ptr1])
@@ -42,42 +46,42 @@ char	**get_only_the_same(char **dirs, char *str, int ptr1, int ptr2)
 	return (output);
 }
 
-int	check_wild_card(char **str)
+static int	check_if_have_to_do_smth(int *array)
 {
-	// int		i;
-	// char	*copy;
-	// char	**pathes;
+	int	i;
 
-	// pathes = malloc(sizeof(char *) * 2);
-	// if (!pathes)
-	// 	return (0);
-	// i = 0;
-	// copy = ft_str_dup(*str);
-	// i = count_amount_path_back(copy);
-	// i = find_nth_app_back_slash(copy, i);
+	i = 0;
+	while (array[i] != -1)
+	{
+		if (array[i] == 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	check_wild_card(char **str, int *wild)
+{
 	char	**directories;
 	char	*copy;
 
-	if (find_first_app(*str, '*', 0, 0) == str_len(*str))
+	if (!check_if_have_to_do_smth(wild))
 		return (1);
 	directories = get_folders_in_that_dir();
 	if (!directories)
 		return (0);
-	copy = ft_str_dup(*str);
-	if (!copy)
-	{
-		freeing(directories);
-		return (0);
-	}
-	directories = get_only_the_same(directories, copy, 0, 0);
+	directories = get_only_the_same(directories, *str, wild);
 	if (!directories)
+		return (0);
+	copy = transform_to_1d_space(directories);
+	if (!copy)
+		return (0);
+	if (*copy == 0)
 	{
 		free(copy);
-		return (0);
+		return (1);
 	}
 	free(*str);
-	*str = transform_to_1d_space(directories);
-	if (!*str)
-		return (0);
+	*str = copy;
 	return (1);
 }
