@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/12 16:08:02 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/12 17:27:18 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	loop(t_data *data)
 			break ;
 		}
 		add_history(input);
-		remove_useless_spaces(copy);
-		remove_useless_dollar(copy);
+		remove_useless_spaces(input);
+		remove_useless_dollar(input);
 		builtin_echo(data, input);
 		// write(1, input, str_len(input));
 		// write(1, "\n", 1);

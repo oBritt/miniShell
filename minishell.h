@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/12 16:49:13 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/12 17:12:46 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_data
 	char	**original_env;
 	char	*last;
 	int		*exit_signal;
+	t_cmd	*t_cmds;
 }	t_data;
 
 typedef struct s_space
