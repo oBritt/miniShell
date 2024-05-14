@@ -6,17 +6,21 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 19:24:49 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 21:48:53 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/14 18:05:04 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	**helper_because_25_lines(char **out)
+static char	**helper_because_25_lines(char **out, DIR *dir)
 {
-	free(out);
+	if (out)
+		freeing(out);
+	if (dir)
+		closedir(dir);
 	return (NULL);
 }
+
 
 static char	**get_folders_helper(char **out, int i)
 {
@@ -25,21 +29,17 @@ static char	**get_folders_helper(char **out, int i)
 
 	dir = opendir(".");
 	if (!dir)
-		return (helper_because_25_lines(out));
+		return (helper_because_25_lines(out, NULL));
 	while (1)
 	{
 		entry = readdir(dir);
 		if (entry == NULL)
 			break ;
-		if (entry->d_type == DT_REG && entry->d_name[0] != '.')
+		if (entry->d_name[0] != '.')
 		{
 			out[i] = ft_str_dup(entry->d_name);
 			if (!out[i])
-			{
-				freeing(out);
-				closedir(dir);
-				return (NULL);
-			}
+				return (helper_because_25_lines(out, dir));
 			i++;
 		}
 	}
@@ -64,7 +64,7 @@ char	**get_folders_in_that_dir(void)
 		entry = readdir(dir);
 		if (entry == NULL)
 			break ;
-		if (entry->d_type == DT_REG && entry->d_name[0] != '.')
+		if (entry->d_name[0] != '.')
 			counter++;
 	}
 	closedir(dir);

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/12 17:12:46 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:30:01 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,19 @@
 
 typedef struct command
 {
-	char		**cmd;
+	char		*cmd;
+	char		*first;
 	char		**input_redirect;
 	int			*is_ambigious_input;
-	char		*output_redirect;
+	char		**output_redirect;
 	int			*is_ambigious_output;
+	char		**delimiter;
 	char		*cmd_path;
 	int			in_fd;
 	int			out_fd;
-	int			consists_only_of_path_variable;
-	int			redir_type; // 0 - infile; 1 - outfile; 2 - append; I actually don't need it if I get from parsing ready fd
-	char		*delimiter;
+	int			have_to_execute;
+	int			is_output_append;
+	int			amount;
 }	t_cmd;
 
 typedef struct s_data
@@ -63,11 +65,24 @@ typedef struct s_space
 	int		one;
 	int		two;
 	int		action;
+	char	*opt1;
+	char	*opt2;
+	int		last;
 }	t_space;
+
+typedef struct s_send
+{
+	int		inp_out;
+	t_cmd	*cmd;
+}	t_send;
 
 # define MAX_LLONG "9223372036854775807"
 # define MIN_LLONG "9223372036854775808"
 # define SHELL_PROMT "minishell > "
+# define DELIMITER "<<"
+# define INPUT_RED "<"
+# define OUTPUT_RED ">"
+# define OUTPUT_RED_AP ">>"
 
 char		**allocate(char **env);
 char		**freeing(char **output);
@@ -124,10 +139,36 @@ char		get_last_char(char *str);
 int			index_equal(char *original, char *find);
 int			is_compare_strings_len(char *str1, char *str2, int len);
 char		**ft_split(char const *s, char c);
-int			*freeing_stuff(char **array, int *out);
+int			freeing_stuff(char **array, int *out);
 int			count_app_in2d_array(char **array, char c);
 int			*get_array_used_stars(int *information, char **array);
 char		**ft_split_wildcard(char *str, int *is_splitable);
 int			absolute_handle(t_data *data, char **str);
 void		remove_useless_dollar(char *str);
+char		**redir(char *str, int *last, char *opt1, char *opt2);
+int			get_amount_redirection(char *str, char *opt1, char *opt2);
+int			parsing(t_data *data, char *input);
+int			get_redir_basic_case(char **output, char *str, t_space *space);
+void		set_equal_and_increment(t_space *space, char *str);
+int			go_untill_space_end(char **output, t_space *space, int l, \
+char *opt);
+int			iterate_and_get_redir(char **commands, t_cmd *cmd);
+int			consists_only_of_dollar(char *str);
+int			get_len_dollar(char *str);
+void		freeing_cmds(t_cmd *cmd);
+void		go_untill_quote(t_space *space, char *str);
+void		update_delimiter(char **array);
+int			parse_addition(t_data *data, char **command, t_cmd *cmd);
+int			change_values_command(char **command, t_data *data, t_cmd *cmd);
+char		*free_str_return_null(char *str);
+int			full_handle_redir(t_data *data, char **str, t_send *send, int i);
+char		**get_only_the_same(char **dirs, char *str, int *wild);
+int			check_if_have_to_do_smth(int *array);
+void		sort_2d_array(char **array);
+void		trans(char *wild, int *splitable);
+void		detrans(char *wild);
+void		detranss(char **s);
+int			get_len_dollar(char *str);
+int			manage_dollar(t_data *data, char **str);
+void		get_rid_of_parantheses(char *str);
 #endif

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:02:37 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/12 11:21:51 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:59:35 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,8 @@ static int	output(char **array)
 
 int	builtin_echo(t_data *data, char *str)
 {
-	char	**temp;
-	int		i;
-
-	temp = ft_split_respect_quotes(str, ' ');
-	if (!temp)
-		return (-1);
-	i = 1;
-	while (temp[i])
-	{
-		if (!absolute_handle(data, &(temp[i])))
-		{
-			freeing(temp);
-			return (-1);
-		}
-		i++;
-	}
-	if (!output(temp))
-		return (-1);
+	data +=0;
+	str += 0;
+	output(NULL);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:25:15 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 12:44:54 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:13:35 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int	evaluate_dollar(char **array, char *str, int *i, int *ptr)
 {
 	int	len;
 
-	if (is_number_or_question(str[*ptr + 1]))
+	if (str[*ptr + 1] == '?')
 		len = 2;
 	else if (str[*ptr + 1] == '{')
 		len = find_first_app(str + *ptr, '}', 0, 0) + 1;
-	else if (!is_number_or_question(str[*ptr + 1]) && str[*ptr + 1] != '_' \
+	else if (str[*ptr + 1] != '?' && str[*ptr + 1] != '_' \
 	&& !is_alpha(str[*ptr + 1]))
 		len = 1;
 	else

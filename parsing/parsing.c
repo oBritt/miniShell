@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_no.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 20:57:07 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 17:59:55 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/12 15:43:44 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/14 14:50:12 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	no_quotes(t_data *data, char **str)
+int	parsing(t_data *data, char *input)
 {
+	char	**commands;
 	int		i;
-	char	*out;
-	char	*input;
 
-	input = *str;
-	i = 0;
-	while (input[i])
-		i++;
-	out = malloc(i + 3);
-	if (!out)
-		return (0);
-	i = 0;
-	while (input[i])
+	commands = ft_split_respect_quotes(input, '|');
+	if (!commands)
 	{
-		out[i + 1] = input[i];
-		i++;
-	}
-	out[0] = 34;
-	out[i + 1] = 34;
-	out[i + 2] = 0;
-	free(*str);
-	*str = out;
-	if (!double_quotes(data, str))
+		free(input);
 		return (0);
-	return (1);
+	}
+	i = 0;
+	while (commands[i])
+		remove_useless_spaces(commands[i++]);
+	data->t_cmds = malloc(sizeof(t_cmd) * i);
+	if (!data->t_cmds)
+	{
+		freeing(commands);
+		return (0);
+	}
+	data->t_cmds[0].amount = len_2d_array(commands);
+	if (!iterate_and_get_redir(commands, data->t_cmds))
+	{
+		freeing(commands);
+		return (0);
+	}
+	return (parse_addition(data, commands, data->t_cmds));
 }

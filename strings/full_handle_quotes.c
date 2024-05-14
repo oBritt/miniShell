@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:08:30 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/12 12:51:30 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:59:44 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,36 +50,33 @@ static int	fill_array(char *str, char **array)
 		if (str[space.pointer2] == 0)
 			break ;
 		space.pointer1 = space.pointer2;
-		if (str[space.pointer2] == 34)
-			if (!helper_f(&space, str, array, 34))
-				return (0);
-		if (str[space.pointer2] == 39)
-			if (!helper_f(&space, str, array, 39))
+		if (str[space.pointer2] == 34 || str[space.pointer2] == 39)
+			if (!helper_f(&space, str, array, str[space.pointer2]))
 				return (0);
 	}
 	array[space.action] = NULL;
 	return (1);
 }
 
-void	special_freeing(char **array, int ind)
+static int	different_cases(t_data *data, char **array, int len, int *out)
 {
-	int	i;
-
-	i = 0;
-	while (1)
+	if (array[len][0] == 34)
 	{
-		if (i == ind)
-		{
-			i++;
-			continue ;
-		}
-		if (!array[i])
-			break ;
-		free(array[i]);
-		i++;
+		if (!double_quotes(data, &(array[len])))
+			return (freeing_stuff(array, out));
 	}
-	free(array);
-	return ;
+	else if (array[len][0] == 39)
+	{
+		if (!single_quotes(&(array[len])))
+			return (freeing_stuff(array, out));
+	}
+	else
+	{
+		if (!no_quotes(data, &(array[len])))
+			return (freeing_stuff(array, out));
+		out[len] = 1;
+	}
+	return (1);
 }
 
 // returns array of int rep if in array[i] * is counted as wildcard
@@ -96,22 +93,8 @@ static int	*change_one_by_one(t_data *data, char **array)
 	while (array[len])
 	{
 		out[len] = 0;
-		if (array[len][0] == 34)
-		{
-			if (!double_quotes(data, &(array[len])))
-				return (freeing_stuff(array, out));
-		}
-		else if (array[len][0] == 39)
-		{
-			if (!single_quotes(&(array[len])))
-				return (freeing_stuff(array, out));
-		}
-		else
-		{
-			if (!no_quotes(data, &(array[len])))
-				return (freeing_stuff(array, out));
-			out[len] = 1;
-		}
+		if (!different_cases(data, array, len, out))
+			return (NULL);
 		len++;
 	}
 	out[len] = -1;

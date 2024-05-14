@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_no.c                                        :+:      :+:    :+:   */
+/*   sort_2d_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 20:57:07 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 17:59:55 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/14 16:37:04 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/14 16:45:28 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	no_quotes(t_data *data, char **str)
+void	sort_2d_array(char **array)
 {
+	int		len;
 	int		i;
-	char	*out;
-	char	*input;
+	int		e;
+	char	*temp;
 
-	input = *str;
-	i = 0;
-	while (input[i])
-		i++;
-	out = malloc(i + 3);
-	if (!out)
-		return (0);
-	i = 0;
-	while (input[i])
+	len = len_2d_array(array);
+	e = 0;
+	while (e < len)
 	{
-		out[i + 1] = input[i];
-		i++;
+		i = 0;
+		while (i < len - 1)
+		{
+			if (compare_strings(array[i], array[i + 1]) > 0)
+			{
+				temp = array[i];
+				array[i] = array[i + 1];
+				array[i + 1] = temp;
+			}
+			i++;
+		}
+		e++;
 	}
-	out[0] = 34;
-	out[i + 1] = 34;
-	out[i + 2] = 0;
-	free(*str);
-	*str = out;
-	if (!double_quotes(data, str))
-		return (0);
-	return (1);
 }

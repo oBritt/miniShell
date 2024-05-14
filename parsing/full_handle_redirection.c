@@ -1,71 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_wild_card.c                                 :+:      :+:    :+:   */
+/*   full_handle_redirection.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/10 18:26:00 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 18:13:48 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/14 15:40:56 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/14 20:16:48 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// static int	get_if_same(char **dirs, char *str, char *wild)
-// {
-
-// }
-
-char	**get_only_the_same(char **dirs, char *str, int *wild)
-{
-	char	**output;
-	int		ptr1;
-	int		ptr2;
-
-	ptr1 = 0;
-	ptr2 = 0;
-	output = malloc((len_2d_array(dirs) + 1) * sizeof(char *));
-	if (!output)
-	{
-		freeing(dirs);
-		return (NULL);
-	}
-	while (dirs[ptr2])
-	{
-		//can retunr - 1 to do fix memory leaks
-		if (check_if_same_wild(dirs[ptr2], str, wild))
-		{
-			output[ptr1] = ft_str_dup(dirs[ptr2]);
-			if (!output[ptr1])
-			{
-				freeing(output);
-				freeing(dirs);
-				return (NULL);
-			}
-			ptr1++;
-		}
-		ptr2++;
-	}
-	freeing(dirs);
-	return (output);
-}
-
-int	check_if_have_to_do_smth(int *array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i] != -1)
-	{
-		if (array[i] == 1)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	check_wild_card(char **str, int *wild)
+int	check_wild_card_redir(char **str, int *wild)
 {
 	char	**directories;
 	char	*copy;
@@ -78,6 +25,8 @@ int	check_wild_card(char **str, int *wild)
 	directories = get_only_the_same(directories, *str, wild);
 	if (!directories)
 		return (0);
+	if (len_2d_array(directories) > 1)
+		return (2);
 	sort_2d_array(directories);
 	copy = transform_to_1d_space(directories);
 	if (!copy)
@@ -89,5 +38,38 @@ int	check_wild_card(char **str, int *wild)
 	}
 	free(*str);
 	*str = copy;
+	return (1);
+}
+
+int	full_handle_redir(t_data *data, char **str, t_send *send, int i)
+{
+	int	*change_ambigious;
+	int	*array;
+	int	ans;
+
+	if (send->inp_out == 1)
+		change_ambigious = send->cmd->is_ambigious_input;
+	else
+		change_ambigious = send->cmd->is_ambigious_output;
+	ans = 2;
+	//ans = check_if_any_expands_to_2words(data, *str);
+	if (ans == -1)
+		return (0);
+	if (ans == 1)
+	{
+		change_ambigious[i] = 1;
+		return (1);
+	}
+	array = full_handle_quotes(data, str);
+	if (!array)
+		return (0);
+	ans = check_wild_card_redir(str, array);
+	free(array);
+	if (!ans)
+		return (0);
+	if (ans == 2 || (change_ambigious[i] && !compare_strings("", *str)))
+		change_ambigious[i] = 1;
+	else
+		change_ambigious[i] = 0;
 	return (1);
 }

@@ -1,42 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_no.c                                        :+:      :+:    :+:   */
+/*   transit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 20:57:07 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 17:59:55 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/14 18:01:38 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/14 18:01:49 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	no_quotes(t_data *data, char **str)
+void	trans(char *wild, int *splitable)
 {
-	int		i;
-	char	*out;
-	char	*input;
+	int	i;
+	int	c;
 
-	input = *str;
 	i = 0;
-	while (input[i])
-		i++;
-	out = malloc(i + 3);
-	if (!out)
-		return (0);
-	i = 0;
-	while (input[i])
+	c = 0;
+	while (wild[i])
 	{
-		out[i + 1] = input[i];
+		if (wild[i] == '*')
+		{
+			if (!splitable[c])
+				wild[i] = 1;
+			c++;
+		}
 		i++;
 	}
-	out[0] = 34;
-	out[i + 1] = 34;
-	out[i + 2] = 0;
-	free(*str);
-	*str = out;
-	if (!double_quotes(data, str))
-		return (0);
-	return (1);
+}
+
+void	detrans(char *wild)
+{
+	int	i;
+
+	i = 0;
+	while (wild[i])
+	{
+		if (wild[i] == 1)
+			wild[i] = '*';
+		i++;
+	}
+}
+
+void	detranss(char **s)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (s[y])
+	{
+		x = 0;
+		while (s[y][x])
+		{
+			if (s[y][x] == 1)
+				s[y][x] = '*';
+			x++;
+		}
+		y++;
+	}
 }

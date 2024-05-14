@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_no.c                                        :+:      :+:    :+:   */
+/*   get_redir_h.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 20:57:07 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 17:59:55 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/12 19:18:35 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/13 15:29:21 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	no_quotes(t_data *data, char **str)
+int	get_redir_basic_case(char **output, char *str, t_space *space)
 {
-	int		i;
-	char	*out;
-	char	*input;
-
-	input = *str;
-	i = 0;
-	while (input[i])
-		i++;
-	out = malloc(i + 3);
-	if (!out)
-		return (0);
-	i = 0;
-	while (input[i])
+	if (is_compare_strings_len(&str[space->pointer2], space->opt1, \
+	str_len(space->opt1)))
 	{
-		out[i + 1] = input[i];
-		i++;
+		if (!go_untill_space_end(output, space, 1, space->opt1))
+			return (0);
 	}
-	out[0] = 34;
-	out[i + 1] = 34;
-	out[i + 2] = 0;
-	free(*str);
-	*str = out;
-	if (!double_quotes(data, str))
-		return (0);
+	else if (is_compare_strings_len(&str[space->pointer2], space->opt2, \
+	str_len(space->opt2)))
+	{
+		if (!go_untill_space_end(output, space, 0, space->opt2))
+			return (0);
+	}
+	else
+		set_equal_and_increment(space, str);
 	return (1);
 }

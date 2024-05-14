@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 20:12:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/11 20:15:00 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:17:05 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ int	count_app_in2d_array(char **array, char c)
 		y++;
 	}
 	return (counter);
+}
+
+char	*free_str_return_null(char *str)
+{
+	free(str);
+	return (NULL);
 }
