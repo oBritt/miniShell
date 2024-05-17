@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:02:37 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 13:21:07 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:07:52 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ static int	output(char **array, int fd)
 	return (1);
 }
 
-int	builtin_echo(t_data *data, char **command, int fd)
+int	builtin_echo(t_data *data, char **command, int fd, int is_main)
 {
 	data += 0;
+	is_main+= 0;
 	if (!output(command, fd))
 		return (0);
 	return (1);

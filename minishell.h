@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 12:56:16 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:07:33 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <termios.h>
-# include <string.h>
+//# include <string.h>
 # include <dirent.h>
 
 typedef struct command
@@ -114,7 +114,7 @@ int			count_words_split(char *s, char c);
 int			count_len_quotes(char *str);
 int			*full_handle_quotes(t_data *data, char **str);
 int			find_first_full_handle(char *str, char app);
-int			builtin_echo(t_data *data, char *str);
+int			builtin_echo(t_data *data, char **command, int fd, int is_main);
 char		*transform_to_1d_space(char **array);
 int			trans_dol(t_data *data, char **array, int *i, char *str);
 int			transform_path_variable(t_data *data, char **str);
