@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 17:35:33 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/13 18:43:06 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:09:31 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,28 @@ void	go_untill_quote(t_space *space, char *str)
 	set_equal_and_increment(space, str);
 }
 
-int	go_untill_space_end(char **output, t_space *space, int l, char *opt)
+int	go_untill_space_end(char **output, t_space *space, char *opt)
 {
 	char	*str;
 	int		i;
+	char	temp;
 
 	str = space->str;
 	space->pointer2 += str_len(opt);
-	space->last = l;
 	while (str[space->pointer2] == ' ')
 		space->pointer2++;
 	i = 0;
 	while (str[space->pointer2 + i] != ' ' && str[space->pointer2 + i])
+	{
+		if (str[space->pointer2 + i] == 34 || str[space->pointer2 + i] == 39)
+		{
+			temp = str[space->pointer2 + i];
+			i++;
+			while (str[space->pointer2 + i] != temp)
+				i++;
+		}
 		i++;
+	}
 	output[space->action] = ft_str_dup_len(&str[space->pointer2], i);
 	if (!output[space->action])
 		return (0);
@@ -58,7 +67,7 @@ int	go_untill_space_end(char **output, t_space *space, int l, char *opt)
 	return (1);
 }
 
-static int	solve_c(char **output, char *str, t_space *space)
+static int	solve_c(char **output, int *array, char *str, t_space *space)
 {
 	while (str[space->pointer2])
 	{
@@ -70,33 +79,37 @@ static int	solve_c(char **output, char *str, t_space *space)
 			go_untill_quote(space, str);
 		else
 		{
-			if (!get_redir_basic_case(output, str, space))
+			if (!get_redir_basic_case(output, array, str, space))
 				return (0);
 		}
 	}
 	return (1);
 }
 
-char	**redir(char *str, int *last, char *opt1, char *opt2)
+char	**redir(char *str, int **last, char *opt1, char *opt2)
 {
 	int		amount;
 	char	**output;
 	t_space	space;
 
 	amount = get_amount_redirection(str, opt1, opt2);
+
+	if (!compare_strings(opt1, OUTPUT_RED_AP))
+		*last = malloc(sizeof(int) * amount);
+	if (!*last)
+		return (NULL);
 	output = malloc(sizeof(char *) * (amount + 1));
 	if (!output)
-		return (0);
+		return (NULL);
 	init_space(&space, str);
 	space.opt1 = opt1;
 	space.opt2 = opt2;
-	if (!solve_c(output, str, &space))
+	if (!solve_c(output, *last, str, &space))
 	{
 		freeing(output);
 		return (NULL);
 	}
 	output[space.action] = NULL;
-	*last = space.last;
 	str[space.pointer1] = 0;
 	remove_useless_spaces(str);
 	return (output);

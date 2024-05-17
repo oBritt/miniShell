@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:02:37 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/13 19:59:35 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:21:07 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_if_flag(char *str)
 	return (1);
 }
 
-static int	output(char **array)
+static int	output(char **array, int fd)
 {
 	int		i;
 	char	*transformed;
@@ -44,17 +44,17 @@ static int	output(char **array)
 	freeing(array);
 	if (!transformed)
 		return (0);
-	write(1, transformed, str_len(transformed));
+	write(fd, transformed, str_len(transformed));
 	if (i == 1)
-		write(1, "\n", 1);
+		write(fd, "\n", 1);
 	free(transformed);
 	return (1);
 }
 
-int	builtin_echo(t_data *data, char *str)
+int	builtin_echo(t_data *data, char **command, int fd)
 {
-	data +=0;
-	str += 0;
-	output(NULL);
+	data += 0;
+	if (!output(command, fd))
+		return (0);
 	return (1);
 }

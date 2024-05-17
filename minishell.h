@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 20:30:01 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:56:16 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 typedef struct command
 {
-	char		*cmd;
+	char		**cmd;
 	char		*first;
 	char		**input_redirect;
 	int			*is_ambigious_input;
@@ -36,7 +36,7 @@ typedef struct command
 	int			in_fd;
 	int			out_fd;
 	int			have_to_execute;
-	int			is_output_append;
+	int			*is_output_append;
 	int			amount;
 }	t_cmd;
 
@@ -145,19 +145,19 @@ int			*get_array_used_stars(int *information, char **array);
 char		**ft_split_wildcard(char *str, int *is_splitable);
 int			absolute_handle(t_data *data, char **str);
 void		remove_useless_dollar(char *str);
-char		**redir(char *str, int *last, char *opt1, char *opt2);
+char		**redir(char *str, int **last, char *opt1, char *opt2);
 int			get_amount_redirection(char *str, char *opt1, char *opt2);
 int			parsing(t_data *data, char *input);
-int			get_redir_basic_case(char **output, char *str, t_space *space);
+int			get_redir_basic_case(char **output, int *array, char *str, \
+t_space *space);
 void		set_equal_and_increment(t_space *space, char *str);
-int			go_untill_space_end(char **output, t_space *space, int l, \
-char *opt);
+int			go_untill_space_end(char **output, t_space *space, char *opt);
 int			iterate_and_get_redir(char **commands, t_cmd *cmd);
 int			consists_only_of_dollar(char *str);
 int			get_len_dollar(char *str);
 void		freeing_cmds(t_cmd *cmd);
 void		go_untill_quote(t_space *space, char *str);
-void		update_delimiter(char **array);
+int			update_delimiter(char **array);
 int			parse_addition(t_data *data, char **command, t_cmd *cmd);
 int			change_values_command(char **command, t_data *data, t_cmd *cmd);
 char		*free_str_return_null(char *str);
@@ -171,4 +171,7 @@ void		detranss(char **s);
 int			get_len_dollar(char *str);
 int			manage_dollar(t_data *data, char **str);
 void		get_rid_of_parantheses(char *str);
+int			free_str_return_numb(char *str, int n);
+void		remove_first_and_last_one(char *str, char s);
+int			fill_array_full_handle(char *str, char **array);
 #endif

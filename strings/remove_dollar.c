@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 13:18:21 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/12 13:43:40 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:58:26 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,18 @@ static void	update_values(t_space *space, char *str)
 	space->pointer2 += 1;
 }
 
-static void	go_untill_closed(t_space *space, char *str)
+static void	handle_case_dollar_then_quote(t_space *space, char *str)
 {
 	if (space->pointer1 != 0)
 	{
 		if (str[space->pointer1 - 1] == '$')
 			space->pointer1 -= 1;
 	}
+}
+
+static void	go_untill_closed(t_space *space, char *str)
+{
+	handle_case_dollar_then_quote(space, str);
 	update_values(space, str);
 	if (space->one)
 	{

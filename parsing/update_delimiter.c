@@ -6,52 +6,51 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:34:41 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/13 18:54:16 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/16 21:14:45 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	go_to_quote_not_include(t_space *space, char *str)
+static int	handle_one(char **str)
 {
-	space->pointer2++;
-	if (space->two)
+	char	**splited;
+	char	*temp;
+	int		len;
+	int		i;
+
+	len = count_len_quotes(*str);
+	splited = malloc((len * 3 + 2) * sizeof(char *));
+	if (!splited)
+		return (0);
+	if (!fill_array_full_handle(*str, splited))
+		return (0);
+	i = 0;
+	while (splited[i])
 	{
-		while (str[space->pointer2] != 34)
-			set_equal_and_increment(space, str);
-		space->two = 0;
+		if (splited[i][0] == 39 || splited[i][0] == 34)
+			remove_first_and_last_one(splited[i], splited[i][0]);
+		i++;
 	}
-	if (space->one)
-	{
-		while (str[space->pointer2] != 39)
-			set_equal_and_increment(space, str);
-		space->one = 0;
-	}
-	space->pointer2++;
+	temp = transform_to_1d(splited);
+	freeing(splited);
+	if (!temp)
+		return (0);
+	free(*str);
+	*str = temp;
+	return (1);
 }
 
-void	update_delimiter(char **array)
+int	update_delimiter(char **array)
 {
-	t_space	space;
-	int		i;
-	char	*str;
+	int	i;
 
 	i = 0;
 	while (array[i])
 	{
-		str = array[i];
-		init_space(&space, str);
-		while (str[space.pointer2])
-		{
-			if (str[space.pointer2] == 39)
-				space.one = 1;
-			if (str[space.pointer2] == 34)
-				space.two = 1;
-			if (space.two || space.one)
-				go_to_quote_not_include(&space, str);
-			else
-				set_equal_and_increment(&space, str);
-		}
+		if (!handle_one(&(array[i])))
+			return (0);
 		i++;
 	}
+	return (1);
 }

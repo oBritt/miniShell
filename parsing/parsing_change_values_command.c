@@ -6,57 +6,31 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:48:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 17:51:11 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/15 19:58:09 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	helper_change_one(char **temp, char **com, t_data *data, t_cmd *cmd)
-{
-	int	only_dollar;
-
-	only_dollar = consists_only_of_dollar(*com);
-	if (!absolute_handle(data, com))
-	{
-		freeing(temp);
-		return (0);
-	}
-	if ((!only_dollar || compare_strings("", *com)) && !cmd->first)
-	{
-		cmd->first = ft_str_dup(*com);
-		if (!cmd->first)
-		{
-			freeing(temp);
-			return (0);
-		}
-	}
-	return (1);
-}
-
 static int	change_only_one(char **command, t_data *data, t_cmd *cmd)
 {
 	int		i;
-	char	**temp;
-	char	*out;
+	char	**cmds;
 
-	temp = ft_split_respect_quotes(*command, ' ');
-	if (!temp)
+	cmds = ft_split_respect_quotes(*command, ' ');
+	if (!cmds)
 		return (0);
 	i = 0;
-	while (temp[i])
+	while (cmds[i])
 	{
-		if (!helper_change_one(temp, &(temp[i]), data, cmd))
+		if (!absolute_handle(data, &(cmds[i])))
+		{
+			freeing(cmds);
 			return (0);
+		}
 		i++;
 	}
-	out = transform_to_1d_space(temp);
-	freeing(temp);
-	if (!out)
-		return (0);
-	remove_useless_spaces(out);
-	free(*command);
-	*command = out;
+	cmd->cmd = cmds;
 	return (1);
 }
 
@@ -67,6 +41,8 @@ int	change_values_command(char **command, t_data *data, t_cmd *cmd)
 	i = 0;
 	while (command[i])
 	{
+		if (!manage_dollar(data, &command[i]))
+			return (0);
 		cmd[i].first = NULL;
 		if (!change_only_one(&command[i], data, &cmd[i]))
 			return (0);

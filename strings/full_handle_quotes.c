@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:08:30 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 17:59:44 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/16 21:15:46 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	helper_f(t_space *space, char *str, char **array, int a)
 	return (1);
 }
 
-static int	fill_array(char *str, char **array)
+int	fill_array_full_handle(char *str, char **array)
 {
 	t_space	space;
 
@@ -58,30 +58,42 @@ static int	fill_array(char *str, char **array)
 	return (1);
 }
 
-static int	different_cases(t_data *data, char **array, int len, int *out)
+// static int	different_cases(t_data *data, char **array, int len, int *out)
+// {
+// 	if (array[len][0] == 34)
+// 	{
+// 		if (!double_quotes(data, &(array[len])))
+// 			return (freeing_stuff(array, out));
+// 	}
+// 	else if (array[len][0] == 39)
+// 	{
+// 		if (!single_quotes(&(array[len])))
+// 			return (freeing_stuff(array, out));
+// 	}
+// 	else
+// 	{
+// 		if (!no_quotes(data, &(array[len])))
+// 			return (freeing_stuff(array, out));
+// 		out[len] = 1;
+// 	}
+// 	return (1);
+// }
+
+void	remove_first_and_last_one(char *str, char s)
 {
-	if (array[len][0] == 34)
+	int	i;
+
+	i = 1;
+	while (str[i] != s)
 	{
-		if (!double_quotes(data, &(array[len])))
-			return (freeing_stuff(array, out));
+		str[i - 1] = str[i];
+		i++;
 	}
-	else if (array[len][0] == 39)
-	{
-		if (!single_quotes(&(array[len])))
-			return (freeing_stuff(array, out));
-	}
-	else
-	{
-		if (!no_quotes(data, &(array[len])))
-			return (freeing_stuff(array, out));
-		out[len] = 1;
-	}
-	return (1);
+	str[i - 1] = 0;
 }
 
 // returns array of int rep if in array[i] * is counted as wildcard
-// modifies array[i] by handling quotes and Path
-static int	*change_one_by_one(t_data *data, char **array)
+static int	*change_one_by_one(char **array)
 {
 	int	len;
 	int	*out;
@@ -93,8 +105,10 @@ static int	*change_one_by_one(t_data *data, char **array)
 	while (array[len])
 	{
 		out[len] = 0;
-		if (!different_cases(data, array, len, out))
-			return (NULL);
+		if (!(array[len][0] == 39 || array[len][0] == 34))
+			out[len] = 1;
+		else
+			remove_first_and_last_one(array[len], array[len][0]);
 		len++;
 	}
 	out[len] = -1;
@@ -102,8 +116,6 @@ static int	*change_one_by_one(t_data *data, char **array)
 }
 
 //return value should be array of int representing if wildcard is used or not
-//addittionally function should change the value of str by deleting quotes
-//and expanding path variable
 int	*full_handle_quotes(t_data *data, char **str)
 {
 	int		len;
@@ -111,13 +123,14 @@ int	*full_handle_quotes(t_data *data, char **str)
 	char	*temp;
 	int		*out;
 
+	data += 0;
 	len = count_len_quotes(*str);
 	array = malloc((len * 3 + 2) * sizeof(char *));
 	if (!array)
 		return (0);
-	if (!fill_array(*str, array))
+	if (!fill_array_full_handle(*str, array))
 		return (NULL);
-	out = get_array_used_stars(change_one_by_one(data, array), array);
+	out = get_array_used_stars(change_one_by_one(array), array);
 	if (!out)
 		return (NULL);
 	temp = transform_to_1d(array);

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 20:12:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 15:17:05 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/15 19:28:40 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,10 @@ char	*free_str_return_null(char *str)
 {
 	free(str);
 	return (NULL);
+}
+
+int	free_str_return_numb(char *str, int n)
+{
+	free(str);
+	return (n);
 }

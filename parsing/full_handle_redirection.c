@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:40:56 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 20:16:48 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:51:06 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,34 @@ int	check_wild_card_redir(char **str, int *wild)
 	return (1);
 }
 
+int	check_if_expands_to_2words(t_data *data, char **str)
+{
+	char	*copy;
+	char	**array;
+	int		len;
+	int		only_dollar;
+
+	copy = ft_str_dup(*str);
+	if (!copy)
+		return (-1);
+	only_dollar = consists_only_of_dollar(copy);
+	if (!manage_dollar(data, &copy))
+		return (free_str_return_numb(copy, -1));
+	if (only_dollar && !compare_strings("", copy))
+		return (free(copy), 1);
+	remove_useless_spaces(copy);
+	array = ft_split_respect_quotes(copy, ' ');
+	if (!array)
+		return (free_str_return_numb(copy, -1));
+	len = len_2d_array(array);
+	freeing(array);
+	if (len > 1)
+		return (free(copy), 1);
+	free(*str);
+	*str = copy;
+	return (0);
+}
+
 int	full_handle_redir(t_data *data, char **str, t_send *send, int i)
 {
 	int	*change_ambigious;
@@ -51,8 +79,7 @@ int	full_handle_redir(t_data *data, char **str, t_send *send, int i)
 		change_ambigious = send->cmd->is_ambigious_input;
 	else
 		change_ambigious = send->cmd->is_ambigious_output;
-	ans = 2;
-	//ans = check_if_any_expands_to_2words(data, *str);
+	ans = check_if_expands_to_2words(data, str);
 	if (ans == -1)
 		return (0);
 	if (ans == 1)
@@ -67,9 +94,6 @@ int	full_handle_redir(t_data *data, char **str, t_send *send, int i)
 	free(array);
 	if (!ans)
 		return (0);
-	if (ans == 2 || (change_ambigious[i] && !compare_strings("", *str)))
-		change_ambigious[i] = 1;
-	else
-		change_ambigious[i] = 0;
+	change_ambigious[i] = 0;
 	return (1);
 }
