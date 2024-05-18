@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 14:07:33 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:28:18 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,19 @@ typedef struct command
 
 typedef struct s_data
 {
-	int		redirect_input;
-	char	*redirect_input_to;
-	int		redirect_output;
-	char	*redirect_output_to;
-	int		redirect_output_append;
 	char	*cwd;
 	char	**comands;
 	char	**env;
+	char	**all_env_paths; //I need all paths stored
 	char	*home;
 	char	**original_env;
 	char	*last;
 	int		*exit_signal;
+	int		origin_stdin; //for execution of several cmds
+	int		origin_stdout; //for execution of several cmds
+	int		waitpid_status; // same
+	int		fd_arr[2]; // for piping
+	int		process_id; // for piping
 	t_cmd	*t_cmds;
 }	t_data;
 

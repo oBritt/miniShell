@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 12:56:55 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:58:52 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "executor.h"
 
 int	exit_signal = 0;
 
@@ -94,6 +95,7 @@ void	loop(t_data *data)
 		// write(1, input, str_len(input));
 		// write(1, "\n", 1);
 		free(input);
+		execute_cmd(data);
 	}
 	clear_history();
 }
