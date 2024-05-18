@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/18 17:10:16 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:13:33 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,6 @@
 #include "../minishell.h"
 #include <stdio.h>
 #include <string.h>
-
-void	print_t_cmd(t_cmd *command)
-{
-	if (command == NULL)
-	{
-		printf("Command structure is NULL\n");
-		return ;
-	}
-	printf("t_cmd structure:\n");
-	printf("cmd: ");
-	for (int i = 0; command->cmd && command->cmd[i]; i++)
-	{
-		printf("%s ", command->cmd[i]);
-	}
-	printf("\n");
-	// printf("cmd_path: %s\n", command->cmd_path);
-	printf("\n");
-	printf("amount: %d\n", command->amount);
-}
 
 void	p_check(int p, t_data *data)
 {

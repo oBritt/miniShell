@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 16:58:52 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/18 18:39:15 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ void	handle_signals(int status)
 void	loop(t_data *data)
 {
 	char	*input;
+	int		fd_in;
+	int		fd_out;
 
+	fd_in = dup(STDIN_FILENO);
+	fd_out = dup(STDOUT_FILENO);
 	data->exit_signal = &exit_signal;
 	rl_catch_signals = 1;
 	if (signal(SIGINT, handle_signals) == SIG_ERR)
@@ -96,6 +100,8 @@ void	loop(t_data *data)
 		// write(1, "\n", 1);
 		free(input);
 		execute_cmd(data);
+		dup2(fd_in, STDIN_FILENO);
+		dup2(fd_out, STDOUT_FILENO);
 	}
 	clear_history();
 }
