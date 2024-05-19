@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:05 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/08 21:30:40 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 14:33:50 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ int	main(int argc, char **argv, char **env)
 	}
 	loop(&data);
 	freeing(data.env);
-	freeing(data.original_env);
 }

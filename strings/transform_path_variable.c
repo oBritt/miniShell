@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:54:58 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/09 19:26:12 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:40:48 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static char	*help(t_data *data, char *str)
 	}
 	else if (!compare_strings("$?", str))
 		out = last_exit(data);
+	else if (!compare_strings("$_", str))
+		out = ft_str_dup(data->last_arg);
 	else
 		out = find_by_value(data, str);
 	return (out);
@@ -63,12 +65,9 @@ int	transform_path_variable(t_data *data, char **str)
 	if (input[0] != '$')
 		return (1);
 	temp = help(data, input);
-	free(input);
 	if (!temp)
-	{
-		input = NULL;
 		return (0);
-	}
+	free(*str);
 	*str = temp;
 	return (1);
 }

@@ -4,6 +4,10 @@
 		"__tuple": "c",
 		"array": "c",
 		"stdlib.h": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"__locale": "c",
+		"locale": "c",
+		"cstdlib": "c",
+		"sstream": "c"
 	}
 }

@@ -6,42 +6,64 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:02:16 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/09 13:26:37 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 17:35:42 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// int	is_amount_arg_ok(char **str)
-// {
-// 	int	i;
-
-// 	i = 0;
-
-// }
-
-int	get_exit_code(char *str)
+int	exit_helper(t_data *data, char **command, int is_main, int sig)
 {
-	long long	temp;
-	char		**splited;
+	int	len;
 
-	splited = ft_split_respect_quotes(str, ' ');
-	if (!splited)
-		return (-1);
-	// if (!is_amount_arg_ok(str))
-	// 	return (1);
-	temp = ft_atoll(str);
-	temp %= 256;
-	if (temp < 0)
-		temp += 256;
-	return ((int) temp);
+	len = len_2d_array(command);
+	if (len > 2)
+	{
+		write(2, "exit: too many arguments\n", 25);
+		if (!is_main)
+			exit(1);
+		data->exit = 1;
+	}
+	else
+	{
+		if (!is_main)
+			exit(sig);
+		data->exit = sig;
+		data->should_continue = 0;
+	}
+	return (1);
 }
 
-int	ft_exit(char *str)
+static int	case_one(t_data *data, int is_main)
+{
+	if (!is_main)
+		exit(0);
+	data->should_continue = 0;
+	data->exit = 0;
+	return (1);
+}
+
+int	builtin_exit(t_data *data, char **command, int is_main)
 {
 	int	t;
+	int	len;
+	int	err;
 
-	t = get_exit_code(str);
-	put_nbr_fd(t, 1);
-	exit(t);
+	len = len_2d_array(command);
+	if (len == 1)
+		return (case_one(data, is_main));
+	t = (char)ft_atoll(command[1], &err);
+	if (err)
+	{
+		if (is_main)
+			write(2, "exit\n", 5);
+		write(2, "minishell: exit: ", 17);
+		write(2, command[1], str_len(command[1]));
+		write(2, ": numeric argument required", 27);
+		if (!is_main)
+			exit(255);
+		data->should_continue = 0;
+		data->exit_printed = 1;
+	}
+	return (exit_helper(data, command, is_main, t));
 }

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:51:51 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/09 10:40:59 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 13:17:45 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ static long long	transform(char *str, int minus)
 	return (out);
 }
 
-long long	ft_atoll(char *str)
+long long	ft_atoll(char *str, int *err)
 {
 	int	minus;
 	int	t;
 
+	*err = 0;
 	t = 0;
 	minus = 0;
 	while (*str == ' ')
@@ -72,11 +73,13 @@ long long	ft_atoll(char *str)
 	}
 	delete_spaces_back(str, &t);
 	if (!is_numeric(str))
-		return (-1);
-	if (str_len(MIN_LLONG) < str_len(str))
-		return (-1);
-	if (str_len(MAX_LLONG) == str_len(str))
+		*err = 1;
+	else if (str_len(MIN_LLONG) < str_len(str))
+		*err = 1;
+	else if (str_len(MAX_LLONG) == str_len(str))
 		if (!compare_a(str, minus))
-			return (-1);
+			*err = 1;
+	if (*err == 1)
+		return (0);
 	return (transform(str, minus));
 }

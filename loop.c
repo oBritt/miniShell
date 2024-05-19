@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 11:33:41 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:48:25 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	loop(t_data *data)
 		write(2, "Erorr signal issue\n", 19);
 		exit(1);
 	}
+	for (int i = 0; data->env[i]; i++)
+		printf("%s\n", data->env[i]);
 	while (1)
 	{
 		input = readline(SHELL_PROMT);
@@ -112,6 +114,9 @@ void	loop(t_data *data)
 		execute_cmd(data);
 		dup2(fd_in, STDIN_FILENO);
 		dup2(fd_out, STDOUT_FILENO);
+		free(data->last_arg);
+		data->last_arg = data->cur_last;
+		data->cur_last = malloc(2);
 	}
 	clear_history();
 }

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:48:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/15 19:58:09 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:42:55 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ static int	change_only_one(char **command, t_data *data, t_cmd *cmd)
 		i++;
 	}
 	cmd->cmd = cmds;
+	free(data->cur_last);
+	i = len_2d_array(cmds);
+	if (i == 0)
+		data->cur_last = ft_str_dup("");
+	else
+		data->cur_last = ft_str_dup(cmds[i - 1]);
+	if (!data->cur_last)
+		return (0);
 	return (1);
 }
 

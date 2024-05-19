@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 11:32:16 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 17:36:16 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ typedef struct s_data
 	int		fd_arr[2]; // for piping
 	int		process_id; // for piping
 	char	*last_arg;
+	char	*cur_last;
 	t_cmd	*t_cmds;
+	int		should_continue;
+	int		exit_printed;
+	int		exit;
 }	t_data;
 
 typedef struct s_space
@@ -99,8 +103,8 @@ void		remove_useless_spaces(char *str);
 void		init_space(t_space *space, char *str);
 void		put_nbr_fd(long long num, int fd);
 int			is_numeric(char *str);
-int			ft_exit(char *str);
-long long	ft_atoll(char *str);
+int			builtin_exit(t_data *data, char **command, int is_main);
+long long	ft_atoll(char *str, int *err);
 int			get_exit_code(char *str);
 int			init_data(t_data *data, char **env);
 char		*ft_str_dup(char *str);
@@ -180,4 +184,11 @@ int			fill_array_full_handle(char *str, char **array);
 int			check_syntaxes(t_data *data, char *input);
 void		output_message_unclosed(char c);
 void		output_message_bad_sub(t_space *space, char *input);
+void		sort_to_original(char **env, char **original_env);
+int			find_by_key(char **env, char *str);
+void		sort_to_original(char **env, char **original_env);
+int			update_env_value(char ***env, char *str, int ind, int append);
+int			get_index_to_insert(char **env, char **original_env, char *str);
+char		*itos(long long num);
+char		*ft_str_join(char *str1, char *str2);
 #endif
