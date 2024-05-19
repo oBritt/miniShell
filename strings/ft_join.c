@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_join.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 16:06:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 16:18:26 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/19 13:31:19 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/19 13:35:21 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	builtin_env(t_data *data, char **command, int fd, int is_main)
+char	*ft_str_join(char *str1, char *str2)
 {
-	char	**env;
-	int		i;
+	char	*output;
+	int		ptr1;
+	int		ptr2;
 
-	if (len_2d_array(command) != 1)
-	{
-		write(fd, "env: can not take any options or argimetns\n", 43);
-		if (!is_main)
-			exit(126);
-		data->last_exit = 126;
-	}
-	else
-	{
-		i = 0;
-		env = data->env;
-		while (env[i])
-		{
-			write(1, env[i], str_len(env[i]));
-			i++;
-		}
-		if (!is_main)
-			exit(0);
-		data->last_exit = 0;
-	}
-	return (1);
+	output = malloc((str_len(str1) + str_len(str2) + 1) * sizeof(char));
+	if (!output)
+		return (NULL);
+	ptr1 = 0;
+	ptr2 = 0;
+	while (str1[ptr2])
+		output[ptr1++] = str1[ptr2++];
+	ptr2 = 0;
+	while (str2[ptr2])
+		output[ptr1++] = str2[ptr2++];
+	output[ptr1] = 0;
+	return (output);
 }

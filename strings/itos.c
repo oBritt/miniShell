@@ -1,41 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   itos.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 16:06:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 16:18:26 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/19 13:00:48 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/19 13:29:36 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	builtin_env(t_data *data, char **command, int fd, int is_main)
+int	get_len_number(long long num)
 {
-	char	**env;
-	int		i;
+	int	i;
 
-	if (len_2d_array(command) != 1)
+	i = 0;
+	while (num)
 	{
-		write(fd, "env: can not take any options or argimetns\n", 43);
-		if (!is_main)
-			exit(126);
-		data->last_exit = 126;
+		num /= 10;
+		i++;
+	}
+	return (i);
+}
+
+char	*itos(long long num)
+{
+	int		i;
+	char	*output;
+
+	if (num == 0)
+	{
+		output = malloc(3 * sizeof(char));
+		if (!output)
+			return (0);
+		output[0] = '0';
+		output[1] = 0;
 	}
 	else
 	{
-		i = 0;
-		env = data->env;
-		while (env[i])
+		i = get_len_number(num);
+		output = malloc((i + 1) * sizeof(char));
+		if (!output)
+			return (NULL);
+		output[i--] = 0;
+		while (num)
 		{
-			write(1, env[i], str_len(env[i]));
-			i++;
+			output[i--] = num % 10 + '0';
+			num /= 10;
 		}
-		if (!is_main)
-			exit(0);
-		data->last_exit = 0;
 	}
-	return (1);
+	return (output);
 }

@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 16:06:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 16:18:26 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/17 16:31:45 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/17 16:32:17 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	builtin_env(t_data *data, char **command, int fd, int is_main)
+void	output_message_bad_sub(t_space *space, char *input)
 {
-	char	**env;
-	int		i;
+	int	len;
 
-	if (len_2d_array(command) != 1)
-	{
-		write(fd, "env: can not take any options or argimetns\n", 43);
-		if (!is_main)
-			exit(126);
-		data->last_exit = 126;
-	}
-	else
-	{
-		i = 0;
-		env = data->env;
-		while (env[i])
-		{
-			write(1, env[i], str_len(env[i]));
-			i++;
-		}
-		if (!is_main)
-			exit(0);
-		data->last_exit = 0;
-	}
-	return (1);
+	len = find_first_app(input + space->pointer1, '}', 0, 0) + 1;
+	write(2, "minishell: ", 11);
+	write(2, input + space->pointer1, len);
+	write(2, ": bad substitution\n", 19);
+}
+
+void	output_message_unclosed(char c)
+{
+	char	t;
+
+	write(2, "minishell: syntax error unclosed token ", 39);
+	t = 96;
+	write(2, &t, 1);
+	write(2, &c, 1);
+	write(2, "\'\n", 2);
 }

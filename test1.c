@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 09:29:05 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 14:33:50 by obrittne         ###   ########.fr       */
+/*   Created: 2024/05/17 15:08:09 by obrittne          #+#    #+#             */
+/*   Updated: 2024/05/17 17:27:32 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int	main(int argc, char **argv, char **env)
+int	main (int arc, char **argv, char **env)
 {
-	t_data	data;
-
-	if (argc != 1)
-	{
-		argv += 0;
-		write(2, "No arguments should be passed!\n", 31);
-		exit(1);
-	}
-	if (!init_data(&data, env))
-	{
-		write(2, "Memmory allocation has failed\n", 30);
-		exit(1);
-	}
-	loop(&data);
-	freeing(data.env);
+	char *str = malloc(7481278946128461281);
+	// str[0] = 1;
+	if (str == NULL)
+		perror("malloc kkk");
+	dprintf(2, "dsfdsf\n");
 }

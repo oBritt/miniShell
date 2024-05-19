@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:26:00 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 18:13:48 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 12:21:13 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	**get_only_the_same(char **dirs, char *str, int *wild)
 		ptr2++;
 	}
 	freeing(dirs);
+	output[ptr1] = NULL;
 	return (output);
 }
 

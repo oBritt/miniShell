@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 17:35:33 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 13:09:31 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:07:17 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**redir(char *str, int **last, char *opt1, char *opt2)
 	t_space	space;
 
 	amount = get_amount_redirection(str, opt1, opt2);
-
+	printf("%i", amount);
 	if (!compare_strings(opt1, OUTPUT_RED_AP))
 		*last = malloc(sizeof(int) * amount);
 	if (!*last)
