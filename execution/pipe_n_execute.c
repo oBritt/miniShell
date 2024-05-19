@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/19 19:47:49 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/19 20:25:01 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ void redir_in_check(t_cmd *command)
 	i = 0;
 	while (i < redir_number)
 	{
+		if (command->is_ambigious_input[i])
+		{
+			display_error("minishell: ");
+			display_error(strerror(errno));
+			display_error("\n");
+			exit(EXIT_FAILURE);
+		}
 		open_file(command, i, redir_number);
 		i++;
 	}
@@ -90,6 +97,14 @@ void redir_out_check(t_cmd *command)
 	i = 0;
 	while (i < redir_number)
 	{
+		printf("output check: ambi %d----\n", command->is_ambigious_output[i]);
+		if (command->is_ambigious_output[i])
+		{
+			display_error("minishell: ");
+			display_error(strerror(errno));
+			display_error("\n");
+			exit(EXIT_FAILURE);
+		}
 		open_out_file(command, i, redir_number);
 		i++;
 	}
