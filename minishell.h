@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 14:07:33 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:31:20 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <termios.h>
-//# include <string.h>
+# include <limits.h>
+# include <errno.h>
 # include <dirent.h>
 
 typedef struct command
@@ -42,18 +43,14 @@ typedef struct command
 
 typedef struct s_data
 {
-	int		redirect_input;
-	char	*redirect_input_to;
-	int		redirect_output;
-	char	*redirect_output_to;
-	int		redirect_output_append;
 	char	*cwd;
 	char	**comands;
 	char	**env;
 	char	*home;
 	char	**original_env;
-	char	*last;
+	int		last_exit;
 	int		*exit_signal;
+	char	*last_arg;
 	t_cmd	*t_cmds;
 }	t_data;
 
@@ -174,4 +171,7 @@ void		get_rid_of_parantheses(char *str);
 int			free_str_return_numb(char *str, int n);
 void		remove_first_and_last_one(char *str, char s);
 int			fill_array_full_handle(char *str, char **array);
+int			check_syntaxes(t_data *data, char *input);
+void		output_message_unclosed(char c);
+void		output_message_bad_sub(t_space *space, char *input);
 #endif

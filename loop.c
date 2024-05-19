@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 12:56:55 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 09:57:11 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,19 @@ void	loop(t_data *data)
 			write(1, "exit\n", 6);
 			break ;
 		}
+		if (!compare_strings("", input))
+		{
+			free(input);
+			continue ;
+		}
 		add_history(input);
+		if (!check_syntaxes(data, input))
+		{
+			free(input);
+			continue ;
+		}
 		remove_useless_spaces(input);
-		remove_useless_dollar(input);
+		remove_useless_dollar(input);	
 		parsing(data, input);
 		t_cmd *cmd = data->t_cmds;
 		for (int i = 0; cmd->amount > i; i++)
