@@ -6,11 +6,12 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 09:57:11 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 11:33:41 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "executor.h"
 
 int	exit_signal = 0;
 
@@ -53,7 +54,11 @@ void	handle_signals(int status)
 void	loop(t_data *data)
 {
 	char	*input;
+	int		fd_in;
+	int		fd_out;
 
+	fd_in = dup(STDIN_FILENO);
+	fd_out = dup(STDOUT_FILENO);
 	data->exit_signal = &exit_signal;
 	rl_catch_signals = 1;
 	if (signal(SIGINT, handle_signals) == SIG_ERR)
@@ -81,7 +86,7 @@ void	loop(t_data *data)
 			continue ;
 		}
 		remove_useless_spaces(input);
-		remove_useless_dollar(input);	
+		remove_useless_dollar(input);
 		parsing(data, input);
 		t_cmd *cmd = data->t_cmds;
 		for (int i = 0; cmd->amount > i; i++)
@@ -104,6 +109,9 @@ void	loop(t_data *data)
 		// write(1, input, str_len(input));
 		// write(1, "\n", 1);
 		free(input);
+		execute_cmd(data);
+		dup2(fd_in, STDIN_FILENO);
+		dup2(fd_out, STDOUT_FILENO);
 	}
 	clear_history();
 }

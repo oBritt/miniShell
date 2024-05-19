@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 17:31:20 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/19 11:32:16 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,16 @@ typedef struct s_data
 	char	*cwd;
 	char	**comands;
 	char	**env;
+	char	**all_env_paths; //I need all paths stored
 	char	*home;
 	char	**original_env;
 	int		last_exit;
 	int		*exit_signal;
+	int		origin_stdin; //for execution of several cmds
+	int		origin_stdout; //for execution of several cmds
+	int		waitpid_status; // same
+	int		fd_arr[2]; // for piping
+	int		process_id; // for piping
 	char	*last_arg;
 	t_cmd	*t_cmds;
 }	t_data;
