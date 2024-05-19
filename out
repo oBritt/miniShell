@@ -1,3 +1,11 @@
+execution
+executor.h
+execution
+executor.h
+drwxr-xr-x   9 oemelyan  2022_heilbronn     306 May 19 20:25 execution
+-rw-r--r--   1 oemelyan  2022_heilbronn    1904 May 19 19:44 executor.h
+hello
+hello
 $.a
 *
 Dockerfile
@@ -12,6 +20,7 @@ env
 execution
 executor.h
 in1
+in2
 init_data.c
 init_data.o
 loop.c
@@ -22,6 +31,8 @@ minishell
 minishell.h
 obrittne.c
 out
+out1
+out2
 parsing
 start.sh
 start2.sh

@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/19 20:25:01 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:04:28 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,13 @@ void redir_out_check(t_cmd *command)
 
 void child(t_data *data, int last_cmd, int i)
 {
+	data->t_cmds[i].in_fd = 0;
+	data->t_cmds[i].out_fd = 0;
 	redir_out_check(&data->t_cmds[i]);
 	if (!last_cmd) //not last cmd
 	{
 		if (data->t_cmds[i].out_fd)
-		{
 			dup2(data->t_cmds[i].out_fd, 1);
-		}
 		else
 		{
 			dup2(data->fd_arr[1], 1);
@@ -129,13 +129,9 @@ void child(t_data *data, int last_cmd, int i)
 	else //last cmd
 	{
 		if (data->t_cmds[i].out_fd)
-		{
 			dup2(data->t_cmds[i].out_fd, 1);
-		}
 		else
-		{
 			dup2(data->origin_stdout, 1);
-		}
 	}
 	redir_in_check(&data->t_cmds[i]);
 	if (data->t_cmds[i].in_fd)
