@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/17 20:04:58 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/18 19:12:24 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ char	*find_in_envp(char *cmd, t_data *data)
 	while (data->all_env_paths[i] != NULL)
 	{
 		temp = ft_strjoin(data->all_env_paths[i], "/");
-		//printf("%s\n", temp);
 		cmd_path = ft_strjoin(temp, cmd);
-		//printf("%s\n", cmd_path);
 		if (access(cmd_path, X_OK) == 0)
 		{
 			free(temp);

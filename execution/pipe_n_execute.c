@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/18 17:13:33 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/18 19:08:39 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	mult_execute(t_data *data)
 	int	last_cmd;
 
 	last_cmd = 0;
-	data->origin_stdin = STDIN_FILENO;
-	data->origin_stdout = STDOUT_FILENO;
+	// data->origin_stdin = STDIN_FILENO;
+	// data->origin_stdout = STDOUT_FILENO;
 	data->waitpid_status = 0;
 	// sleep 10 | ls
 	while (i < data->t_cmds[0].amount)
