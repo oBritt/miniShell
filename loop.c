@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 15:48:25 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:21:06 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,15 @@ void	loop(t_data *data)
 		write(2, "Erorr signal issue\n", 19);
 		exit(1);
 	}
-	for (int i = 0; data->env[i]; i++)
-		printf("%s\n", data->env[i]);
+	// for (int i = 0; data->env[i]; i++)
+	// 	printf("%s\n", data->env[i]);
+	char *asd[5];
+	asd[0] = "ads";
+	asd[1] = "d+=ads";
+	asd[2] = "_3a=asd";
+	asd[3] = "a3=ads";
+	asd[4] = NULL;
+	builtin_export(data, asd, 1, 1);
 	while (1)
 	{
 		input = readline(SHELL_PROMT);

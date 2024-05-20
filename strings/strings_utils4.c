@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 20:12:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/15 19:28:40 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:40:35 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,25 @@ int	free_str_return_numb(char *str, int n)
 {
 	free(str);
 	return (n);
+}
+
+char	**join_2d_arrays_same_address(char **arr1, char **arr2)
+{
+	char	**output;
+	int		ptr1;
+	int		ptr2;
+
+	output = malloc((1 + len_2d_array(arr1) + len_2d_array(arr2)) \
+	* sizeof(char *));
+	if (!output)
+		return (NULL);
+	ptr1 = 0;
+	ptr2 = 0;
+	while (arr1[ptr2])
+		output[ptr1++] = arr1[ptr2++];
+	ptr2 = 0;
+	while (arr2[ptr2])
+		output[ptr1++] = arr2[ptr2++];
+	output[ptr1] = NULL;
+	return (output);
 }

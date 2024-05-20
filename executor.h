@@ -6,19 +6,28 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/17 20:13:33 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/19 19:44:03 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
+# include <errno.h>
+# include <fcntl.h> //for O_WRONLY O_CREAT O_TRUNC flags
 #include "minishell.h"
 
 //execution itself
 void		execute_cmd(t_data *data);
 void		get_paths(t_data *data);
 void 		mult_execute(t_data *data);
+void		child(t_data *data, int last_cmd, int i);
+void		parent(t_data *data, int last_cmd);
+void		redir_in_check(t_cmd *command);
+void		open_file(t_cmd *command, int i, int redir_number);
+void		p_check(int p, t_data *data);
+void		redir_out_check(t_cmd *command);
+void		open_out_file(t_cmd *command, int i, int redir_number);
 
 //utils
 size_t		ft_strlen(const char *str);

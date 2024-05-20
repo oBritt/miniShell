@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:32:31 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 17:58:55 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:02:15 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ int	consists_only_of_dollar(char *str)
 	while (str[i])
 	{
 		if (str[i] == '$')
-		{
 			go_untill_end_dolar(str, &i);
+		else
+		{
+			if (str[i] != ' ' && str[i])
+				ans = 0;
+			i++;
 		}
-		if (str[i] != ' ' && str[i])
-			ans = 0;
-		i++;
 	}
 	return (ans);
 }
