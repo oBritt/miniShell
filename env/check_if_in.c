@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:29:43 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 14:53:58 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 17:04:31 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	find_by_key(char **env, char *str)
 	{
 		len = find_first_app(env[i], '=', 0, 0);
 		if (is_compare_strings_len(env[i], str, len))
-			return (i);
+			return (i + 1);
 		i++;
 	}
 	return (0);

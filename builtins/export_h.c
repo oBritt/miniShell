@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:45:53 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 15:27:56 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 18:27:39 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@ int	check_if_valid_export(char *str)
 			return (0);
 		i++;
 	}
+	if (!str[i])
+		return (3);
+	return (1);
+}
+
+int	export_change_value(t_data *data, char *str, int ans)
+{
+	if (ans == 3)
+	{
+		delete_from_addition(data, str);
+		if (!update_env_value(&data->addition_env, str, \
+		len_2d_array(data->addition_env), 1))
+			return (0);
+	}
+	if (ans == 2)
+	{
+		if (!update_export_append(data, str))
+			return (0);
+	}
+	if (ans == 1)
+	{
+		if (!update_export(data, str))
+			return (0);
+	}
 	return (1);
 }
 
@@ -56,13 +80,16 @@ int	export_handle(t_data *data, char **command, int is_main)
 		{
 			error_output_export(command[i]);
 			data->last_exit = 1;
-			err = 1;
 		}
 		else
 		{
-			
+			if (!export_change_value(data, command[i], ans))
+			{
+				if (!is_main)
+					exit(1);
+				return (0);
+			}
 		}
 	}
-	is_main += 0;
 	return (1);
 }

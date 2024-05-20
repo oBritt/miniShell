@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/05/20 16:17:14 by oemelyan         ###   ########.fr       */
+=======
+/*   Updated: 2024/05/20 18:49:13 by obrittne         ###   ########.fr       */
+>>>>>>> c608c33c9d16a0afe70d65517961d0ed311d6135
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +37,7 @@ typedef struct command
 	char		**output_redirect;
 	int			*is_ambigious_output;
 	char		**delimiter;
+	char		**stored_delimiter;
 	char		*cmd_path;
 	int			in_fd;
 	int			out_fd;
@@ -196,4 +201,12 @@ char		*get_cwd(void);
 int			builtin_export(t_data *data, char **command, int fd, int is_main);
 char		**join_2d_arrays_same_address(char **arr1, char **arr2);
 int			export_handle(t_data *data, char **command, int is_main);
+int			check_if_in(char **array, char *str);
+int			update_export(t_data *data, char *str);
+void		delete_from_addition(t_data *data, char *str);
+int			update_export_append(t_data *data, char *str);
+int			check_if_valid_export(char *str);
+void		error_output_export(char *str);
+void		delete_from_array(char **array, int ind);
+int			builtin_unset(t_data *data, char **command, int is_main);
 #endif
