@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/19 21:04:28 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/20 10:09:12 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,16 @@ void redir_out_check(t_cmd *command)
 	}
 }
 
+void set_heredoc(t_cmd *command)
+{
+	int		nbr;
+
+	nbr = 0;
+	while (command->delimiter[nbr])
+		nbr++;
+	
+}
+
 void child(t_data *data, int last_cmd, int i)
 {
 	data->t_cmds[i].in_fd = 0;
@@ -133,6 +143,8 @@ void child(t_data *data, int last_cmd, int i)
 		else
 			dup2(data->origin_stdout, 1);
 	}
+	if (data->t_cmds[i].delimiter[0])
+		set_heredoc(&data->t_cmds[i]); //first it takes input with the heredoc, then it starts checking input redirections, if they aren't valid error and not execute cmd
 	redir_in_check(&data->t_cmds[i]);
 	if (data->t_cmds[i].in_fd)
 		dup2(data->t_cmds[i].in_fd, 0);
