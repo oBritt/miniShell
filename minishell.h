@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 18:42:15 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 18:49:13 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct command
 	char		*cmd_path;
 	int			in_fd;
 	int			out_fd;
-	int			have_to_execute;
+	int			have_to_execute; //for what?
 	int			*is_output_append;
 	int			amount;
 }	t_cmd;
