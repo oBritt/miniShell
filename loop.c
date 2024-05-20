@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 15:21:06 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 18:25:52 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,13 @@ void	loop(t_data *data)
 	// for (int i = 0; data->env[i]; i++)
 	// 	printf("%s\n", data->env[i]);
 	char *asd[5];
-	asd[0] = "ads";
-	asd[1] = "d+=ads";
-	asd[2] = "_3a=asd";
-	asd[3] = "a3=ads";
+	asd[0] = "asd";
+	asd[1] = "HOME+=a";
+	asd[2] = "asd";
+	asd[3] = "d";
 	asd[4] = NULL;
+	builtin_export(data, asd, 1, 1);
+	asd[1] = NULL;
 	builtin_export(data, asd, 1, 1);
 	while (1)
 	{

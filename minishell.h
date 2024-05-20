@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 15:18:20 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 18:42:15 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct command
 	char		**output_redirect;
 	int			*is_ambigious_output;
 	char		**delimiter;
+	char		**stored_delimiter;
 	char		*cmd_path;
 	int			in_fd;
 	int			out_fd;
@@ -196,4 +197,12 @@ char		*get_cwd(void);
 int			builtin_export(t_data *data, char **command, int fd, int is_main);
 char		**join_2d_arrays_same_address(char **arr1, char **arr2);
 int			export_handle(t_data *data, char **command, int is_main);
+int			check_if_in(char **array, char *str);
+int			update_export(t_data *data, char *str);
+void		delete_from_addition(t_data *data, char *str);
+int			update_export_append(t_data *data, char *str);
+int			check_if_valid_export(char *str);
+void		error_output_export(char *str);
+void		delete_from_array(char **array, int ind);
+int			builtin_unset(t_data *data, char **command, int is_main);
 #endif
