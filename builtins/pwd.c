@@ -6,45 +6,38 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:05:53 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 16:35:56 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:16:42 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	helper(char *cwd, int fd, int is_main)
+char	*get_cwd(void)
 {
-	write(fd, cwd, str_len(cwd));
+	char	*cwd;
+
+	cwd = malloc(PATH_MAX * sizeof(char));
+	if (!cwd)
+		return (NULL);
+	if (getcwd(cwd, PATH_MAX))
+		return (cwd);
 	free(cwd);
-	if (!is_main)
-		exit(0);
-	return (1);
+	return (NULL);
 }
 
 int	pwd(int fd, int is_main)
 {
 	char	*cwd;
-	int		size;
 
-	size = 1024;
-	while (1)
+	cwd = get_cwd();
+	if (!cwd)
 	{
-		cwd = malloc(size * sizeof(char));
-		if (!cwd)
-			return (0);
-		if (getcwd(cwd, sizeof(cwd)))
-			return (helper(cwd, fd, is_main));
-		else
-		{
-			free(cwd);
-			if (errno == ERANGE)
-				size *= 2;
-			else
-			{
-				if (!is_main)
-					exit(0);
-				return (0);
-			}
-		}
+		if (!is_main)
+			exit(1);
+		return (0);
 	}
+	write(fd, cwd, str_len(cwd));
+	write(1, "\n", 1);
+	free(cwd);
+	return (1);
 }

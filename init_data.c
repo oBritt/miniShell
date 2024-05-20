@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:26:01 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 17:40:37 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:08:15 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,28 +96,31 @@ int	update_under_score(t_data *data)
 {
 	char	*str;
 	char	*copy;
-	int		i;
+	char	*joined;
 	int		t;
 
 	t = find_by_key(data->env, "_");
-	str = ft_str_dup(data->env[t]);
+	str = get_cwd();
 	if (!str)
 		return (freeing(data->env), 0);
-	i = 2;
-	while (str[i])
-	{
-		str[i - 2] = str[i];
-		i++;
-	}
-	str[i - 2] = 0;
+	joined = ft_str_join(str, "/./minishell");
+	free(str);
+	if (!joined)
+		return (freeing(data->env), 0);
 	copy = ft_str_dup("_=/usr/bin/env");
 	if (!copy)
 		return (free(str), freeing(data->env), 0);
 	update_env_value(&data->env, copy, t, 0);
-	data->last_arg = str;
+	data->last_arg = joined;
 	data->cur_last = malloc(2);
+	if (!data->cur_last)
+		return (free(str), freeing(data->env), 0);
 	data->should_continue = 1;
 	data->exit_printed = 0;
+	data->addition_env = malloc(1 * sizeof(char *));
+	if (!data->addition_env)
+		return (free(str), freeing(data->env), 0);
+	data->addition_env[0] = NULL;
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 21:17:54 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:05:13 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_data
 	char	**all_env_paths; //I need all paths stored
 	char	*home;
 	char	**original_env;
+	char	**addition_env;
 	int		last_exit;
 	int		*exit_signal;
 	int		origin_stdin; //for execution of several cmds
@@ -191,4 +192,8 @@ int			update_env_value(char ***env, char *str, int ind, int append);
 int			get_index_to_insert(char **env, char **original_env, char *str);
 char		*itos(long long num);
 char		*ft_str_join(char *str1, char *str2);
+char		*get_cwd(void);
+int			builtin_export(t_data *data, char **command, int fd, int is_main);
+char		**join_2d_arrays_same_address(char **arr1, char **arr2);
+int			export_handle(t_data *data, char **command, int is_main);
 #endif

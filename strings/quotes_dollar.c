@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:25:15 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/13 19:13:35 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:01:04 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	get_len_dollar(char *str)
 	int	i;
 
 	i = 1;
-	while (1)
+	while (str[i])
 	{
 		if (!is_number(str[i]) && str[i] != '_' && !is_alpha(str[i]))
 			break ;

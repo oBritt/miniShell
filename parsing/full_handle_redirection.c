@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:40:56 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 11:51:06 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:29:12 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ int	check_if_expands_to_2words(t_data *data, char **str)
 	return (0);
 }
 
+void	modify_ambigious(int i, int *change_ambigious, int ans)
+{
+	change_ambigious[i] = 0;
+	if (ans == 2)
+		change_ambigious[i] = 1;
+}
+
 int	full_handle_redir(t_data *data, char **str, t_send *send, int i)
 {
 	int	*change_ambigious;
@@ -94,6 +101,6 @@ int	full_handle_redir(t_data *data, char **str, t_send *send, int i)
 	free(array);
 	if (!ans)
 		return (0);
-	change_ambigious[i] = 0;
+	modify_ambigious(i, change_ambigious, ans);
 	return (1);
 }
