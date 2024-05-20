@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 18:35:35 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/17 19:19:19 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:32:42 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i] != 0)
+	while (str[i])
 		i++;
 	return (i);
 }

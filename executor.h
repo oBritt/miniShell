@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/19 19:44:03 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:26:40 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void		open_file(t_cmd *command, int i, int redir_number);
 void		p_check(int p, t_data *data);
 void		redir_out_check(t_cmd *command);
 void		open_out_file(t_cmd *command, int i, int redir_number);
-
+void		set_heredoc(t_cmd *command);
+void		read_store_input(t_cmd *command, int nbr);
 //utils
 size_t		ft_strlen(const char *str);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
