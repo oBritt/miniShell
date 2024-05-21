@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:02:37 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 18:59:26 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:11:12 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	builtin_echo(t_data *data, char **command, int fd, int is_main)
 {
 	if (!output(command, fd))
 	{
-		write(2, "Memmory allocation failure\n", 28);
 		if (!is_main)
-			exit(127);
+			exit(1);
+		return (0);
 	}
 	if (!is_main)
 		exit(0);

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:05:53 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 13:16:42 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:07:17 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ int	pwd(int fd, int is_main)
 	write(fd, cwd, str_len(cwd));
 	write(1, "\n", 1);
 	free(cwd);
+	if (!is_main)
+		exit(0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:12:21 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 15:43:48 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:11:53 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	change_cwd(t_data *data, char *str, int is_main)
 			exit(1);
 		return (0);
 	}
+	if (!is_main)
+		exit(0);
 	return (1);
 }
 

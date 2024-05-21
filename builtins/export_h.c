@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:45:53 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 15:33:06 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:09:09 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ int	export_change_value(t_data *data, char *str, int ans)
 	return (1);
 }
 
+static int	exit_export(t_data *data, int is_main)
+{
+	if (!is_main)
+		exit(data->last_exit);
+	return (1);
+}
+
 int	export_handle(t_data *data, char **command, int is_main)
 {
 	int	i;
@@ -91,5 +98,5 @@ int	export_handle(t_data *data, char **command, int is_main)
 			}
 		}
 	}
-	return (1);
+	return (exit_export(data, is_main));
 }

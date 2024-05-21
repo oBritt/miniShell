@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:06:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 15:32:59 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:10:44 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	builtin_env(t_data *data, char **command, int fd, int is_main)
 		env = data->env;
 		while (env[i])
 		{
-			write(1, env[i], str_len(env[i]));
+			write(fd, env[i], str_len(env[i]));
 			i++;
 		}
 		if (!is_main)
