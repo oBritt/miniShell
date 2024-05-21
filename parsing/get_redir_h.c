@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 19:18:35 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 12:56:32 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:34:59 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,11 @@ int	get_redir_basic_case(char **output, int *array, char *str, t_space *space)
 	else
 		set_equal_and_increment(space, str);
 	return (1);
+}
+
+void	set_equal_and_increment(t_space *space, char *str)
+{
+	str[space->pointer1] = str[space->pointer2];
+	space->pointer1++;
+	space->pointer2++;
 }

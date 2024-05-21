@@ -6,18 +6,11 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 17:35:33 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 14:11:46 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:37:04 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	set_equal_and_increment(t_space *space, char *str)
-{
-	str[space->pointer1] = str[space->pointer2];
-	space->pointer1++;
-	space->pointer2++;
-}
 
 void	go_untill_quote(t_space *space, char *str)
 {
@@ -35,6 +28,17 @@ void	go_untill_quote(t_space *space, char *str)
 		space->two = 0;
 	}
 	set_equal_and_increment(space, str);
+}
+
+static int	go_untill_space_end_h(t_space *space, char *str, int i, \
+char **output)
+{
+	output[space->action] = ft_str_dup_len(&str[space->pointer2], i);
+	if (!output[space->action])
+		return (0);
+	space->action++;
+	space->pointer2 += i;
+	return (1);
 }
 
 int	go_untill_space_end(char **output, t_space *space, char *opt)
@@ -59,12 +63,7 @@ int	go_untill_space_end(char **output, t_space *space, char *opt)
 		}
 		i++;
 	}
-	output[space->action] = ft_str_dup_len(&str[space->pointer2], i);
-	if (!output[space->action])
-		return (0);
-	space->action++;
-	space->pointer2 += i;
-	return (1);
+	return (go_untill_space_end_h(space, str, i, output));
 }
 
 static int	solve_c(char **output, int *array, char *str, t_space *space)

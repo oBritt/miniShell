@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 21:17:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 19:53:44 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:55:03 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@
 #include <errno.h>
 
 int main() {
-    const char *new_path = "";
-    DIR *dir = opendir(new_path);
+    // const char *new_path = "";
+    // DIR *dir = opendir(new_path);
 
-    // Check if the directory can be opened
-    if (dir == NULL) {
-        if (errno == ENOENT) {
-            fprintf(stderr, "Error: %s does not exist\n", new_path);
-        } else if (errno == ENOTDIR) {
-            fprintf(stderr, "Error: %s is not a directory\n", new_path);
-        } else {
-            perror("opendir() error");
-        }
-        return 1;
-    }
+    // // Check if the directory can be opened
+    // if (dir == NULL) {
+    //     if (errno == ENOENT) {
+    //         fprintf(stderr, "Error: %s does not exist\n", new_path);
+    //     } else if (errno == ENOTDIR) {
+    //         fprintf(stderr, "Error: %s is not a directory\n", new_path);
+    //     } else {
+    //         perror("opendir() error");
+    //     }
+    //     return 1;
+    // }
 
     // Close the directory as it exists and is a directory
- 	 closedir(dir);
+ 	 //closedir(dir);
 
     // Change the current working directory
-    if (chdir("/etc/passwd") != 0) {
+    if (chdir("..") != 0) {
         perror("chdir() error");
         return 1;
     }

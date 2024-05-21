@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:14:09 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 13:42:02 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:17:34 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	update_values(t_data *data, char **command, t_cmd *cmd)
 	if (!change_values_command(command, data, cmd))
 		return (freeing_cmd_and_comand(cmd, command));
 	free(command);
+	data->last_exit = 0;
 	return (1);
 }
 

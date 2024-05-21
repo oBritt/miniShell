@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 19:24:49 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 18:05:04 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:45:06 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static char	**helper_because_25_lines(char **out, DIR *dir)
 		closedir(dir);
 	return (NULL);
 }
-
 
 static char	**get_folders_helper(char **out, int i)
 {

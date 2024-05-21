@@ -6,11 +6,18 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:48:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 15:42:55 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:43:29 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static int	check_if_allocated(char *str)
+{
+	if (!str)
+		return (0);
+	return (1);
+}
 
 static int	change_only_one(char **command, t_data *data, t_cmd *cmd)
 {
@@ -37,9 +44,7 @@ static int	change_only_one(char **command, t_data *data, t_cmd *cmd)
 		data->cur_last = ft_str_dup("");
 	else
 		data->cur_last = ft_str_dup(cmds[i - 1]);
-	if (!data->cur_last)
-		return (0);
-	return (1);
+	return (check_if_allocated(data->cur_last));
 }
 
 int	change_values_command(char **command, t_data *data, t_cmd *cmd)

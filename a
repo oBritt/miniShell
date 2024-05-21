@@ -1,1 +1,3 @@
-ads
+check from child, fd is: 0
+child check: cmd is: wc, path is: /usr/bin/wc
+      51

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 20:41:04 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:50:28 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ typedef struct s_space
 typedef struct s_send
 {
 	int		inp_out;
+	int		*ptr1;
+	int		*ptr2;
+	char	*str;
 	t_cmd	*cmd;
 }	t_send;
 
@@ -207,4 +210,9 @@ int			check_if_valid_export(char *str);
 void		error_output_export(char *str);
 void		delete_from_array(char **array, int ind);
 int			builtin_unset(t_data *data, char **command, int is_main);
+int			copy_up_to_end_of_dollar(t_data *data, t_space *space, \
+char *str, char **expended);
+int			copy_up_to_now(t_space *space, char *str, char **expended);
+int			count_dollars(t_space *space, char *str);
+void		go_untill_end(t_space *space, char *str);
 #endif
