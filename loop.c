@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 18:25:52 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 21:16:16 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	loop(t_data *data)
 				printf("%s %i  %i    ", cmd[i].output_redirect[e], cmd[i].is_ambigious_output[e], cmd[i].is_output_append[e]);
 			printf("\ndelimiter   :" );
 			for (int e = 0; cmd[i].delimiter[e]; e++)
-				printf("%s    ", cmd[i].delimiter[e]);
+				printf("-->%s<--    ", cmd[i].delimiter[e]);
 			printf("\n");
 			printf("\n");
 		}

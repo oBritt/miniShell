@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:21:58 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 15:21:08 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 21:14:59 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	remove_useless_spaces(char *str)
 		else
 			either(&space);
 	}
-	if (str_len(str) >= 1 && space.str[space.pointer1 - 1] == ' ')
+	if (str_len(str) >= 1 && space.pointer1 >= 1 \
+	&& space.str[space.pointer1 - 1] == ' ')
 		space.str[space.pointer1 - 1] = 0;
 	else
 		space.str[space.pointer1] = 0;
