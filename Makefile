@@ -14,7 +14,7 @@ builtins/builtins.c builtins/exit.c builtins/echo.c builtins/cd.c builtins/expor
 env/check_if_in.c env/sort_env.c env/update_env.c env/handle_update.c \
 execution/exe_start.c execution/cmd_paths.c execution/pipe_n_execute.c \
 execution/exe_utils/error_msg.c execution/exe_utils/ft_split.c execution/exe_utils/ft_strjoin.c execution/exe_utils/ft_strnstr.c \
-execution/exe_utils/libft.c \
+execution/exe_utils/libft.c execution/heredoc.c \
 
 OBJS = $(SRCS:.c=.o)
 

@@ -1,4 +1,6 @@
-check from child, fd is: 0
-child check: cmd is: grep, path is: /usr/bin/grep
-execution
-executor.h
+delimiter check: (null)
+--redir in check--
+the infile to open: in1
+temp fd: 6
+so it's not an error
+ex1
