@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:54:58 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 15:40:48 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:37:25 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,7 @@ static char	*last_exit(t_data *data)
 {
 	char	*str;
 
-	data += 0;
-	str = malloc(5);
-	if (!str)
-		return (NULL);
-	str[0] = 'D';
-	str[1] = 'o';
-	str[2] = 'n';
-	str[3] = 't';
-	str[4] = 0;
+	str = itos(data->last_exit);
 	return (str);
 }
 

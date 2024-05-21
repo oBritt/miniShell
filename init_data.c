@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:26:01 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 18:28:57 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:29:51 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,22 @@ int	handle_update_shlvl(char **str)
 	return (1);
 }
 
+int	set_other(t_data *data)
+{
+	data->last_exit = 0;
+	data->oldpwd = find_by_value(data, "OLDPWD");
+	if (!data->oldpwd)
+		return (freeing(data->env), 0);
+	data->pwd = find_by_value(data, "PWD");
+	if (!data->pwd)
+		return (free(data->oldpwd), freeing(data->env), 0);
+	data->addition_env = malloc(1 * sizeof(char *));
+	if (!data->addition_env)
+		return (free(data->pwd), free(data->oldpwd), freeing(data->env), 0);
+	data->addition_env[0] = NULL;
+	return (1);
+}
+
 int	update_under_score(t_data *data)
 {
 	char	*str;
@@ -109,19 +125,15 @@ int	update_under_score(t_data *data)
 		return (freeing(data->env), 0);
 	copy = ft_str_dup("_=/usr/bin/env");
 	if (!copy)
-		return (free(str), freeing(data->env), 0);
+		return (freeing(data->env), 0);
 	update_env_value(&data->env, copy, t, 0);
 	data->last_arg = joined;
 	data->cur_last = malloc(2);
 	if (!data->cur_last)
-		return (free(str), freeing(data->env), 0);
+		return (freeing(data->env), 0);
 	data->should_continue = 1;
 	data->exit_printed = 0;
-	data->addition_env = malloc(1 * sizeof(char *));
-	if (!data->addition_env)
-		return (free(str), freeing(data->env), 0);
-	data->addition_env[0] = NULL;
-	return (1);
+	return (set_other(data));
 }
 
 int	init_data(t_data *data, char **env)

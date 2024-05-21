@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:14:09 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/19 15:30:02 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:42:02 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ int	parse_addition(t_data *data, char **command, t_cmd *cmd)
 	i = 0;
 	while (command[i])
 	{
-		cmd[i].is_ambigious_input = malloc((len_2d_array(cmd->input_redirect)) \
-		* sizeof(int));
-		cmd[i].is_ambigious_output = malloc((len_2d_array(cmd->output_redirect) \
-		* sizeof(int)));
+		cmd[i].is_ambigious_input = \
+		malloc((len_2d_array(cmd->input_redirect) + 1) * sizeof(int));
+		cmd[i].is_ambigious_output = \
+		malloc((len_2d_array(cmd->output_redirect) + 1) * sizeof(int));
 		if (!cmd[i].is_ambigious_input || !cmd[i].is_ambigious_output)
 		{
 			freeing_cmds(cmd);

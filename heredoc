@@ -1,2 +1,4 @@
-ex1
-ex2
+set heredoc
+read store input
+check from read store input, fd is: 5
+2004h> asdsdasdasdasdasdasdasdasdadsasdasdasdasdasdasdasadjsadksaskjdasdas^C2004l

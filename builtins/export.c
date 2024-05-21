@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:32:39 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 18:21:51 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:36:26 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int	builtin_export(t_data *data, char **command, int fd, int is_main)
 		{
 			if (!is_main)
 				exit(1);
-			data->last_exit = 0;
+			data->last_exit = 1;
 			return (0);
 		}
 		if (!is_main)
 			exit(0);
-		data->last_exit = 1;
+		data->last_exit = 0;
 		return (1);
 	}
 	return (export_handle(data, command, is_main));
