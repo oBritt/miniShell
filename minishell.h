@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 15:50:28 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/23 20:34:15 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ typedef struct command
 	int			in_fd;
 	int			out_fd;
 	int			have_to_execute; //for what?
+	int			is_builtin;
 	int			*is_output_append;
+	int			exit_code;
 	int			amount;
 }	t_cmd;
 

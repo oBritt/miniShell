@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/21 22:04:27 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:03:40 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,19 @@ void redir_out_check(t_cmd *command)
 		i++;
 	}
 }
+int execute_builtin(t_data *data, int i, int is_main)
+{
+	printf("goes to builtin directions check\n");
+	if (data->t_cmds[i].is_builtin == 1)
+		return(builtin_echo(data, &data->t_cmds[i].cmd[0], data->t_cmds[i].out_fd, is_main));
+	else if (data->t_cmds[i].is_builtin == 2)
+		return(builtin_cd(data, data->t_cmds[i].cmd, is_main));
+	return(0);
+}
 
 void child(t_data *data, int last_cmd, int i)
 {
+	printf("--child--\n");
 	data->t_cmds[i].in_fd = 0;
 	data->t_cmds[i].out_fd = 0;
 	redir_out_check(&data->t_cmds[i]);
@@ -153,7 +163,13 @@ void child(t_data *data, int last_cmd, int i)
 		}
 	}
 	dup2(data->t_cmds[i].in_fd, 0);
-	execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
+	if (data->t_cmds[i].is_builtin)
+	{
+		printf("ok is builtin\n");
+		execute_builtin(data, i, 0);
+	}
+	else
+		execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
 	close(data->t_cmds[i].in_fd);
 }
 
@@ -171,6 +187,7 @@ void parent(t_data *data, int last_cmd)
 
 void	mult_execute(t_data *data)
 {
+	printf("--mult_exe--\n");
 	int	i = 0;
 	int	p;
 	int	last_cmd;
@@ -180,6 +197,7 @@ void	mult_execute(t_data *data)
 	// sleep 10 | ls //it works, what should happen
 	while (i < data->t_cmds[0].amount)
 	{
+		printf("--mult_exe--while--\n");
 		if (i == data->t_cmds[0].amount - 1)
 			last_cmd = 1;
 		if (!last_cmd)

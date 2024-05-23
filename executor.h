@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/21 21:32:55 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/23 20:56:31 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void 		mult_execute(t_data *data);
 void		child(t_data *data, int last_cmd, int i);
 void		parent(t_data *data, int last_cmd);
 void		p_check(int p, t_data *data);
+int			check_if_builtin(char *str);
 
 //redir in
 void		redir_in_check(t_cmd *command);
@@ -40,6 +41,9 @@ void		take_n_write(t_cmd *command);
 //redir out
 void		redir_out_check(t_cmd *command);
 void		open_out_file(t_cmd *command, int i, int redir_number);
+
+//builtins
+int			builtin_cd(t_data *data, char **command, int is_main);
 
 //utils
 size_t		ft_strlen(const char *str);
