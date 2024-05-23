@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/23 21:03:40 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:05:51 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,16 @@ int execute_builtin(t_data *data, int i, int is_main)
 		return(builtin_echo(data, &data->t_cmds[i].cmd[0], data->t_cmds[i].out_fd, is_main));
 	else if (data->t_cmds[i].is_builtin == 2)
 		return(builtin_cd(data, data->t_cmds[i].cmd, is_main));
-	return(0);
+	else if (data->t_cmds[i].is_builtin == 3)
+		return(pwd(data->t_cmds[i].out_fd, is_main));
+	else if (data->t_cmds[i].is_builtin == 4)
+		return (builtin_export(data, data->t_cmds[i].cmd, data->t_cmds[i].out_fd, is_main));
+	else if (data->t_cmds[i].is_builtin == 5)
+		return(builtin_unset(data, data->t_cmds[i].cmd, is_main));
+	else if (data->t_cmds[i].is_builtin == 6)
+		return(builtin_env(data, data->t_cmds[i].cmd, data->t_cmds[i].out_fd, is_main));
+	else
+		return(builtin_exit(data, data->t_cmds[i].cmd, is_main));
 }
 
 void child(t_data *data, int last_cmd, int i)

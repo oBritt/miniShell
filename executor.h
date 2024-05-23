@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/23 20:56:31 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:07:33 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 //execution itself
 void		execute_cmd(t_data *data);
 void		get_paths(t_data *data);
+void		set_redirections(t_data *data);
 void 		mult_execute(t_data *data);
 void		child(t_data *data, int last_cmd, int i);
 void		parent(t_data *data, int last_cmd);
@@ -44,6 +45,10 @@ void		open_out_file(t_cmd *command, int i, int redir_number);
 
 //builtins
 int			builtin_cd(t_data *data, char **command, int is_main);
+int			pwd(int fd, int is_main);
+int			builtin_export(t_data *data, char **command, int fd, int is_main);
+int			export_handle(t_data *data, char **command, int is_main);
+int			builtin_env(t_data *data, char **command, int fd, int is_main);
 
 //utils
 size_t		ft_strlen(const char *str);

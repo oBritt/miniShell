@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:06:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 16:10:44 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:33:57 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	builtin_env(t_data *data, char **command, int fd, int is_main)
 		while (env[i])
 		{
 			write(fd, env[i], str_len(env[i]));
+			write(fd, "\n", 1);
 			i++;
 		}
 		if (!is_main)
