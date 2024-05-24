@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/24 12:53:18 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:37:24 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,14 +161,15 @@ void child(t_data *data, int last_cmd, int i)
 	}
 	if (data->t_cmds[i].delimiter[0]) //rewrite after correcting the heredoc
 	{
-		data->t_cmds[i].in_fd = open("heredoc", O_RDONLY);
-    	if (data->t_cmds[i].in_fd == -1)
-		{
-        	display_error("minishell: ");
-        	display_error(strerror(errno));
-        	display_error("\n");
-        	exit(EXIT_FAILURE);
-		}
+		dup2(data->t_cmds[i].heredoc_fd[0], 0); //so that the command reads from pipe
+		// data->t_cmds[i].in_fd = open("heredoc", O_RDONLY);
+    	// if (data->t_cmds[i].in_fd == -1)
+		// {
+        // 	display_error("minishell: ");
+        // 	display_error(strerror(errno));
+        // 	display_error("\n");
+        // 	exit(EXIT_FAILURE);
+		// }
 	}
 	if (data->t_cmds[i].in_fd) //added condition before dup
 		dup2(data->t_cmds[i].in_fd, 0);
@@ -223,6 +224,7 @@ void last_cmd_builtin_exe(t_data *data, int i)
 	execute_builtin(data, i, 1);
 	dup2(data->origin_stdin, 0); //at the end
 }
+
 void specific_builtin (t_data *data, int i)
 {
 	printf("--builtin export n unset exe\n");
@@ -246,7 +248,6 @@ void mult_execute(t_data *data)
 	// sleep 10 | ls //it works, what should happen
 	while (i < data->t_cmds[0].amount)
 	{
-		printf("--mult_exe--while--\n");
 		if (i == data->t_cmds[0].amount - 1)
 			last_cmd = 1;
 		if (!last_cmd)
@@ -255,18 +256,11 @@ void mult_execute(t_data *data)
 			p_check(p, data);
 		}
 		if (data->t_cmds[i].is_builtin && last_cmd)
-			last_cmd_builtin_exe(data, i);//to write it
+			last_cmd_builtin_exe(data, i);
 		else if ((data->t_cmds[i].is_builtin == 4 || data->t_cmds[i].is_builtin == 5) && !last_cmd)
 			specific_builtin(data, i);
 		else
-			normal_exe(data, last_cmd, i);//to edit it
-		//normal
-		//----
-
-
-
-		//---
-		//normal
+			normal_exe(data, last_cmd, i);
 		i++;
 	}
 }

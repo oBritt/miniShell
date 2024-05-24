@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/24 11:07:13 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:25:00 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		parent(t_data *data, int last_cmd);
 void		p_check(int p, t_data *data);
 int			check_if_builtin(char *str);
 void		last_cmd_builtin_exe(t_data *data, int i);
+void		specific_builtin (t_data *data, int i);
 void		normal_exe(t_data *data, int last_cmd, int i);
 
 //redir in

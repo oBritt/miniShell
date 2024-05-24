@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/24 10:09:07 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:42:44 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void set_redirections(t_data *data)
 	printf("---set redirect---\n");
 	int		i;
 
+	heredoc_check(data); //process all heredocs at once
 	i = 0;
 	while (i < data->t_cmds[0].amount)
 	{
 		data->t_cmds[i].in_fd = 0;
 		data->t_cmds[i].out_fd = 0;
 		redir_out_check(&data->t_cmds[i]);
-		heredoc_check(&data->t_cmds[i]);
 		redir_in_check(&data->t_cmds[i]);
 		i++;
 	}
