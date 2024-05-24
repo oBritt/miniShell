@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:02:16 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 10:26:17 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:40:44 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static int	case_one(t_data *data, int is_main)
 int	builtin_exit(t_data *data, char **command, int is_main)
 {
 	printf("--exit builtin start--\n");
+	printf("is main: %d\n", is_main);
 	int	t;
 	int	len;
 	int	err;

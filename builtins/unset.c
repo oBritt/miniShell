@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:30:48 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 10:27:21 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:57:19 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	builtin_unset(t_data *data, char **command, int is_main)
 				delete_from_array(data->env, ind - 1);
 		}
 	}
+	printf("--unset builtin before return--\n");
 	if (!is_main)
 		exit(data->last_exit);
 	return (1);

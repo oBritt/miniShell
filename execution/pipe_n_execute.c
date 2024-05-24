@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/24 11:24:21 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:53:18 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,9 @@ void redir_out_check(t_cmd *command)
 int execute_builtin(t_data *data, int i, int is_main)
 {
 	printf("goes to builtin directions check\n");
+	printf("is main here: %d\n", is_main);
+	if (!data->t_cmds[i].out_fd)
+		data->t_cmds[i].out_fd = data->origin_stdout;
 	if (data->t_cmds[i].is_builtin == 1)
 		return(builtin_echo(data, &data->t_cmds[i].cmd[0], data->t_cmds[i].out_fd, is_main));
 	else if (data->t_cmds[i].is_builtin == 2)
@@ -210,6 +213,7 @@ void normal_exe(t_data *data, int last_cmd, int i)
 
 void last_cmd_builtin_exe(t_data *data, int i)
 {
+	printf("--builtin last cmd exe\n");
 	if (data->t_cmds[i].out_fd)
 		dup2(data->t_cmds[i].out_fd, 1);
 	else
@@ -219,8 +223,17 @@ void last_cmd_builtin_exe(t_data *data, int i)
 	execute_builtin(data, i, 1);
 	dup2(data->origin_stdin, 0); //at the end
 }
+void specific_builtin (t_data *data, int i)
+{
+	printf("--builtin export n unset exe\n");
+	if (data->t_cmds[i].out_fd)
+		dup2(data->t_cmds[i].out_fd, 1);
+	if (data->t_cmds[i].in_fd) //added condition before dup
+		dup2(data->t_cmds[i].in_fd, 0);
+	execute_builtin(data, i, 1);
+}
 
-void	mult_execute(t_data *data)
+void mult_execute(t_data *data)
 {
 	printf("--mult_exe--\n");
 	int	i;
@@ -243,6 +256,8 @@ void	mult_execute(t_data *data)
 		}
 		if (data->t_cmds[i].is_builtin && last_cmd)
 			last_cmd_builtin_exe(data, i);//to write it
+		else if ((data->t_cmds[i].is_builtin == 4 || data->t_cmds[i].is_builtin == 5) && !last_cmd)
+			specific_builtin(data, i);
 		else
 			normal_exe(data, last_cmd, i);//to edit it
 		//normal
