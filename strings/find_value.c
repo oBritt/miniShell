@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:32:58 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/17 15:33:00 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:14:30 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 char	*get_everything_after_equal(char *str)
 {
-	while (*str != '=')
+	while (*str != '=' && *str)
 		str++;
-	str++;
+	if (*str)
+		str++;
 	return (ft_str_dup(str));
 }
 

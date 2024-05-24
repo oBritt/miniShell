@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:02:37 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/23 22:52:51 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:51:27 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int	output(char **array, int fd)
 		i++;
 	}
 	transformed = transform_to_1d_space(array + i);
-	freeing(array);
 	if (!transformed)
 		return (0);
 	write(fd, transformed, str_len(transformed));

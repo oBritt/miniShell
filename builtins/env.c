@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:06:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/23 21:33:57 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:23:05 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	builtin_env(t_data *data, char **command, int fd, int is_main)
 
 	if (len_2d_array(command) != 1)
 	{
-		write(fd, "env: can not take any options or argimetns\n", 43);
+		write(2, "env: can not take any options or argimetns\n", 43);
 		if (!is_main)
 			exit(126);
 		data->last_exit = 126;

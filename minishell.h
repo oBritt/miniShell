@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 13:28:02 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 15:30:08 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,4 +218,7 @@ char *str, char **expended);
 int			copy_up_to_now(t_space *space, char *str, char **expended);
 int			count_dollars(t_space *space, char *str);
 void		go_untill_end(t_space *space, char *str);
+char		**original_env(void);
+char		*get_str_cd(t_data *data, char *str, int is_main);
+void		output_error_cd(char *str, int err);
 #endif

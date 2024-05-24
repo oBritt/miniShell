@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 21:16:16 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:54:12 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,7 @@ void	loop(t_data *data)
 	}
 	// for (int i = 0; data->env[i]; i++)
 	// 	printf("%s\n", data->env[i]);
-	char *asd[5];
-	asd[0] = "asd";
-	asd[1] = "HOME+=a";
-	asd[2] = "asd";
-	asd[3] = "d";
-	asd[4] = NULL;
-	builtin_export(data, asd, 1, 1);
-	asd[1] = NULL;
-	builtin_export(data, asd, 1, 1);
+
 	while (1)
 	{
 		input = readline(SHELL_PROMT);
@@ -126,6 +118,7 @@ void	loop(t_data *data)
 		free(data->last_arg);
 		data->last_arg = data->cur_last;
 		data->cur_last = malloc(2);
+		freeing_cmds(data->t_cmds);
 	}
 	clear_history();
 }
