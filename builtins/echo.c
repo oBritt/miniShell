@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:02:37 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 16:11:12 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:52:51 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	check_if_flag(char *str)
 
 static int	output(char **array, int fd)
 {
+	printf("--output echo--\n");
+
 	int		i;
 	char	*transformed;
 
@@ -53,6 +55,7 @@ static int	output(char **array, int fd)
 
 int	builtin_echo(t_data *data, char **command, int fd, int is_main)
 {
+	printf("echo start\n");
 	if (!output(command, fd))
 	{
 		if (!is_main)

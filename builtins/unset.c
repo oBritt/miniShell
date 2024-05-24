@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:30:48 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 13:08:34 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/24 10:27:21 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	builtin_unset(t_data *data, char **command, int is_main)
 {
+	printf("--unset builtin start--\n");
 	int	i;
 	int	ind;
 

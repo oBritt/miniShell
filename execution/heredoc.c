@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/21 21:29:40 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:28:59 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,11 @@ void set_heredoc(t_cmd *command)
 		nbr++;
 	read_store_input(command, nbr);
 	dup2(command->in_fd, 0); //set the input for command
+}
+
+void heredoc_check(t_cmd *command)
+{
+	printf("---heredoc check---\n");
+	if (command->delimiter[0])
+		set_heredoc(command);
 }

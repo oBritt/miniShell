@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/23 22:05:51 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:24:21 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ void open_file(t_cmd *command, int i, int redir_number)
 	else
         close(temp_fd);
 }
+
 void redir_in_check(t_cmd *command)
 {
+	printf("--redirect in check ---\n");
 	int		i;
 	int		redir_number;
 
@@ -69,6 +71,7 @@ void redir_in_check(t_cmd *command)
 
 void	open_out_file(t_cmd *command, int i, int redir_number)
 {
+	printf("--redirect out check ---\n");
 	int		fd;
 
 	fd = 0;
@@ -92,6 +95,7 @@ void	open_out_file(t_cmd *command, int i, int redir_number)
 
 void redir_out_check(t_cmd *command)
 {
+	printf("--redirect out check ---\n");
 	int		i;
 	int		redir_number;
 
@@ -134,9 +138,6 @@ int execute_builtin(t_data *data, int i, int is_main)
 void child(t_data *data, int last_cmd, int i)
 {
 	printf("--child--\n");
-	data->t_cmds[i].in_fd = 0;
-	data->t_cmds[i].out_fd = 0;
-	redir_out_check(&data->t_cmds[i]);
 	if (!last_cmd) //not last cmd
 	{
 		if (data->t_cmds[i].out_fd)
@@ -155,12 +156,7 @@ void child(t_data *data, int last_cmd, int i)
 		else
 			dup2(data->origin_stdout, 1);
 	}
-	if (data->t_cmds[i].delimiter[0])
-	{
-		set_heredoc(&data->t_cmds[i]); //first it takes input with the heredoc, then it starts checking input redirections, if they aren't valid error and not execute cmd
-	}
-	redir_in_check(&data->t_cmds[i]);
-	if (data->t_cmds[i].delimiter[0])
+	if (data->t_cmds[i].delimiter[0]) //rewrite after correcting the heredoc
 	{
 		data->t_cmds[i].in_fd = open("heredoc", O_RDONLY);
     	if (data->t_cmds[i].in_fd == -1)
@@ -171,14 +167,18 @@ void child(t_data *data, int last_cmd, int i)
         	exit(EXIT_FAILURE);
 		}
 	}
-	dup2(data->t_cmds[i].in_fd, 0);
+	if (data->t_cmds[i].in_fd) //added condition before dup
+		dup2(data->t_cmds[i].in_fd, 0);
 	if (data->t_cmds[i].is_builtin)
 	{
 		printf("ok is builtin\n");
 		execute_builtin(data, i, 0);
 	}
 	else
+	{
+		printf("not a builtin\n");
 		execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
+	}
 	close(data->t_cmds[i].in_fd);
 }
 
@@ -193,16 +193,43 @@ void parent(t_data *data, int last_cmd)
 	else
 		dup2(data->origin_stdin, 0);
 }
+void normal_exe(t_data *data, int last_cmd, int i)
+{
+	data->process_id = fork();
+	if (data->process_id == -1)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE); //should it exit??
+	}
+	if (data->process_id == 0)
+		child(data, last_cmd, i);
+	else //parent
+		parent(data, last_cmd);
+	waitpid(data->process_id, 0, 0);
+}
+
+void last_cmd_builtin_exe(t_data *data, int i)
+{
+	if (data->t_cmds[i].out_fd)
+		dup2(data->t_cmds[i].out_fd, 1);
+	else
+		dup2(data->origin_stdout, 1);
+	if (data->t_cmds[i].in_fd) //added condition before dup
+		dup2(data->t_cmds[i].in_fd, 0);
+	execute_builtin(data, i, 1);
+	dup2(data->origin_stdin, 0); //at the end
+}
 
 void	mult_execute(t_data *data)
 {
 	printf("--mult_exe--\n");
-	int	i = 0;
+	int	i;
 	int	p;
 	int	last_cmd;
 
 	last_cmd = 0;
 	data->waitpid_status = 0;
+	i = 0;
 	// sleep 10 | ls //it works, what should happen
 	while (i < data->t_cmds[0].amount)
 	{
@@ -214,17 +241,18 @@ void	mult_execute(t_data *data)
 			p = pipe(data->fd_arr);
 			p_check(p, data);
 		}
-		data->process_id = fork();
-		if (data->process_id == -1)
-		{
-			perror("fork");
-			exit(EXIT_FAILURE); //should it exit??
-		}
-		if (data->process_id == 0)
-			child(data, last_cmd, i);
-		else //parent
-			parent(data, last_cmd);
+		if (data->t_cmds[i].is_builtin && last_cmd)
+			last_cmd_builtin_exe(data, i);//to write it
+		else
+			normal_exe(data, last_cmd, i);//to edit it
+		//normal
+		//----
+
+
+
+		//---
+		//normal
 		i++;
-		waitpid(data->process_id, 0, 0);
 	}
 }
+
