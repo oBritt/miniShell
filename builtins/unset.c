@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:30:48 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 12:18:44 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:46:16 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	builtin_unset(t_data *data, char **command, int is_main)
 		}
 		i++;
 	}
+	printf("--unset builtin before return--\n");
 	if (!is_main)
 		exit(data->last_exit);
 	return (1);
