@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/24 13:42:44 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:00:49 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,25 @@ void set_redirections(t_data *data)
 		i++;
 	}
 }
+void builtins_check(t_data *data)
+{
+	int		i;
+
+	i = 0;
+	while (i < data->t_cmds[0].amount)
+	{
+		data->t_cmds[i].is_builtin = check_if_builtin(data->t_cmds[i].cmd[0]);
+		printf("builtin check from builtin_check: %d\n", data->t_cmds[i].is_builtin);
+		i++;
+	}
+}
 
 void execute_cmd(t_data *data)
 {
 	printf("\n\n---**execution**---\n\n");
 	data->origin_stdin = STDIN_FILENO;
 	data->origin_stdout = STDOUT_FILENO;
+	builtins_check(data);
 	if (data->t_cmds[0].cmd[0])
 		get_paths(data);
 	set_redirections(data);

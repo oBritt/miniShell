@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/24 13:25:00 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/24 15:36:12 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		redir_in_check(t_cmd *command);
 void		open_file(t_cmd *command, int i, int redir_number);
 
 //heredoc
-void		heredoc_check(t_cmd *command);
+void		heredoc_check(t_data *data);
 void		set_heredoc(t_cmd *command);
 void		read_store_input(t_cmd *command, int nbr);
 void		skip_unused_delimiters(t_cmd *command, int nbr);
