@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:58:02 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 15:33:38 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:43:03 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	update_export(t_data *data, char *str)
 	int		ind;
 	char	*key;
 	int		i;
+
 
 	key = get_key(str);
 	if (!key)

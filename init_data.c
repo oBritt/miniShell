@@ -6,61 +6,22 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:26:01 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 13:29:51 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:01:39 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**original_env(void)
+int	get_num(long long num, int err)
 {
-	static char	*env_standart[34];
-	static int	first = 1;
-
-	if (!first)
-		return (env_standart);
-	first = 0;
-	env_standart[0] = "TERM_PROGRAM";
-	env_standart[1] = "TERM";
-	env_standart[2] = "HOMEBREW_TEMP";
-	env_standart[3] = "SHELL";
-	env_standart[4] = "TMPDIR";
-	env_standart[5] = "TERM_PROGRAM_VERSION";
-	env_standart[6] = "ZDOTDIR";
-	env_standart[7] = "ORIGINAL_XDG_CURRENT_DESKTOP";
-	env_standart[8] = "MallocNanoZone";
-	env_standart[9] = "USER";
-	env_standart[10] = "COMMAND_MODE";
-	env_standart[11] = "SSH_AUTH_SOCK";
-	env_standart[12] = "__CF_USER_TEXT_ENCODING";
-	env_standart[13] = "HOMEBREW_CACHE";
-	env_standart[14] = "PATH";
-	env_standart[15] = "LaunchInstanceID";
-	env_standart[16] = "USER_ZDOTDIR";
-	env_standart[17] = "PWD";
-	env_standart[18] = "LANG";
-	env_standart[19] = "VSCODE_GIT_ASKPASS_EXTRA_ARGS";
-	env_standart[20] = "XPC_FLAGS";
-	env_standart[21] = "XPC_SERVICE_NAME";
-	env_standart[22] = "VSCODE_INJECTION";
-	env_standart[23] = "SHLVL";
-	env_standart[24] = "HOME";
-	env_standart[25] = "VSCODE_GIT_ASKPASS_MAIN";
-	env_standart[26] = "LOGNAME";
-	env_standart[27] = "VSCODE_GIT_IPC_HANDLE";
-	env_standart[28] = "VSCODE_GIT_ASKPASS_NODE";
-	env_standart[29] = "GIT_ASKPASS";
-	env_standart[30] = "SECURITYSESSIONID";
-	env_standart[31] = "COLORTERM";
-	env_standart[32] = "_";
-	env_standart[33] = NULL;
-	return (env_standart);
+	if (err)
+		num = 1;
+	else if (num == 9223372036854775807 || num < 0)
+		num = 0;
+	else
+		num += 1;
+	return (num);
 }
-
-// static void	set_array(char **array, char *str)
-// {
-
-// }
 
 int	handle_update_shlvl(char **str)
 {
@@ -73,12 +34,7 @@ int	handle_update_shlvl(char **str)
 	if (!copy)
 		return (0);
 	num = ft_atoll(copy, &err);
-	if (err)
-		num = 1;
-	else if (num == 9223372036854775807 || num < 0)
-		num = 0;
-	else
-		num += 1;
+	num = get_num(num, err);
 	free(copy);
 	numb = itos(num);
 	if (!numb)
@@ -95,10 +51,10 @@ int	handle_update_shlvl(char **str)
 int	set_other(t_data *data)
 {
 	data->last_exit = 0;
-	data->oldpwd = find_by_value(data, "OLDPWD");
+	data->oldpwd = get_cwd();
 	if (!data->oldpwd)
 		return (freeing(data->env), 0);
-	data->pwd = find_by_value(data, "PWD");
+	data->pwd = get_cwd();
 	if (!data->pwd)
 		return (free(data->oldpwd), freeing(data->env), 0);
 	data->addition_env = malloc(1 * sizeof(char *));
