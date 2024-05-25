@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/23 19:43:49 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/25 14:14:37 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,15 @@ void get_paths(t_data *data)
 	i = 0;
 	while (i < data->t_cmds[0].amount)
 	{
-		if (!(data->t_cmds[i].is_builtin = check_if_builtin(data->t_cmds[i].cmd[0])))
+		
+		if (!(data->t_cmds[i].is_builtin))
 		{
 			if (access(data->t_cmds[i].cmd[0], X_OK) == 0)
 				data->t_cmds[i].cmd_path = data->t_cmds[i].cmd[0];
 			else
 				data->t_cmds[i].cmd_path = find_in_envp(data->t_cmds[i].cmd[0], data);
 		}
-		printf("builtin check: %d\n", data->t_cmds[i].is_builtin);
+		printf("builtin check from get paths: %d\n", data->t_cmds[i].is_builtin);
 		i++;
 	}
 }

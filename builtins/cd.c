@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:12:21 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 14:41:01 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/25 14:10:34 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	handle_err_cd(t_data *data, char *str, int is_main)
 
 int	builtin_cd(t_data *data, char **command, int is_main)
 {
+	printf("--cd start--\n");
 	char	*str;
 	DIR		*dir;
 
