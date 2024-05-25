@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:02:16 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 11:40:44 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/25 18:54:26 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	builtin_exit(t_data *data, char **command, int is_main)
 			write(2, "exit\n", 5);
 		write(2, "minishell: exit: ", 17);
 		write(2, command[1], str_len(command[1]));
-		write(2, ": numeric argument required", 27);
+		write(2, ": numeric argument required\n", 28);
 		if (!is_main)
 			exit(255);
 		data->should_continue = 0;

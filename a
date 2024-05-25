@@ -1,0 +1,3 @@
+infile check: 6
+infile check2: 6
+not a builtin but cmd to execute

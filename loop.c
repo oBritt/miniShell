@@ -6,50 +6,12 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 12:54:12 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:34:46 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "executor.h"
-
-int	exit_signal = 0;
-
-static char	*copy(char *str)
-{
-	char	*output;
-	int		i;
-
-	output = malloc(str_len(str) + 3);
-	if (!output)
-		return (NULL);
-	i = 0;
-	while (str[i])
-	{
-		output[i] = str[i];
-		i++;
-	}
-	output[i] = ' ';
-	output[i + 1] = ' ';
-	output[i + 2] = '\0';
-	return (output);
-}
-
-void	handle_signals(int status)
-{
-	char	*str;
-
-	str = copy(rl_line_buffer);
-	rl_replace_line(str, 1);
-	rl_redisplay();
-	write(1, "\n", 1);
-	exit_signal = 1;
-	//loop forever signal not 0 to do
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	rl_redisplay();
-	status--;
-}
 
 void	loop(t_data *data)
 {
@@ -59,24 +21,16 @@ void	loop(t_data *data)
 
 	fd_in = dup(STDIN_FILENO);
 	fd_out = dup(STDOUT_FILENO);
-	data->exit_signal = &exit_signal;
 	rl_catch_signals = 1;
-	if (signal(SIGINT, handle_signals) == SIG_ERR)
-	{
-		write(2, "Erorr signal issue\n", 19);
-		exit(1);
-	}
+
 	// for (int i = 0; data->env[i]; i++)
 	// 	printf("%s\n", data->env[i]);
-
-	while (1)
+	init_signals(data);
+	while (data->should_continue && !data->signal->error)
 	{
 		input = readline(SHELL_PROMT);
 		if (!input)
-		{
-			write(1, "exit\n", 6);
 			break ;
-		}
 		if (!compare_strings("", input))
 		{
 			free(input);
@@ -112,6 +66,7 @@ void	loop(t_data *data)
 		// write(1, input, str_len(input));
 		// write(1, "\n", 1);
 		free(input);
+		get_signal()->is_execution = 1;
 		execute_cmd(data);
 		dup2(fd_in, STDIN_FILENO);
 		dup2(fd_out, STDOUT_FILENO);
@@ -119,6 +74,9 @@ void	loop(t_data *data)
 		data->last_arg = data->cur_last;
 		data->cur_last = malloc(2);
 		freeing_cmds(data->t_cmds);
+		get_signal()->is_execution = 0;
 	}
+	if (!data->exit_printed)
+		write(1, "exit\n", 5);
 	clear_history();
 }

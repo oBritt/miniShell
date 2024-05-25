@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 15:30:08 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:10:19 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@
 # include <limits.h>
 # include <errno.h>
 # include <dirent.h>
+
+
+typedef struct s_sig
+{
+	int		is_execution;
+	int		should_stop;
+	int		signal_type;
+	int		error;
+}	t_sig;
 
 typedef struct command
 {
@@ -57,7 +66,6 @@ typedef struct s_data
 	char	**original_env;
 	char	**addition_env;
 	int		last_exit;
-	int		*exit_signal;
 	int		origin_stdin; //for execution of several cmds
 	int		origin_stdout; //for execution of several cmds
 	int		waitpid_status; // same
@@ -69,6 +77,7 @@ typedef struct s_data
 	int		should_continue;
 	int		exit_printed;
 	int		exit;
+	t_sig	*signal;
 }	t_data;
 
 typedef struct s_space
@@ -105,7 +114,6 @@ char		**allocate(char **env);
 char		**freeing(char **output);
 char		*find_string(char *str, char *to_find);
 void		loop(t_data *data);
-int			init_signals(void);
 int			str_len(char *str);
 char		*get_first_word(char *str);
 int			compare_strings(char *str1, char *str2);
@@ -221,4 +229,7 @@ void		go_untill_end(t_space *space, char *str);
 char		**original_env(void);
 char		*get_str_cd(t_data *data, char *str, int is_main);
 void		output_error_cd(char *str, int err);
+void		init_signals(t_data *data);
+t_sig		*get_signal(void);
+
 #endif
