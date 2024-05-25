@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/24 15:55:40 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/25 13:44:44 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,96 +26,7 @@ void	p_check(int p, t_data *data)
 	}
 }
 
-void open_file(t_cmd *command, int i, int redir_number)
-{
-    int temp_fd;
 
-	temp_fd = 0;
-    temp_fd = open(command->input_redirect[i], O_RDONLY);
-    if (temp_fd == -1)
-	{
-        display_error("minishell: ");
-        display_error(strerror(errno));
-        display_error("\n");
-        exit(EXIT_FAILURE);
-    }
-    if (i == redir_number - 1 && !command->delimiter[0])
-        command->in_fd = temp_fd;
-	else
-        close(temp_fd);
-}
-
-void redir_in_check(t_cmd *command)
-{
-	printf("--redirect in check ---\n");
-	int		i;
-	int		redir_number;
-
-	redir_number = 0;
-	while(command->input_redirect[redir_number])
-		redir_number++;
-	i = 0;
-	while (i < redir_number)
-	{
-		if (command->is_ambigious_input[i])
-		{
-			display_error("minishell: ");
-			display_error(strerror(errno));
-			display_error("\n");
-			exit(EXIT_FAILURE);
-		}
-		open_file(command, i, redir_number);
-		i++;
-	}
-}
-
-void	open_out_file(t_cmd *command, int i, int redir_number)
-{
-	printf("--redirect out check ---\n");
-	int		fd;
-
-	fd = 0;
-	if (command->is_output_append[i])
-		fd = open(command->output_redirect[i], O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else
-		fd = open(command->output_redirect[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		display_error("minishell: ");
-		display_error(strerror(errno));
-		display_error("\n");
-		exit(EXIT_FAILURE);
-	}
-	if (i == redir_number - 1)
-	{
-		command->out_fd = fd;
-	}
-	return ;
-}
-
-void redir_out_check(t_cmd *command)
-{
-	printf("--redirect out check ---\n");
-	int		i;
-	int		redir_number;
-
-	redir_number = 0;
-	while(command->output_redirect[redir_number])
-		redir_number++;
-	i = 0;
-	while (i < redir_number)
-	{
-		if (command->is_ambigious_output[i])
-		{
-			display_error("minishell: ");
-			display_error(strerror(errno));
-			display_error("\n");
-			exit(EXIT_FAILURE);
-		}
-		open_out_file(command, i, redir_number);
-		i++;
-	}
-}
 int execute_builtin(t_data *data, int i, int is_main)
 {
 	printf("goes to builtin directions check\n");
@@ -143,6 +54,7 @@ void child(t_data *data, int last_cmd, int i)
 	printf("--child--\n");
 	if (!last_cmd) //not last cmd
 	{
+		//printf("---not a last cmd---\n");
 		if (data->t_cmds[i].out_fd)
 			dup2(data->t_cmds[i].out_fd, 1);
 		else
@@ -154,36 +66,34 @@ void child(t_data *data, int last_cmd, int i)
 	}
 	else //last cmd
 	{
+		//printf("---yes the last cmd---\n");
 		if (data->t_cmds[i].out_fd)
 			dup2(data->t_cmds[i].out_fd, 1);
 		else
 			dup2(data->origin_stdout, 1);
 	}
-	if (data->t_cmds[i].delimiter[0]) //rewrite after correcting the heredoc
+	if (data->t_cmds[i].delimiter && data->t_cmds[i].delimiter[0]) //rewrite after correcting the heredoc
 	{
+		// printf("assigning pipe from heredoc to cmd input: %d\n", data->t_cmds[i].heredoc_fd[0]);
 		dup2(data->t_cmds[i].heredoc_fd[0], 0); //so that the command reads from pipe
-		// data->t_cmds[i].in_fd = open("heredoc", O_RDONLY);
-    	// if (data->t_cmds[i].in_fd == -1)
-		// {
-        // 	display_error("minishell: ");
-        // 	display_error(strerror(errno));
-        // 	display_error("\n");
-        // 	exit(EXIT_FAILURE);
-		// }
+		close(data->t_cmds[i].heredoc_fd[0]);//added ch
 	}
-	if (data->t_cmds[i].in_fd) //added condition before dup
+	// printf("infile check: %d\n", data->t_cmds[i].in_fd);
+	if (!data->t_cmds[i].delimiter && data->t_cmds[i].in_fd) //added condition before dup
 		dup2(data->t_cmds[i].in_fd, 0);
+	// printf("infile check2: %d\n", data->t_cmds[i].in_fd);
 	if (data->t_cmds[i].is_builtin)
 	{
-		printf("ok is builtin\n");
+		//printf("ok is builtin\n");
 		execute_builtin(data, i, 0);
 	}
-	else
+	else if (data->t_cmds[i].cmd[0])
 	{
-		printf("not a builtin\n");
+		//printf("not a builtin but cmd to execute\n");
 		execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
 	}
-	close(data->t_cmds[i].in_fd);
+	if (data->t_cmds[i].in_fd)
+		close(data->t_cmds[i].in_fd);
 }
 
 void parent(t_data *data, int last_cmd)
