@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/25 13:44:44 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/25 14:11:51 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void child(t_data *data, int last_cmd, int i)
 	printf("--child--\n");
 	if (!last_cmd) //not last cmd
 	{
-		//printf("---not a last cmd---\n");
+		printf("---not a last cmd---\n");
 		if (data->t_cmds[i].out_fd)
 			dup2(data->t_cmds[i].out_fd, 1);
 		else
@@ -66,7 +66,7 @@ void child(t_data *data, int last_cmd, int i)
 	}
 	else //last cmd
 	{
-		//printf("---yes the last cmd---\n");
+		printf("---yes the last cmd---\n");
 		if (data->t_cmds[i].out_fd)
 			dup2(data->t_cmds[i].out_fd, 1);
 		else
@@ -74,22 +74,22 @@ void child(t_data *data, int last_cmd, int i)
 	}
 	if (data->t_cmds[i].delimiter && data->t_cmds[i].delimiter[0]) //rewrite after correcting the heredoc
 	{
-		// printf("assigning pipe from heredoc to cmd input: %d\n", data->t_cmds[i].heredoc_fd[0]);
+		printf("assigning pipe from heredoc to cmd input: %d\n", data->t_cmds[i].heredoc_fd[0]);
 		dup2(data->t_cmds[i].heredoc_fd[0], 0); //so that the command reads from pipe
 		close(data->t_cmds[i].heredoc_fd[0]);//added ch
 	}
-	// printf("infile check: %d\n", data->t_cmds[i].in_fd);
+	printf("infile check: %d\n", data->t_cmds[i].in_fd);
 	if (!data->t_cmds[i].delimiter && data->t_cmds[i].in_fd) //added condition before dup
 		dup2(data->t_cmds[i].in_fd, 0);
-	// printf("infile check2: %d\n", data->t_cmds[i].in_fd);
+	printf("infile check2: %d\n", data->t_cmds[i].in_fd);
 	if (data->t_cmds[i].is_builtin)
 	{
-		//printf("ok is builtin\n");
+		printf("ok is builtin\n");
 		execute_builtin(data, i, 0);
 	}
 	else if (data->t_cmds[i].cmd[0])
 	{
-		//printf("not a builtin but cmd to execute\n");
+		printf("not a builtin but cmd to execute\n");
 		execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
 	}
 	if (data->t_cmds[i].in_fd)

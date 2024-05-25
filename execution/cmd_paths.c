@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/24 16:00:23 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/25 14:14:37 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void get_paths(t_data *data)
 	i = 0;
 	while (i < data->t_cmds[0].amount)
 	{
-		data->t_cmds[i].is_builtin = 0;
+		
 		if (!(data->t_cmds[i].is_builtin))
 		{
 			if (access(data->t_cmds[i].cmd[0], X_OK) == 0)

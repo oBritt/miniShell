@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/25 12:20:57 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/25 14:14:44 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void builtins_check(t_data *data)
 	i = 0;
 	while (i < data->t_cmds[0].amount)
 	{
+		data->t_cmds[i].is_builtin = 0;
 		data->t_cmds[i].is_builtin = check_if_builtin(data->t_cmds[i].cmd[0]);
 		printf("builtin check from builtin_check: %d\n", data->t_cmds[i].is_builtin);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:54:51 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/23 18:43:57 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/25 14:10:07 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	init_array(char **array)
 
 int	check_if_builtin(char *str)
 {
+	printf("---builtins check--\n");
 	char	*first_word;
 	char	*built_ins[7];
 	int		i;
