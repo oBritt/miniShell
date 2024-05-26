@@ -1,0 +1,6 @@
+assigning pipe from heredoc to cmd input: 5
+infile check: 0
+infile check2: 0
+not a builtin but cmd to execute
+ex
+exx

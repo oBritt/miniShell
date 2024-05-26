@@ -12,7 +12,7 @@ parsing/parsing_fill_redirect.c parsing/parsing_change_values_command.c parsing/
 wildcard/handle_wild_card.c wildcard/get_folders.c wildcard/check_if_same_wild.c wildcard/get_array_used_wild.c wildcard/ft_split_wildcard.c wildcard/transit.c \
 builtins/builtins.c builtins/exit.c builtins/echo.c builtins/cd.c builtins/export.c builtins/env.c builtins/unset.c builtins/pwd.c builtins/export_h.c builtins/cd_h.c \
 env/check_if_in.c env/sort_env.c env/update_env.c env/handle_update.c \
-execution/exe_start.c execution/cmd_paths.c execution/pipe_n_execute.c \
+execution/exe_start.c execution/cmd_paths.c execution/pipe_n_execute.c execution/execution.c execution/heredoc_process.c \
 execution/exe_utils/error_msg.c execution/exe_utils/ft_split.c execution/exe_utils/ft_strjoin.c execution/exe_utils/ft_strnstr.c \
 execution/exe_utils/libft.c execution/heredoc.c execution/redirections.c \
 signals/init_signals.c

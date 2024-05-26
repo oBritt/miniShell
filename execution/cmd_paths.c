@@ -6,14 +6,14 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/25 14:14:37 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:51:27 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../executor.h"
 
-char	*find_in_envp(char *cmd, t_data *data)
+char	*find_in_envp(char *cmd, t_data *data, int nbr)
 {
 	char	*temp;
 	char	*cmd_path;
@@ -33,13 +33,11 @@ char	*find_in_envp(char *cmd, t_data *data)
 		free(cmd_path);
 		i++;
 	}
-
 	display_error("zsh: command not found: ");
 	display_error(cmd);
 	display_error("\n");
-
 	//free_struct(___); //what to free??
-	exit(EXIT_FAILURE);
+	data->t_cmds[nbr].path_failed = 1;
 	return (NULL);
 }
 
@@ -53,13 +51,6 @@ void	get_all_paths(t_data *data)
 	data->all_env_paths = ft_split1(data->env[i] + 5, ':');
 	if (!data->all_env_paths)
 		exit(1); //what is needed to be free here?
-
-	// i = 0;
-	// while(data->all_env_paths[i] != NULL)
-	// {
-	// 	printf("path: %s\n", data->all_env_paths[i]);
-	// 	i++;
-	// }
 }
 
 void get_paths(t_data *data)
@@ -70,13 +61,13 @@ void get_paths(t_data *data)
 	i = 0;
 	while (i < data->t_cmds[0].amount)
 	{
-		
+		data->t_cmds[i].path_failed = 0;
 		if (!(data->t_cmds[i].is_builtin))
 		{
 			if (access(data->t_cmds[i].cmd[0], X_OK) == 0)
 				data->t_cmds[i].cmd_path = data->t_cmds[i].cmd[0];
 			else
-				data->t_cmds[i].cmd_path = find_in_envp(data->t_cmds[i].cmd[0], data);
+				data->t_cmds[i].cmd_path = find_in_envp(data->t_cmds[i].cmd[0], data, i);
 		}
 		printf("builtin check from get paths: %d\n", data->t_cmds[i].is_builtin);
 		i++;

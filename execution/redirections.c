@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:19:12 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/24 17:21:46 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:05:46 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void open_file(t_cmd *command, int i, int redir_number)
         display_error("minishell: ");
         display_error(strerror(errno));
         display_error("\n");
-        exit(EXIT_FAILURE);
+		command->redir_failed = 1;
+        //exit(EXIT_FAILURE);
     }
     if (i == redir_number - 1 && !command->delimiter[0])
         command->in_fd = temp_fd;
@@ -50,7 +51,7 @@ void redir_in_check(t_cmd *command)
 			display_error("minishell: ");
 			display_error(strerror(errno));
 			display_error("\n");
-			exit(EXIT_FAILURE);
+			//exit(EXIT_FAILURE);
 		}
 		open_file(command, i, redir_number);
 		i++;
@@ -72,7 +73,8 @@ void	open_out_file(t_cmd *command, int i, int redir_number)
 		display_error("minishell: ");
 		display_error(strerror(errno));
 		display_error("\n");
-		exit(EXIT_FAILURE);
+		command->redir_failed = 1;
+		//exit(EXIT_FAILURE);
 	}
 	if (i == redir_number - 1)
 	{
@@ -98,7 +100,7 @@ void redir_out_check(t_cmd *command)
 			display_error("minishell: ");
 			display_error(strerror(errno));
 			display_error("\n");
-			exit(EXIT_FAILURE);
+			//exit(EXIT_FAILURE);
 		}
 		open_out_file(command, i, redir_number);
 		i++;
