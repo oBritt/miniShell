@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 14:00:35 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:01:23 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ void child(t_data *data, int last_cmd, int i)
 		printf("not a builtin but cmd to execute\n");
 		execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
 	}
-	else
-		exit(0);
 	else
 		exit(0);
 	if (data->t_cmds[i].in_fd)
