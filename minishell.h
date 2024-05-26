@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 11:42:50 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:23:44 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct command
 	char		**output_redirect;
 	int			*is_ambigious_output;
 	char		**delimiter;
-	char		**stored_delimiter;
 	char		*cmd_path;
 	int			in_fd;
 	int			out_fd;

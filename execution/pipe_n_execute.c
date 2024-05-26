@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_n_execute.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/25 14:11:51 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:19:39 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void child(t_data *data, int last_cmd, int i)
 		printf("not a builtin but cmd to execute\n");
 		execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
 	}
+	else
+		exit(0);
 	if (data->t_cmds[i].in_fd)
 		close(data->t_cmds[i].in_fd);
 }
