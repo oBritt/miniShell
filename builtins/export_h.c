@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:45:53 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 14:07:06 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:17:31 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,9 @@ static int	exit_export(t_data *data, int is_main)
 int	export_handle(t_data *data, char **command, int is_main)
 {
 	int	i;
-	int	err;
 	int	ans;
 
 	i = 0;
-	err = 0;
 	while (command[++i])
 	{
 		ans = check_if_valid_export(command[i]);
