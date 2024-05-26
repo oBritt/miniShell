@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 14:01:23 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:11:59 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void normal_exe(t_data *data, int last_cmd, int i)
 	printf("---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
 }
 
-void last_cmd_builtin_exe(t_data *data, int i)
+void the_only_one_builtin_exe(t_data *data, int i)
 {
 	printf("--builtin last cmd exe\n");
 	if (data->t_cmds[i].out_fd)
@@ -144,15 +144,15 @@ void last_cmd_builtin_exe(t_data *data, int i)
 	printf("---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
 }
 
-void specific_builtin (t_data *data, int i)
-{
-	printf("--builtin export n unset exe\n");
-	if (data->t_cmds[i].out_fd)
-		dup2(data->t_cmds[i].out_fd, 1);
-	if (data->t_cmds[i].in_fd) //added condition before dup
-		dup2(data->t_cmds[i].in_fd, 0);
-	execute_builtin(data, i, 1);
-}
+// void specific_builtin (t_data *data, int i)
+// {
+// 	printf("--builtin export n unset exe\n");
+// 	if (data->t_cmds[i].out_fd)
+// 		dup2(data->t_cmds[i].out_fd, 1);
+// 	if (data->t_cmds[i].in_fd) //added condition before dup
+// 		dup2(data->t_cmds[i].in_fd, 0);
+// 	execute_builtin(data, i, 1);
+// }
 
 void mult_execute(t_data *data)
 {
@@ -175,10 +175,12 @@ void mult_execute(t_data *data)
 			p = pipe(data->fd_arr);
 			p_check(p, data);
 		}
-		if (data->t_cmds[i].is_builtin && last_cmd)
-			last_cmd_builtin_exe(data, i);
-		else if ((data->t_cmds[i].is_builtin == 4 || data->t_cmds[i].is_builtin == 5) && !last_cmd)
-			specific_builtin(data, i);
+		if (data->t_cmds[i].is_builtin && data->t_cmds[0].amount == 1)
+			the_only_one_builtin_exe(data, i);
+		// if (data->t_cmds[i].is_builtin && last_cmd)
+		// 	last_cmd_builtin_exe(data, i);
+		// else if ((data->t_cmds[i].is_builtin == 4 || data->t_cmds[i].is_builtin == 5) && !last_cmd)
+		// 	specific_builtin(data, i);
 		else
 			normal_exe(data, last_cmd, i);
 		i++;
