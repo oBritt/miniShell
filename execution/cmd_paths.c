@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 17:47:16 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:20:02 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 
 void	get_all_paths(t_data *data)
 {
+	printf("--path search--\n");
 	int		i;
 	int		flag;
 
@@ -54,7 +55,10 @@ void	get_all_paths(t_data *data)
 	while (data->env[i])
 	{
 		if (ft_strnstr(data->env[i], "PATH", 4) != 0)
+		{
+			printf("-----somehow found path: %d-----\n", i);
 			data->all_env_paths = ft_split1(data->env[i] + 5, ':');
+		}
 		i++;
 	}
 	if (!data->all_env_paths)
@@ -72,6 +76,7 @@ void get_paths(t_data *data)
 		data->t_cmds[i].path_failed = 0;
 		if (!(data->t_cmds[i].is_builtin))
 		{
+			printf("is builtin: %d, shouldn't go here\n", data->t_cmds[i].is_builtin);
 			if (access(data->t_cmds[i].cmd[0], X_OK) == 0)
 				data->t_cmds[i].cmd_path = data->t_cmds[i].cmd[0];
 			else
