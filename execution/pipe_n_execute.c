@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 12:19:39 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:00:35 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void child(t_data *data, int last_cmd, int i)
 	}
 	else
 		exit(0);
+	else
+		exit(0);
 	if (data->t_cmds[i].in_fd)
 		close(data->t_cmds[i].in_fd);
 }
@@ -111,6 +113,7 @@ void parent(t_data *data, int last_cmd)
 }
 void normal_exe(t_data *data, int last_cmd, int i)
 {
+	data->waitpid_status = 0;
 	data->process_id = fork();
 	if (data->process_id == -1)
 	{
@@ -121,7 +124,9 @@ void normal_exe(t_data *data, int last_cmd, int i)
 		child(data, last_cmd, i);
 	else //parent
 		parent(data, last_cmd);
-	waitpid(data->process_id, 0, 0);
+	waitpid(data->process_id, &data->waitpid_status, 0);
+	data->waitpid_status = WEXITSTATUS(data->waitpid_status);
+	printf("---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
 }
 
 void last_cmd_builtin_exe(t_data *data, int i)
@@ -133,8 +138,12 @@ void last_cmd_builtin_exe(t_data *data, int i)
 		dup2(data->origin_stdout, 1);
 	if (data->t_cmds[i].in_fd) //added condition before dup
 		dup2(data->t_cmds[i].in_fd, 0);
-	execute_builtin(data, i, 1);
+	if (execute_builtin(data, i, 1) == 1)
+		data->waitpid_status = 0;
+	else
+		data->waitpid_status = 1;
 	dup2(data->origin_stdin, 0); //at the end
+	printf("---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
 }
 
 void specific_builtin (t_data *data, int i)
@@ -155,7 +164,7 @@ void mult_execute(t_data *data)
 	int	last_cmd;
 
 	last_cmd = 0;
-	data->waitpid_status = 0;
+	//data->waitpid_status = 0;
 	i = 0;
 	// sleep 10 | ls //it works, what should happen
 	while (i < data->t_cmds[0].amount)
@@ -176,5 +185,6 @@ void mult_execute(t_data *data)
 			normal_exe(data, last_cmd, i);
 		i++;
 	}
+	//waitpid(data->process_id, 0, 0);
 }
 

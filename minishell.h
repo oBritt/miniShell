@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 12:23:44 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 13:59:15 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,11 @@ typedef struct command
 	char		*cmd_path;
 	int			in_fd;
 	int			out_fd;
-	int			have_to_execute; //for what?
+	int			have_to_execute;
 	int			is_builtin;
 	int			*is_output_append;
-	int			exit_code;
 	int			amount;
-	int			heredoc_fd[2];//for heredoc
+	int			heredoc_fd[2];
 }	t_cmd;
 
 typedef struct s_data
@@ -58,16 +57,16 @@ typedef struct s_data
 	//char	*cwd;
 	char	**comands;
 	char	**env;
-	char	**all_env_paths; //I need all paths stored
+	char	**all_env_paths;
 	char	*pwd;
 	char	*oldpwd;
 	// char	*home;
 	char	**original_env;
 	char	**addition_env;
-	int		last_exit;
+	int		last_exit; //to store exit status of last cmd - for echo
 	int		origin_stdin; //for execution of several cmds
 	int		origin_stdout; //for execution of several cmds
-	int		waitpid_status; // same
+	int		waitpid_status; // status of the last cmd will be stored
 	int		fd_arr[2]; // for piping
 	int		process_id; // for piping
 	char	*last_arg;
