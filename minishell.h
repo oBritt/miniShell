@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 15:49:35 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 16:54:30 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,5 +232,5 @@ void		output_error_cd(char *str, int err);
 void		init_signals(t_data *data);
 t_sig		*get_signal(void);
 void		free_data(t_data *data);
-
+void		output_message_token(void);
 #endif

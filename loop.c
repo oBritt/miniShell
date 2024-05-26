@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 14:14:34 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 16:42:38 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	loop(t_data *data)
 			free(input);
 			continue ;
 		}
-		remove_useless_spaces(input);
 		remove_useless_dollar(input);
 		parsing(data, input);
 		t_cmd *cmd = data->t_cmds;
