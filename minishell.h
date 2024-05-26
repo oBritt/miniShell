@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/25 20:10:19 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 11:42:50 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ typedef struct command
 
 typedef struct s_data
 {
-	char	*cwd;
+	//char	*cwd;
 	char	**comands;
 	char	**env;
 	char	**all_env_paths; //I need all paths stored
 	char	*pwd;
 	char	*oldpwd;
-	char	*home;
+	// char	*home;
 	char	**original_env;
 	char	**addition_env;
 	int		last_exit;
@@ -231,5 +231,6 @@ char		*get_str_cd(t_data *data, char *str, int is_main);
 void		output_error_cd(char *str, int err);
 void		init_signals(t_data *data);
 t_sig		*get_signal(void);
+void		free_data(t_data *data);
 
 #endif

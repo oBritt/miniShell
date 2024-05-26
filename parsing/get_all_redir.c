@@ -6,39 +6,11 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:16:32 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 12:53:07 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 11:11:46 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	freeing_cmds(t_cmd *cmd)
-{
-	int	e;
-
-	e = 0;
-	while (cmd[0].amount > e)
-	{
-		if (cmd[e].delimiter)
-			freeing(cmd[e].delimiter);
-		if (cmd[e].input_redirect)
-			freeing(cmd[e].input_redirect);
-		if (cmd[e].output_redirect)
-			freeing(cmd[e].output_redirect);
-		if (cmd[e].is_ambigious_input)
-			free(cmd[e].is_ambigious_input);
-		if (cmd[e].is_ambigious_output)
-			free(cmd[e].is_ambigious_output);
-		if (cmd[e].cmd)
-			free(cmd[e].cmd);
-		if (cmd[e].first)
-			free(cmd[e].first);
-		if (cmd[e].is_output_append)
-			free(cmd[e].is_output_append);
-		e++;
-	}
-	free(cmd);
-}
 
 int	get_all_types_of_delimiter(char	*str, t_cmd *cmd)
 {

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:04:41 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/25 20:38:13 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 11:03:50 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	handle_signals_c(int status)
 	}
 	else
 		write(1, "\n", 1);
+	free(str);
 	status--;
 }
 
@@ -98,6 +99,7 @@ void	handle_signals_b(int status)
 		str[str_len(str) - 2] = 0;
 		rl_replace_line(str, 1);
 		rl_redisplay();
+		free(str);
 	}
 }
 
