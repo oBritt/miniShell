@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:54:51 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/25 14:10:07 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:05:21 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	check_if_builtin(char *str)
 	char	*built_ins[7];
 	int		i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	init_array(built_ins);
 	first_word = get_first_word(str);
