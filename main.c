@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:05 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 12:12:27 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:22:15 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ int	main(int argc, char **argv, char **env)
 	}
 	loop(&data);
 	//free_data(&data);
+	// system("leaks ./minishell");
 }

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 16:54:30 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:19:32 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <dirent.h>
+# include <sys/wait.h>
 
 
 typedef struct s_sig
