@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 11:56:09 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 13:42:24 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,14 @@ typedef struct command
 	char		**output_redirect;
 	int			*is_ambigious_output;
 	char		**delimiter;
-	char		**stored_delimiter;
 	char		*cmd_path;
 	int			in_fd;
 	int			out_fd;
-	int			have_to_execute; //for what?
+	int			have_to_execute;
 	int			is_builtin;
 	int			*is_output_append;
-	int			exit_code;
 	int			amount;
-	int			heredoc_fd[2];//for heredoc
+	int			heredoc_fd[2];
 }	t_cmd;
 
 typedef struct s_data
@@ -59,7 +57,7 @@ typedef struct s_data
 	//char	*cwd;
 	char	**comands;
 	char	**env;
-	char	**all_env_paths; //I need all paths stored
+	char	**all_env_paths;
 	char	*pwd;
 	char	*oldpwd;
 	// char	*home;
@@ -68,7 +66,7 @@ typedef struct s_data
 	int		last_exit; //to store exit status of last cmd - for echo
 	int		origin_stdin; //for execution of several cmds
 	int		origin_stdout; //for execution of several cmds
-	int		waitpid_status; // same
+	int		waitpid_status; // status of the last cmd will be stored
 	int		fd_arr[2]; // for piping
 	int		process_id; // for piping
 	char	*last_arg;

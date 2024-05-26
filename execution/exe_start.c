@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 11:54:19 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:31:26 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void builtins_check(t_data *data)
 
 void execute_cmd(t_data *data)
 {
-	//if it's only input or output or only delimiter errors
-	//
 	printf("\n\n---**execution**---\n\n");
 	data->origin_stdin = STDIN_FILENO;
 	data->origin_stdout = STDOUT_FILENO;
