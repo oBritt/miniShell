@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 11:42:50 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/26 11:56:09 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_data
 	// char	*home;
 	char	**original_env;
 	char	**addition_env;
-	int		last_exit;
+	int		last_exit; //to store exit status of last cmd - for echo
 	int		origin_stdin; //for execution of several cmds
 	int		origin_stdout; //for execution of several cmds
 	int		waitpid_status; // same
