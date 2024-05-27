@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 15:51:27 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:20:02 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,24 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 
 void	get_all_paths(t_data *data)
 {
+	printf("--path search--\n");
 	int		i;
+	int		flag;
 
+	flag = 0;
 	i = 0;
-	while (ft_strnstr(data->env[i], "PATH", 4) == 0)
+	// while (data->env[i] && ft_strnstr(data->env[i], "PATH", 4) == 0)
+	// 	i++;
+	// data->all_env_paths = ft_split1(data->env[i] + 5, ':');
+	while (data->env[i])
+	{
+		if (ft_strnstr(data->env[i], "PATH", 4) != 0)
+		{
+			printf("-----somehow found path: %d-----\n", i);
+			data->all_env_paths = ft_split1(data->env[i] + 5, ':');
+		}
 		i++;
-	data->all_env_paths = ft_split1(data->env[i] + 5, ':');
+	}
 	if (!data->all_env_paths)
 		exit(1); //what is needed to be free here?
 }
@@ -64,12 +76,12 @@ void get_paths(t_data *data)
 		data->t_cmds[i].path_failed = 0;
 		if (!(data->t_cmds[i].is_builtin))
 		{
+			printf("is builtin: %d, shouldn't go here\n", data->t_cmds[i].is_builtin);
 			if (access(data->t_cmds[i].cmd[0], X_OK) == 0)
 				data->t_cmds[i].cmd_path = data->t_cmds[i].cmd[0];
 			else
 				data->t_cmds[i].cmd_path = find_in_envp(data->t_cmds[i].cmd[0], data, i);
 		}
-		printf("builtin check from get paths: %d\n", data->t_cmds[i].is_builtin);
 		i++;
 	}
 }
