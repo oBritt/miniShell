@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 15:00:58 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:30:42 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void read_store_input(t_cmd *command, int nbr) //to fix that if it's only heredo
 
 void set_heredoc(t_cmd *command)
 {
-	printf("---set heredoc---\n");
+	//printf("---set heredoc---\n");
 	int		nbr;
 
 	nbr = 0;
@@ -42,7 +42,7 @@ void set_heredoc(t_cmd *command)
 
 void heredoc_check(t_data *data)
 {
-	printf("---heredoc check---\n");
+	//printf("---heredoc check---\n");
 	int		i;
 	int		p;
 
@@ -53,7 +53,7 @@ void heredoc_check(t_data *data)
 		{
 			data->t_cmds[i].redir_failed = 0;
 			p = pipe(data->t_cmds[i].heredoc_fd);
-			printf("read end fd: %d, write end fd: %d\n", data->t_cmds[i].heredoc_fd[0], data->t_cmds[i].heredoc_fd[1]);
+			//printf("read end fd: %d, write end fd: %d\n", data->t_cmds[i].heredoc_fd[0], data->t_cmds[i].heredoc_fd[1]);
 			p_check(p, data);
 			set_heredoc(&data->t_cmds[i]);
 			close(data->t_cmds[i].heredoc_fd[1]);

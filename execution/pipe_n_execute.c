@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 12:59:22 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:31:09 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void last_cmd_check(t_data *data, int last_cmd, int i)
 {
 	if (!last_cmd) //not last cmd
 	{
-		printf("---not a last cmd---\n");
+		//printf("---not a last cmd---\n");
 		if (data->t_cmds[i].out_fd)
 			dup2(data->t_cmds[i].out_fd, 1);
 		else
@@ -31,45 +31,45 @@ void last_cmd_check(t_data *data, int last_cmd, int i)
 	}
 	else //last cmd
 	{
-		printf("---yes the last cmd---\n");
+		//printf("---yes the last cmd---\n");
 		if (data->t_cmds[i].out_fd)
 			dup2(data->t_cmds[i].out_fd, 1);
 		else
 			dup2(data->origin_stdout, 1);
 	}
-	printf("last cmd check complete\n");
+	//printf("last cmd check complete\n");
 }
 
 void child(t_data *data, int last_cmd, int i)
 {
 	data->t_cmds[i].path_failed = 0;
-	printf("--child--\n");
+	//printf("--child--\n");
 	last_cmd_check(data, last_cmd, i);
-	printf("delimiter check: %s\n", data->t_cmds[i].delimiter[0]);
+	//printf("delimiter check: %s\n", data->t_cmds[i].delimiter[0]);
 	if (data->t_cmds[i].delimiter && data->t_cmds[i].delimiter[0])
 	{
-		printf("assigning pipe from heredoc to cmd input: %d\n", data->t_cmds[i].heredoc_fd[0]);
+		//printf("assigning pipe from heredoc to cmd input: %d\n", data->t_cmds[i].heredoc_fd[0]);
 		dup2(data->t_cmds[i].heredoc_fd[0], 0); //so that the command reads from pipe
 		close(data->t_cmds[i].heredoc_fd[0]);//added ch
 	}
 	else if (data->t_cmds[i].in_fd) //added condition before dup
 		dup2(data->t_cmds[i].in_fd, 0);
-	printf("infile check2: %d\n", data->t_cmds[i].in_fd);
+	//printf("infile check2: %d\n", data->t_cmds[i].in_fd);
 	if (data->t_cmds[i].is_builtin && !data->t_cmds[i].redir_failed && !data->t_cmds[i].path_failed)
 	{
-		printf("ok is builtin\n");
+		//printf("ok is builtin\n");
 		execute_builtin(data, i, 0);
 	}
 	else if (data->t_cmds[i].cmd[0] && !data->t_cmds[i].redir_failed)
 	{
-		printf("not a builtin but cmd to execute\n");
+		//printf("not a builtin but cmd to execute\n");
 		get_cmd_path(data, i);
 		if (!data->t_cmds[i].path_failed)
 			execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
 	}
 	else if (last_cmd && (data->t_cmds[i].redir_failed || data->t_cmds[i].path_failed))
 	{
-		printf("last cmd redir or path failure\n");
+		//printf("last cmd redir or path failure\n");
 		exit(1);
 	}
 	else
@@ -91,7 +91,7 @@ void parent(t_data *data, int last_cmd)
 }
 void normal_exe(t_data *data, int last_cmd, int i)
 {
-	printf("normal _exe start\n");
+	//printf("normal _exe start\n");
 	data->waitpid_status = 0;
 	data->process_id = fork();
 	if (data->process_id == -1)
@@ -105,7 +105,7 @@ void normal_exe(t_data *data, int last_cmd, int i)
 		parent(data, last_cmd);
 	waitpid(data->process_id, &data->waitpid_status, 0);
 	data->waitpid_status = WEXITSTATUS(data->waitpid_status);
-	printf("---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
+	//printf("---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
 }
 
 void mult_execute(t_data *data)

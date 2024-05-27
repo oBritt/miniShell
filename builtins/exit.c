@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:02:16 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 14:02:16 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:29:09 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static int	case_one(t_data *data, int is_main)
 
 int	builtin_exit(t_data *data, char **command, int is_main)
 {
-	printf("--exit builtin start--\n");
-	printf("is main: >>>>>>>%d<<<<<<\n", is_main);
+	// printf("--exit builtin start--\n");
+	// printf("is main: >>>>>>>%d<<<<<<\n", is_main);
 	int	t;
 	int	len;
 	int	err;

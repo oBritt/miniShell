@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 13:06:00 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:30:01 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 
 void	get_all_paths(t_data *data)
 {
-	printf("--path search--\n");
+	//printf("--path search--\n");
 	int		i;
 	// int		flag;
 
@@ -73,7 +73,7 @@ int if_path_is_still_in_env(t_data *data)
 	{
 		if (ft_strnstr(data->env[i], "PATH", 4) != 0)
 		{
-			printf("-----somehow found path: %d-----\n", i);
+			//printf("-----somehow found path: %d-----\n", i);
 			return(1);
 		}
 		i++;
@@ -83,15 +83,15 @@ int if_path_is_still_in_env(t_data *data)
 
 void get_cmd_path(t_data *data, int cmd_index)
 {
-	printf("--start path search--\n");
+	//printf("--start path search--\n");
 	get_all_paths(data);
 
-	printf("is builtin check from path sezrch: %d, shouldn't go here\n", data->t_cmds[cmd_index].is_builtin);
+	//printf("is builtin check from path sezrch: %d, shouldn't go here\n", data->t_cmds[cmd_index].is_builtin);
 	if (access(data->t_cmds[cmd_index].cmd[0], X_OK) == 0)
 		data->t_cmds[cmd_index].cmd_path = data->t_cmds[cmd_index].cmd[0];
 	else
 		data->t_cmds[cmd_index].cmd_path = find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index);
-	printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
+	//printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
 }
 
 

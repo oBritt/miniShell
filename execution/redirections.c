@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:19:12 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 15:05:46 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:31:25 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void open_file(t_cmd *command, int i, int redir_number)
 {
-	printf("--open_file--\n");
+	//printf("--open_file--\n");
     int temp_fd;
 
 	temp_fd = 0;
@@ -36,7 +36,7 @@ void open_file(t_cmd *command, int i, int redir_number)
 
 void redir_in_check(t_cmd *command)
 {
-	printf("--redirect in check ---\n");
+	//printf("--redirect in check ---\n");
 	int		i;
 	int		redir_number;
 
@@ -60,7 +60,7 @@ void redir_in_check(t_cmd *command)
 
 void	open_out_file(t_cmd *command, int i, int redir_number)
 {
-	printf("--open out file ---\n");
+	//printf("--open out file ---\n");
 	int		fd;
 
 	fd = 0;
@@ -85,7 +85,7 @@ void	open_out_file(t_cmd *command, int i, int redir_number)
 
 void redir_out_check(t_cmd *command)
 {
-	printf("--redirect out check ---\n");
+	//printf("--redirect out check ---\n");
 	int		i;
 	int		redir_number;
 

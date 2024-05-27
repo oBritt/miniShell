@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:32:39 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 10:26:52 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:29:19 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	output_export(t_data *data, int fd)
 
 int	builtin_export(t_data *data, char **command, int fd, int is_main)
 {
-	printf("--export builtin start--\n");
+	//printf("--export builtin start--\n");
 	if (len_2d_array(command) == 1)
 	{
 		if (!output_export(data, fd))

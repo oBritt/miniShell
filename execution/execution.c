@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:45:43 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 12:49:11 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:30:26 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 int execute_builtin(t_data *data, int i, int is_main)
 {
-	printf("goes to builtin directions check\n");
-	printf("is main here: %d\n", is_main);
+	// printf("goes to builtin directions check\n");
+	// printf("is main here: %d\n", is_main);
 
 	if (!data->t_cmds[i].out_fd)
 		data->t_cmds[i].out_fd = data->origin_stdout;
@@ -45,7 +45,7 @@ int execute_builtin(t_data *data, int i, int is_main)
 
 void the_only_one_builtin_exe(t_data *data, int i)
 {
-	printf("--builtin last cmd exe\n");
+	//printf("--builtin last cmd exe\n");
 	if (data->t_cmds[i].out_fd)
 		dup2(data->t_cmds[i].out_fd, 1);
 	else
@@ -65,7 +65,7 @@ void the_only_one_builtin_exe(t_data *data, int i)
 			data->waitpid_status = 1;
 	}
 	dup2(data->origin_stdin, 0); //at the end
-	printf("from the only builtin---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
+	//printf("from the only builtin---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
 }
 
 void	p_check(int p, t_data *data)
