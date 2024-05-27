@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 11:51:20 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:23:41 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,4 +229,8 @@ void		init_signals(t_data *data);
 t_sig		*get_signal(void);
 void		free_data(t_data *data);
 void		output_message_token(void);
+int			check_pipes(t_space *space, char *input);
+void		output_message_new_line(int err);
+int			check_redirect(t_space *space, char *input);
+void		helper_redirect(t_space *space, char *input);
 #endif

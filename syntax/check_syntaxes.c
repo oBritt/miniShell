@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:52:52 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 16:57:45 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:22:19 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,26 +94,24 @@ int	check_braces(t_space *space, char *str)
 	return (1);
 }
 
-int	check_pipes(t_space *space, char *input)
+int	check_syntaxes2(t_data *data, char *input)
 {
-	while (input[space->pointer1])
+	t_space	space;
+
+	init_space(&space, input);
+	if (!check_pipes(&space, input))
 	{
-		if (input[space->pointer1] == '|')
-		{
-			space->two = 1;
-			if (!space->one)
-				return (0);
-			space->one = 0;
-		}
-		if (!is_white_space(input[space->pointer1]) && \
-		input[space->pointer1] != '|')
-		{
-			space->one = 1;
-		}
-		space->pointer1++;
-	}
-	if (!space->one && space->two)
+		data->last_exit = 258;
+		output_message_token();
 		return (0);
+	}
+	init_space(&space, input);
+	if (!check_redirect(&space, input))
+	{
+		data->last_exit = 258;
+		output_message_new_line(space.two);
+		return (0);
+	}
 	return (1);
 }
 
@@ -121,7 +119,6 @@ int	check_syntaxes(t_data *data, char *input)
 {
 	t_space	space;
 
-	data += 0;
 	init_space(&space, NULL);
 	if (!check_if_closed(&space, input))
 	{
@@ -136,12 +133,5 @@ int	check_syntaxes(t_data *data, char *input)
 		output_message_bad_sub(&space, input);
 		return (0);
 	}
-	init_space(&space, input);
-	if (!check_pipes(&space, input))
-	{
-		data->last_exit = 258;
-		output_message_token();
-		return (0);
-	}
-	return (1);
+	return (check_syntaxes2(data, input));
 }
