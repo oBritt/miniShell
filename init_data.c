@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:26:01 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 13:01:39 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 10:31:52 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	update_under_score(t_data *data)
 	data->last_arg = joined;
 	data->cur_last = malloc(2);
 	if (!data->cur_last)
-		return (freeing(data->env), 0);
+		return (free(data->last_arg), freeing(data->env), 0);
 	data->should_continue = 1;
 	data->exit_printed = 0;
 	return (set_other(data));

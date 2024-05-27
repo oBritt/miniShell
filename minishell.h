@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 17:19:32 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:51:20 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_sig
 typedef struct command
 {
 	char		**cmd;
-	char		*first;
 	char		**input_redirect;
 	int			*is_ambigious_input;
 	char		**output_redirect;
@@ -46,7 +45,6 @@ typedef struct command
 	char		*cmd_path;
 	int			in_fd;
 	int			out_fd;
-	int			have_to_execute;
 	int			is_builtin;
 	int			*is_output_append;
 	int			amount;
@@ -57,13 +55,10 @@ typedef struct command
 
 typedef struct s_data
 {
-	//char	*cwd;
-	char	**comands;
 	char	**env;
 	char	**all_env_paths;
 	char	*pwd;
 	char	*oldpwd;
-	// char	*home;
 	char	**original_env;
 	char	**addition_env;
 	int		last_exit; //to store exit status of last cmd - for echo

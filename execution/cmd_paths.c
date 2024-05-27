@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 12:16:57 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:06:00 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	get_all_paths(t_data *data)
 {
 	printf("--path search--\n");
 	int		i;
-	int		flag;
+	// int		flag;
 
-	flag = 0;
+	// flag = 0;
 	i = 0;
 
 	while (data->env[i])

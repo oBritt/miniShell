@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 11:11:30 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 11:51:53 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:15:11 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ void	freeing_cmds(t_cmd *cmd)
 		if (cmd[e].is_ambigious_output)
 			free(cmd[e].is_ambigious_output);
 		if (cmd[e].cmd)
-			free(cmd[e].cmd);
-		if (cmd[e].first)
-			free(cmd[e].first);
+			freeing(cmd[e].cmd);
 		if (cmd[e].is_output_append)
 			free(cmd[e].is_output_append);
-		// if (cmd[e].stored_delimiter)
-		// 	freeing(cmd[e].stored_delimiter);
+		// if (cmd[e].cmd_path)
+		// 	free(cmd[e].cmd_path);
 		e++;
 	}
 	free(cmd);
