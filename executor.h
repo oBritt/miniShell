@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 14:49:33 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:04:45 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 
 //execution itself
 void		execute_cmd(t_data *data);
-void		get_paths(t_data *data);
+void		get_cmd_path(t_data *data, int cmd_index);
+//void		get_paths(t_data *data);
 void		set_redirections(t_data *data);
 void 		mult_execute(t_data *data);
 void		child(t_data *data, int last_cmd, int i);
@@ -30,6 +31,7 @@ void		the_only_one_builtin_exe(t_data *data, int i);
 void		normal_exe(t_data *data, int last_cmd, int i);
 void		last_cmd_check(t_data *data, int last_cmd, int i);
 int			execute_builtin(t_data *data, int i, int is_main);
+int			if_path_is_still_in_env(t_data *data);
 
 //redir in
 void		redir_in_check(t_cmd *command);
