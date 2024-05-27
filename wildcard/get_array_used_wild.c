@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 19:31:24 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/12 11:00:08 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:37:06 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int	*get_array_used_stars(int *information, char **array)
 		return (NULL);
 	}
 	go_trough_and_update(information, array, out);
+	free(information);
 	return (out);
 }

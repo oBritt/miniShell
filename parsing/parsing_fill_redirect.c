@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:14:09 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 14:17:34 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:58:13 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	update_values(t_data *data, char **command, t_cmd *cmd)
 	}
 	if (!change_values_command(command, data, cmd))
 		return (freeing_cmd_and_comand(cmd, command));
-	free(command);
+	freeing(command);
 	data->last_exit = 0;
 	return (1);
 }
@@ -78,15 +78,16 @@ int	parse_addition(t_data *data, char **command, t_cmd *cmd)
 	while (command[i])
 	{
 		cmd[i].is_ambigious_input = \
-		malloc((len_2d_array(cmd->input_redirect) + 1) * sizeof(int));
+		malloc((len_2d_array(cmd->input_redirect) + 3) * sizeof(int));
 		cmd[i].is_ambigious_output = \
-		malloc((len_2d_array(cmd->output_redirect) + 1) * sizeof(int));
+		malloc((len_2d_array(cmd->output_redirect) + 3) * sizeof(int));
 		if (!cmd[i].is_ambigious_input || !cmd[i].is_ambigious_output)
 		{
 			freeing_cmds(cmd);
 			freeing(command);
 			return (0);
 		}
+		write(1, "ADS", 3);
 		fill_is_pos_ambiguos(cmd[i].output_redirect, \
 		cmd[i].is_ambigious_output);
 		fill_is_pos_ambiguos(cmd[i].input_redirect, cmd[i].is_ambigious_input);

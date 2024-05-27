@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 18:20:02 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 10:19:29 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	get_all_paths(t_data *data)
 {
 	printf("--path search--\n");
 	int		i;
-	int		flag;
+	// int		flag;
 
-	flag = 0;
+	// flag = 0;
 	i = 0;
 	// while (data->env[i] && ft_strnstr(data->env[i], "PATH", 4) == 0)
 	// 	i++;

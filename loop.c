@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 16:42:38 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:59:44 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	loop(t_data *data)
 		data->last_arg = data->cur_last;
 		data->cur_last = malloc(2);
 		freeing_cmds(data->t_cmds);
+
 		get_signal()->is_execution = 0;
 		data->last_exit = data->waitpid_status;
 	}
