@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 16:22:46 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:15:46 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	loop(t_data *data)
 			printf("\n");
 			printf("\n");
 		}
-		write(1, input, str_len(input));
-		write(1, "\n", 1);
+		// write(1, input, str_len(input));
+		// write(1, "\n", 1);
 		free(input);
 		get_signal()->is_execution = 1;
 		data->last_exit = 0;

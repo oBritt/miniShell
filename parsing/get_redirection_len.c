@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 18:13:37 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/16 19:52:57 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:39:19 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	go_untill_space_end_c(t_space *space, char *str, char *opt)
 	space->pointer2 += str_len(opt);
 	while (str[space->pointer2] == ' ')
 		space->pointer2++;
-	while (str[space->pointer2] != ' ' && str[space->pointer2])
+	while (str[space->pointer2] != ' ' && str[space->pointer2] && \
+	str[space->pointer2] != '>' && str[space->pointer2] != '<')
 	{
 		if (str[space->pointer2] == 34 || str[space->pointer2] == 39)
 		{
