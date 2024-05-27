@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_n_execute.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 14:44:34 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:50:51 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void normal_exe(t_data *data, int last_cmd, int i)
 
 void mult_execute(t_data *data)
 {
-	printf("--mult_exe--\n");
+	//printf("--mult_exe--\n");
 	int	i;
 	int	p;
 	int	last_cmd;

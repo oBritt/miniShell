@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:45:53 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 17:17:31 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:24:22 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	error_output_export(char *str)
 	write(2, "minishell: export: ", 19);
 	write(2, &t, 1);
 	write(2, str, str_len(str));
-	write(2, "\': not a valid indentifier\n", 27);
+	write(2, "\': not a valid identifier\n", 27);
 }
 
 int	check_if_valid_export(char *str)
@@ -52,22 +52,21 @@ int	export_change_value(t_data *data, char *str, int ans)
 		return (0);
 	if (ans == 3)
 	{
-		delete_from_addition(data, str);
-		if (!update_env_value(&data->addition_env, str, \
+		delete_from_addition(data, copy);
+		if (!update_env_value(&data->addition_env, copy, \
 		len_2d_array(data->addition_env), 1))
 			return (free(copy), 0);
 	}
 	if (ans == 2)
 	{
-		if (!update_export_append(data, str))
+		if (!update_export_append(data, copy))
 			return (free(copy), 0);
 	}
 	if (ans == 1)
 	{
-		if (!update_export(data, str))
+		if (!update_export(data, copy))
 			return (free(copy), 0);
 	}
-	free(copy);
 	return (1);
 }
 

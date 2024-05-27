@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:45:43 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 14:30:26 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:13:31 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void the_only_one_builtin_exe(t_data *data, int i)
 
 	if (execute_builtin(data, i, 1) == 1)
 	{
-		printf("builtin exe OK\n");
-		data->waitpid_status = 0;
+		//printf("builtin exe OK\n");
+		data->waitpid_status = data->last_exit;
 	}
 	else
 	{
-		printf("builtin exe KO\n");
+		//printf("builtin exe KO\n");
 		if (data->t_cmds[i].is_builtin != 6)
-			data->waitpid_status = 1;
+			data->waitpid_status = (data->last_exit == 0) ? 1 : data->last_exit;
 	}
 	dup2(data->origin_stdin, 0); //at the end
 	//printf("from the only builtin---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);

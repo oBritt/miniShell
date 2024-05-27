@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:02:16 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 14:29:09 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:16:11 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exit_helper(t_data *data, char **command, int is_main, int sig)
 		write(2, "exit: too many arguments\n", 25);
 		if (!is_main)
 			exit(1);
-		data->exit = 1;
+		data->last_exit = 1;
 	}
 	else
 	{
@@ -66,6 +66,9 @@ int	builtin_exit(t_data *data, char **command, int is_main)
 			exit(255);
 		data->should_continue = 0;
 		data->exit_printed = 1;
+		data->exit = 255;
+		data->last_exit = 255;
+		return (1);
 	}
 	return (exit_helper(data, command, is_main, t));
 }

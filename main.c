@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:05 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 12:04:10 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:19:10 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	main(int argc, char **argv, char **env)
 	freeing(data.addition_env);
 	free(data.last_arg);
 	free(data.cur_last);
-	system("leaks ./minishell");
+	if (data.exit)
+		exit(data.exit);
+	//system("leaks ./minishell");
 	//exit(0);
 }
