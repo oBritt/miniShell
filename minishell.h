@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 13:23:41 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:28:18 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,4 +233,6 @@ int			check_pipes(t_space *space, char *input);
 void		output_message_new_line(int err);
 int			check_redirect(t_space *space, char *input);
 void		helper_redirect(t_space *space, char *input);
+char		*transform_to_1d_pipe(char **array);
+char		**split_wildcard(char **cmds);
 #endif

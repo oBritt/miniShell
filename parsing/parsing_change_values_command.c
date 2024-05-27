@@ -6,15 +6,23 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:48:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 10:46:29 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:33:30 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	check_if_allocated(char *str)
+static int	get_last(t_data *data, char **cmds)
 {
-	if (!str)
+	int	i;
+
+	i = len_2d_array(cmds);
+	if (i == 0)
+		data->cur_last = ft_str_dup("");
+	else
+		data->cur_last = ft_str_dup(cmds[i - 1]);
+
+	if (!data->cur_last)
 		return (0);
 	return (1);
 }
@@ -37,14 +45,12 @@ static int	change_only_one(char **command, t_data *data, t_cmd *cmd)
 		}
 		i++;
 	}
+	cmds = split_wildcard(cmds);
+	if (!cmds)
+		return (0);
 	cmd->cmd = cmds;
 	free(data->cur_last);
-	i = len_2d_array(cmds);
-	if (i == 0)
-		data->cur_last = ft_str_dup("");
-	else
-		data->cur_last = ft_str_dup(cmds[i - 1]);
-	return (check_if_allocated(data->cur_last));
+	return (get_last(data, cmds));
 }
 
 int	change_values_command(char **command, t_data *data, t_cmd *cmd)

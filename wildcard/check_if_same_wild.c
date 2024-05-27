@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 19:54:12 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/14 18:01:34 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:52:38 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_if_same_wild(char *posible, char *wild, int *splitable)
 	if (!requiments)
 		return (-1);
 	if (!requiments[0])
-		return (1);
+		return (freeing(requiments), 1);
 	init_space(&space, wild);
 	if (wild[0] != '*')
 		space.one = 1;
@@ -80,7 +80,7 @@ int	check_if_same_wild(char *posible, char *wild, int *splitable)
 	{
 		if (!is_compare_strings_len(requiments[0], posible, \
 		str_len(requiments[0])))
-			return (0);
+			return (freeing(requiments), 0);
 		space.pointer2 = 1;
 		space.pointer1 = str_len(requiments[0]);
 	}
