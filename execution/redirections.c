@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:19:12 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 14:31:25 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 21:14:04 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void open_file(t_cmd *command, int i, int redir_number)
     if (temp_fd == -1)
 	{
         display_error("minishell: ");
+		display_error(command->input_redirect[i]);
+		display_error(": ");
         display_error(strerror(errno));
         display_error("\n");
 		command->redir_failed = 1;
