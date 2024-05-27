@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 11:11:30 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 12:15:11 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:18:59 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,16 @@ void	freeing_cmds(t_cmd *cmd)
 
 void	free_data(t_data *data)
 {
-	// if (data->cwd)
-	// 	free(data->cwd);
-	// if (data->comands)
-	// {
-	// 	write(1, "ASd", 3);
-	// 	for (int i = 0; data->comands[i]; i++)
-	// 		free(data->comands[i]);
-	// 	free(data->comands);
-	// }
-	// if (data->all_env_paths)
-	// 	freeing(data->all_env_paths);
+	if (data->env)
+		freeing(data->env);
 	if (data->pwd)
 		free(data->pwd);
 	if (data->oldpwd)
 		free(data->oldpwd);
-	// if (data->home)
-	// 	free(data->home);
 	if (data->addition_env)
 		freeing(data->addition_env);
 	if (data->last_arg)
 		free(data->last_arg);
 	if (data->cur_last)
 		free(data->cur_last);
-	if (data->t_cmds)
-		freeing_cmds(data->t_cmds);
 }
