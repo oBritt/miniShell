@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 18:20:02 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:31:44 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	get_all_paths(t_data *data)
 
 void get_paths(t_data *data)
 {
+	//should search during the execution of each command, not before
 	int		i;
 
 	get_all_paths(data);
