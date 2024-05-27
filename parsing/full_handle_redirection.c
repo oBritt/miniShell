@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:40:56 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/20 14:29:12 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:59:29 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ int	check_wild_card_redir(char **str, int *wild)
 	if (!directories)
 		return (0);
 	if (len_2d_array(directories) > 1)
-		return (2);
+		return (freeing(directories), 2);
 	sort_2d_array(directories);
 	copy = transform_to_1d_space(directories);
+	freeing(directories);
 	if (!copy)
 		return (0);
 	if (*copy == 0)
-	{
-		free(copy);
-		return (1);
-	}
+		return (free(copy), 1);
 	free(*str);
 	*str = copy;
 	return (1);

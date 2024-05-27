@@ -1,4 +1,7 @@
-asdasd
-
-
-echo "Hello, world!" | cat - > output.txt | cat < output.txt | grep "Hello" > filtered_output.txt | cat < filtered_output.txt | wc -l
+asdasdasaS
+asdasdasaSdas
+d
+asdasdasaSdasasd
+a
+ds
+ads

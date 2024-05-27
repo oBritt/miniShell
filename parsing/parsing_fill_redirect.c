@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:14:09 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 11:58:13 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:31:49 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	parse_addition(t_data *data, char **command, t_cmd *cmd)
 			freeing(command);
 			return (0);
 		}
-		write(1, "ADS", 3);
 		fill_is_pos_ambiguos(cmd[i].output_redirect, \
 		cmd[i].is_ambigious_output);
 		fill_is_pos_ambiguos(cmd[i].input_redirect, cmd[i].is_ambigious_input);
