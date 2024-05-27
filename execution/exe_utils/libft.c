@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 18:35:35 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 17:59:33 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:22:30 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 size_t	ft_strlen(const char *str)
 {
-	printf("the string is: %s\n", str);
+	//printf("the string is: %s\n", str);
 	size_t	i;
 
 	i = 0;
 	while (str[i])
 	{
-		printf("the i is: %zu\n", i);
 		i++;
 	}
 	return (i);
@@ -75,7 +74,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (src_len + dst_init_len);
 }
 
-int	ft_strncmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	unsigned char	*ptr1;
 	unsigned char	*ptr2;

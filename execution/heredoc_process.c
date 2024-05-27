@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:31:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 17:52:16 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:23:41 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void take_n_write(t_cmd *command)
 	char	*input;
 
 	input = readline("> ");
-	while (ft_strncmp(input, command->delimiter[0]))
+	while (ft_strcmp(input, command->delimiter[0]))
 	{
 		//printf("--len of input: %zu, len of delim: %zu--\n", ft_strlen(input), ft_strlen(command->delimiter[0]));
 		write(command->heredoc_fd[1], input, ft_strlen(input));
@@ -36,7 +36,7 @@ int reject_check(char *input, t_cmd *command, int nbr)
 	i = 0;
 	while (i < nbr - 2)
 	{
-		if (strncmp(input, command->delimiter[i], ft_strlen(input)))
+		if (ft_strcmp(input, command->delimiter[i]))
 			i++;
 		else
 			return (1);
@@ -49,14 +49,14 @@ void do_4_two(t_cmd *command, int nbr)
 	char		*input;
 
 	input = readline("> ");
-	while (ft_strncmp(input, command->delimiter[nbr - 2])) //not a delim
+	while (ft_strcmp(input, command->delimiter[nbr - 2])) //not a delim
 	{
 		free(input);
 		input = readline("> ");
 	}
 	free(input);
 	input = readline("> ");
-	while(ft_strncmp(input, command->delimiter[nbr - 1]))
+	while(ft_strcmp(input, command->delimiter[nbr - 1]))
 	{
 		if (!reject_check(input, command, nbr))
 		{
@@ -79,7 +79,7 @@ void skip_unused_delimiters(t_cmd *command, int nbr)
 	{
 		input = readline("> ");
 		//printf("--len of input: %zu, len of delim: %zu--\n", ft_strlen(input), ft_strlen(command->delimiter[count]));
-		if (!ft_strncmp(input, command->delimiter[count]))
+		if (!ft_strcmp(input, command->delimiter[count]))
 			count++;
 		free(input);
 	}
