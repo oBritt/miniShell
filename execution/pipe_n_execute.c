@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 14:31:09 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:44:34 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void mult_execute(t_data *data)
 	// sleep 10 | ls //it works, what should happen
 	while (i < data->t_cmds[0].amount)
 	{
-		printf("builtin check from multiple exe: %d\n", data->t_cmds[i].is_builtin);
+		//printf("builtin check from multiple exe: %d\n", data->t_cmds[i].is_builtin);
 		if (i == data->t_cmds[0].amount - 1)
 			last_cmd = 1;
 		if (!last_cmd)
@@ -132,7 +132,7 @@ void mult_execute(t_data *data)
 			the_only_one_builtin_exe(data, i);
 		else
 		{
-			printf("the only builtin shouldn't be here\n");
+			//printf("the only builtin shouldn't be here\n");
 			normal_exe(data, last_cmd, i);
 		}
 		i++;
