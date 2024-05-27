@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:05 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 17:22:15 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 10:15:15 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char **argv, char **env)
 		exit(1);
 	}
 	loop(&data);
-	//free_data(&data);
+	// free_data(&data);
+	freeing(data.env);
+	free()
 	// system("leaks ./minishell");
 }
