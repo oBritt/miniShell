@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:14:09 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 13:31:49 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 21:13:30 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ int	update_values(t_data *data, char **command, t_cmd *cmd)
 	i = 0;
 	while (command[i])
 	{
-		if (!change_values(cmd->input_redirect, data, &cmd[i], 1))
+		if (!change_values(cmd[i].input_redirect, data, &cmd[i], 1))
 			return (freeing_cmd_and_comand(cmd, command));
-		if (!change_values(cmd->output_redirect, data, &cmd[i], 2))
+		if (!change_values(cmd[i].output_redirect, data, &cmd[i], 2))
 			return (freeing_cmd_and_comand(cmd, command));
-		if (!update_delimiter(cmd->delimiter))
+		if (!update_delimiter(cmd[i].delimiter))
 			return (freeing_cmd_and_comand(cmd, command));
 		i++;
 	}
