@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:06:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 14:23:05 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:45:46 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "../executor.h"
 
 int	builtin_env(t_data *data, char **command, int fd, int is_main)
 {
@@ -21,8 +22,25 @@ int	builtin_env(t_data *data, char **command, int fd, int is_main)
 	{
 		write(2, "env: can not take any options or argimetns\n", 43);
 		if (!is_main)
+		{
+			data->waitpid_status = 126;
 			exit(126);
+		}
+		data->waitpid_status = 126;
 		data->last_exit = 126;
+		return(0);
+	}
+	else if (!if_path_is_still_in_env(data))
+	{
+		write(2, "env: No such file or directory\n", 31);
+		if (!is_main)
+		{
+			data->waitpid_status = 127;
+			exit(127);
+		}
+		data->waitpid_status = 127;
+		data->last_exit = 127;
+		return(0);
 	}
 	else
 	{
@@ -35,7 +53,7 @@ int	builtin_env(t_data *data, char **command, int fd, int is_main)
 			i++;
 		}
 		if (!is_main)
-			exit(0);
+			exit(0); //exit the child
 		data->last_exit = 0;
 	}
 	return (1);

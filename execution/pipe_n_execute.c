@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 16:03:30 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:59:22 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,22 @@ void last_cmd_check(t_data *data, int last_cmd, int i)
 		else
 			dup2(data->origin_stdout, 1);
 	}
+	printf("last cmd check complete\n");
 }
 
 void child(t_data *data, int last_cmd, int i)
 {
+	data->t_cmds[i].path_failed = 0;
 	printf("--child--\n");
 	last_cmd_check(data, last_cmd, i);
+	printf("delimiter check: %s\n", data->t_cmds[i].delimiter[0]);
 	if (data->t_cmds[i].delimiter && data->t_cmds[i].delimiter[0])
 	{
 		printf("assigning pipe from heredoc to cmd input: %d\n", data->t_cmds[i].heredoc_fd[0]);
 		dup2(data->t_cmds[i].heredoc_fd[0], 0); //so that the command reads from pipe
 		close(data->t_cmds[i].heredoc_fd[0]);//added ch
 	}
-	printf("infile check: %d\n", data->t_cmds[i].in_fd);
-	if (!data->t_cmds[i].delimiter && data->t_cmds[i].in_fd) //added condition before dup
+	else if (data->t_cmds[i].in_fd) //added condition before dup
 		dup2(data->t_cmds[i].in_fd, 0);
 	printf("infile check2: %d\n", data->t_cmds[i].in_fd);
 	if (data->t_cmds[i].is_builtin && !data->t_cmds[i].redir_failed && !data->t_cmds[i].path_failed)
@@ -58,13 +60,18 @@ void child(t_data *data, int last_cmd, int i)
 		printf("ok is builtin\n");
 		execute_builtin(data, i, 0);
 	}
-	else if (data->t_cmds[i].cmd[0] && !data->t_cmds[i].redir_failed && !data->t_cmds[i].path_failed)
+	else if (data->t_cmds[i].cmd[0] && !data->t_cmds[i].redir_failed)
 	{
 		printf("not a builtin but cmd to execute\n");
-		execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
+		get_cmd_path(data, i);
+		if (!data->t_cmds[i].path_failed)
+			execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
 	}
 	else if (last_cmd && (data->t_cmds[i].redir_failed || data->t_cmds[i].path_failed))
+	{
+		printf("last cmd redir or path failure\n");
 		exit(1);
+	}
 	else
 		exit(0);
 	if (data->t_cmds[i].in_fd)
@@ -84,6 +91,7 @@ void parent(t_data *data, int last_cmd)
 }
 void normal_exe(t_data *data, int last_cmd, int i)
 {
+	printf("normal _exe start\n");
 	data->waitpid_status = 0;
 	data->process_id = fork();
 	if (data->process_id == -1)
@@ -123,7 +131,10 @@ void mult_execute(t_data *data)
 		if (data->t_cmds[i].is_builtin && data->t_cmds[0].amount == 1)
 			the_only_one_builtin_exe(data, i);
 		else
+		{
+			printf("the only builtin shouldn't be here\n");
 			normal_exe(data, last_cmd, i);
+		}
 		i++;
 	}
 }

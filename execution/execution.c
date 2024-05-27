@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:45:43 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/26 15:46:08 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:49:11 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,18 @@ void the_only_one_builtin_exe(t_data *data, int i)
 		dup2(data->t_cmds[i].in_fd, 0);
 
 	if (execute_builtin(data, i, 1) == 1)
+	{
+		printf("builtin exe OK\n");
 		data->waitpid_status = 0;
+	}
 	else
-		data->waitpid_status = 1;
+	{
+		printf("builtin exe KO\n");
+		if (data->t_cmds[i].is_builtin != 6)
+			data->waitpid_status = 1;
+	}
 	dup2(data->origin_stdin, 0); //at the end
-	printf("---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
+	printf("from the only builtin---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
 }
 
 void	p_check(int p, t_data *data)
