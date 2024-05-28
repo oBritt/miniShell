@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 14:30:01 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:33:36 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 
 void	get_all_paths(t_data *data)
 {
-	//printf("--path search--\n");
+	printf("--all paths search--\n");
 	int		i;
 	// int		flag;
 
@@ -64,8 +64,10 @@ void	get_all_paths(t_data *data)
 	if (!data->all_env_paths)
 		exit(1);
 }
+
 int if_path_is_still_in_env(t_data *data)
 {
+	printf("--find in env--\n");
 	int		i;
 
 	i = 0;
@@ -83,88 +85,17 @@ int if_path_is_still_in_env(t_data *data)
 
 void get_cmd_path(t_data *data, int cmd_index)
 {
-	//printf("--start path search--\n");
+	printf("--start path search--\n");
+	data->t_cmds[cmd_index].cmd_is_path = 0;
 	get_all_paths(data);
-
-	//printf("is builtin check from path sezrch: %d, shouldn't go here\n", data->t_cmds[cmd_index].is_builtin);
+	//it should be a check that the access is ok and it is a part of PATH
 	if (access(data->t_cmds[cmd_index].cmd[0], X_OK) == 0)
+	{
+		data->t_cmds[cmd_index].cmd_is_path = 1;
 		data->t_cmds[cmd_index].cmd_path = data->t_cmds[cmd_index].cmd[0];
+	}
 	else
 		data->t_cmds[cmd_index].cmd_path = find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index);
-	//printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
+	printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
 }
 
-
-// char	*find_in_envp(char *cmd, t_data *data, int nbr)
-// {
-// 	char	*temp;
-// 	char	*cmd_path;
-// 	int		i;
-
-// 	i = 0;
-// 	while (data->all_env_paths[i] != NULL)
-// 	{
-// 		temp = ft_strjoin(data->all_env_paths[i], "/");
-// 		cmd_path = ft_strjoin(temp, cmd);
-// 		if (access(cmd_path, X_OK) == 0)
-// 		{
-// 			free(temp);
-// 			return (cmd_path);
-// 		}
-// 		free(temp);
-// 		free(cmd_path);
-// 		i++;
-// 	}
-// 	display_error("zsh: command not found: ");
-// 	display_error(cmd);
-// 	display_error("\n");
-// 	//free_struct(___); //what to free??
-// 	data->t_cmds[nbr].path_failed = 1;
-// 	return (NULL);
-// }
-
-// void	get_all_paths(t_data *data)
-// {
-// 	printf("--path search--\n");
-// 	int		i;
-// 	int		flag;
-
-// 	flag = 0;
-// 	i = 0;
-// 	// while (data->env[i] && ft_strnstr(data->env[i], "PATH", 4) == 0)
-// 	// 	i++;
-// 	// data->all_env_paths = ft_split1(data->env[i] + 5, ':');
-// 	while (data->env[i])
-// 	{
-// 		if (ft_strnstr(data->env[i], "PATH", 4) != 0)
-// 		{
-// 			printf("-----somehow found path: %d-----\n", i);
-// 			data->all_env_paths = ft_split1(data->env[i] + 5, ':');
-// 		}
-// 		i++;
-// 	}
-// 	if (!data->all_env_paths)
-// 		exit(1); //what is needed to be free here?
-// }
-
-// void get_paths(t_data *data)
-// {
-// 	//should search during the execution of each command, not before
-// 	int		i;
-
-// 	get_all_paths(data);
-// 	i = 0;
-// 	while (i < data->t_cmds[0].amount)
-// 	{
-// 		data->t_cmds[i].path_failed = 0;
-// 		if (!(data->t_cmds[i].is_builtin))
-// 		{
-// 			printf("is builtin: %d, shouldn't go here\n", data->t_cmds[i].is_builtin);
-// 			if (access(data->t_cmds[i].cmd[0], X_OK) == 0)
-// 				data->t_cmds[i].cmd_path = data->t_cmds[i].cmd[0];
-// 			else
-// 				data->t_cmds[i].cmd_path = find_in_envp(data->t_cmds[i].cmd[0], data, i);
-// 		}
-// 		i++;
-// 	}
-// }
