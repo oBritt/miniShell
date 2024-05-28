@@ -6,12 +6,22 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 16:17:01 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:28:18 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../executor.h"
+
+void err_127(char *cmd, t_data *data, int nbr)
+{
+	display_error("minishell: command not found: ");
+	display_error(cmd);
+	display_error("\n");
+	//free_struct(___); //what to free??
+	data->t_cmds[nbr].path_failed = 1;
+	exit(127);
+}
 
 char	*find_in_envp(char *cmd, t_data *data, int nbr)
 {
@@ -19,6 +29,8 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 	char	*cmd_path;
 	int		i;
 
+	if(cmd[0] == '\0')
+		err_127(cmd, data, nbr);
 	i = 0;
 	while (data->all_env_paths[i] != NULL)
 	{
@@ -35,12 +47,13 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 	}
 	if (access(cmd, X_OK) == 0)
 		return (NULL);
-	display_error("zsh: command not found: ");
-	display_error(cmd);
-	display_error("\n");
-	//free_struct(___); //what to free??
-	data->t_cmds[nbr].path_failed = 1;
-	exit(127);
+	err_127(cmd, data, nbr);
+	// display_error("minishell: command not found: ");
+	// display_error(cmd);
+	// display_error("\n");
+	// //free_struct(___); //what to free??
+	// data->t_cmds[nbr].path_failed = 1;
+	// exit(127);
 	return (NULL);
 }
 
