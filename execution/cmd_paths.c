@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 14:59:54 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:51:13 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 		free(cmd_path);
 		i++;
 	}
+	if (access(cmd, X_OK) == 0)
+		return (NULL);
 	display_error("zsh: command not found: ");
 	display_error(cmd);
 	display_error("\n");
@@ -82,20 +84,40 @@ int if_path_is_still_in_env(t_data *data)
 	}
 	return(0);
 }
-
 void get_cmd_path(t_data *data, int cmd_index)
 {
 	//printf("--start path search--\n");
 	data->t_cmds[cmd_index].cmd_is_path = 0;
 	get_all_paths(data);
 	//it should be a check that the access is ok and it is a part of PATH
-	if (access(data->t_cmds[cmd_index].cmd[0], X_OK) == 0)
+
+	if ((data->t_cmds[cmd_index].cmd_path = find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index)))
 	{
-		data->t_cmds[cmd_index].cmd_is_path = 1;
-		data->t_cmds[cmd_index].cmd_path = data->t_cmds[cmd_index].cmd[0];
+		printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
+		return ;
 	}
 	else
-		data->t_cmds[cmd_index].cmd_path = find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index);
-	//printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
+	{
+		if (access(data->t_cmds[cmd_index].cmd[0], X_OK) == 0)
+			data->t_cmds[cmd_index].cmd_is_path = 1;
+			data->t_cmds[cmd_index].cmd_path = data->t_cmds[cmd_index].cmd[0];
+	}
+	printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
 }
+
+// void get_cmd_path(t_data *data, int cmd_index)
+// {
+// 	printf("--start path search--\n");
+// 	data->t_cmds[cmd_index].cmd_is_path = 0;
+// 	get_all_paths(data);
+// 	//it should be a check that the access is ok and it is a part of PATH
+// 	if (access(data->t_cmds[cmd_index].cmd[0], X_OK) == 0)
+// 	{
+// 		data->t_cmds[cmd_index].cmd_is_path = 1;
+// 		data->t_cmds[cmd_index].cmd_path = data->t_cmds[cmd_index].cmd[0];
+// 	}
+// 	else
+// 		data->t_cmds[cmd_index].cmd_path = find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index);
+// 	printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
+// }
 
