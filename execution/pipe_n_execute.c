@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_n_execute.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 14:50:51 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:44:41 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ void last_cmd_check(t_data *data, int last_cmd, int i)
 	}
 	//printf("last cmd check complete\n");
 }
+void execve_check(t_data *data, int last_cmd, int i)
+{
+	(void)last_cmd;
+	if (data->t_cmds[i].execve_result == -1)
+	{
+		display_error("minishell: ");
+		display_error(data->t_cmds[i].cmd[0]);
+		display_error(": is a directory\n");
+		exit(126);
+	}
+}
 
 void child(t_data *data, int last_cmd, int i)
 {
@@ -65,7 +76,8 @@ void child(t_data *data, int last_cmd, int i)
 		//printf("not a builtin but cmd to execute\n");
 		get_cmd_path(data, i);
 		if (!data->t_cmds[i].path_failed)
-			execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
+			data->t_cmds[i].execve_result = execve(data->t_cmds[i].cmd_path, data->t_cmds[i].cmd, data->env);
+		execve_check(data, last_cmd, i);
 	}
 	else if (last_cmd && (data->t_cmds[i].redir_failed || data->t_cmds[i].path_failed))
 	{
@@ -91,6 +103,7 @@ void parent(t_data *data, int last_cmd)
 }
 void normal_exe(t_data *data, int last_cmd, int i)
 {
+	data->t_cmds[i].execve_result = 0;
 	//printf("normal _exe start\n");
 	data->waitpid_status = 0;
 	data->process_id = fork();
