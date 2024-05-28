@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:48:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 14:33:30 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:42:46 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ int	change_values_command(char **command, t_data *data, t_cmd *cmd)
 	i = 0;
 	while (command[i])
 	{
+
 		if (!manage_dollar(data, &command[i]))
 			return (0);
+
 		if (!change_only_one(&command[i], data, &cmd[i]))
 			return (0);
 		i++;
