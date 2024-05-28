@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 16:08:27 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:51:18 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ void parent(t_data *data, int last_cmd)
 		close(data->fd_arr[1]);
 	}
 	else
+	{
 		dup2(data->origin_stdin, 0);
+		close(STDIN_FILENO);
+	}
 }
 void normal_exe(t_data *data, int last_cmd, int i)
 {
@@ -116,8 +119,8 @@ void normal_exe(t_data *data, int last_cmd, int i)
 		child(data, last_cmd, i);
 	else //parent
 		parent(data, last_cmd);
-	waitpid(data->process_id, &data->waitpid_status, 0);
-	data->waitpid_status = WEXITSTATUS(data->waitpid_status);
+	// waitpid(data->process_id, &data->waitpid_status, 0);
+	// data->waitpid_status = WEXITSTATUS(data->waitpid_status);
 	//printf("---cmd %d, waitpid status: %d-----\n", i + 1, data->waitpid_status);
 }
 

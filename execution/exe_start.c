@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 15:51:54 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:45:46 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,19 @@ void builtins_check(t_data *data)
 	}
 }
 
+void	ft_waitpid(t_data *data)
+{
+	int	status;
+
+	while (data->t_cmds[0].amount--)
+		wait(&status);
+	data->waitpid_status = (WEXITSTATUS(status));
+}
+
 void execute_cmd(t_data *data)
 {
-	printf("\n\n*********");
-	printf("\n\n---**execution**---\n\n");
+	// printf("\n\n*********");
+	// printf("\n\n---**execution**---\n\n");
 	data->origin_stdin = STDIN_FILENO;
 	data->origin_stdout = STDOUT_FILENO;
 	builtins_check(data);
@@ -56,4 +65,6 @@ void execute_cmd(t_data *data)
 	// 	get_paths(data);
 	set_redirections(data);
 	mult_execute(data);
+	ft_waitpid(data);
+
 }
