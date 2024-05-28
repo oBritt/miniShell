@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:03:51 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 14:04:51 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:13:21 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	get_total_len_space(char **array)
 static void	helper_25_lines(int *i, char *output, int *counter, int len)
 {
 	*i += 1;
-	output[*counter] = '|';
+	output[*counter] = 1;
 	if (*counter != len)
 		*counter += 1;
 }

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:15:54 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 14:29:32 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:13:00 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	copy_s(char *cmd, char **out, int *ptr1)
 	char	**splited;
 	int		i;
 
-	splited = ft_split(cmd, '|');
+	splited = ft_split(cmd, 1);
 	if (!splited)
 		return (0);
 	i = 0;

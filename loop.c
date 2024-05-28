@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/05/27 20:57:28 by oemelyan         ###   ########.fr       */
-=======
-/*   Updated: 2024/05/27 20:51:34 by obrittne         ###   ########.fr       */
->>>>>>> 18a04f03b718844bf28b8fcd82a33d228635898a
+/*   Updated: 2024/05/28 14:13:34 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +44,7 @@ void	loop(t_data *data)
 		}
 		remove_useless_dollar(input);
 		parsing(data, input);
-<<<<<<< HEAD
 		t_cmd *cmd = data->t_cmds;
-=======
-		 t_cmd *cmd = data->t_cmds;
->>>>>>> 18a04f03b718844bf28b8fcd82a33d228635898a
 		for (int i = 0; cmd->amount > i; i++)
 		{
 			printf("command: ");
@@ -70,13 +62,8 @@ void	loop(t_data *data)
 			printf("\n");
 			printf("\n");
 		}
-<<<<<<< HEAD
-		write(1, input, str_len(input));
-		write(1, "\n", 1);
-=======
 		// write(1, input, str_len(input));
 		// write(1, "\n", 1);
->>>>>>> 18a04f03b718844bf28b8fcd82a33d228635898a
 		free(input);
 		get_signal()->is_execution = 1;
 		data->last_exit = 0;
