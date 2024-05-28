@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 14:30:15 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:51:54 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void builtins_check(t_data *data)
 
 void execute_cmd(t_data *data)
 {
-	//printf("\n\n---**execution**---\n\n");
+	printf("\n\n*********");
+	printf("\n\n---**execution**---\n\n");
 	data->origin_stdin = STDIN_FILENO;
 	data->origin_stdout = STDOUT_FILENO;
 	builtins_check(data);
