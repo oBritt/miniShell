@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:15:54 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/28 14:13:00 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:49:18 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	get_len(char **cmds)
 		e = 0;
 		while (cmds[i][e])
 		{
-			if (cmds[i][e] == '|')
+			if (cmds[i][e] == 1)
 				pipes++;
 			e++;
 		}
@@ -38,6 +38,7 @@ static int	get_len(char **cmds)
 int	copy_s(char *cmd, char **out, int *ptr1)
 {
 	char	**splited;
+	char	*t;
 	int		i;
 
 	splited = ft_split(cmd, 1);
@@ -48,6 +49,15 @@ int	copy_s(char *cmd, char **out, int *ptr1)
 	{
 		out[*ptr1] = splited[i];
 		i++;
+		*ptr1 += 1;
+	}
+	if (i == 0)
+	{
+		t = malloc(1 * sizeof(char));
+		if (!t)
+			return (0);
+		t[0] = 0;
+		out[*ptr1] = t;
 		*ptr1 += 1;
 	}
 	free(splited);

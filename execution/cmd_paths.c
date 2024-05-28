@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 14:33:36 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:59:54 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 
 void	get_all_paths(t_data *data)
 {
-	printf("--all paths search--\n");
+	//printf("--all paths search--\n");
 	int		i;
 	// int		flag;
 
@@ -85,7 +85,7 @@ int if_path_is_still_in_env(t_data *data)
 
 void get_cmd_path(t_data *data, int cmd_index)
 {
-	printf("--start path search--\n");
+	//printf("--start path search--\n");
 	data->t_cmds[cmd_index].cmd_is_path = 0;
 	get_all_paths(data);
 	//it should be a check that the access is ok and it is a part of PATH
@@ -96,6 +96,6 @@ void get_cmd_path(t_data *data, int cmd_index)
 	}
 	else
 		data->t_cmds[cmd_index].cmd_path = find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index);
-	printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
+	//printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
 }
 
