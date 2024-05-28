@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/28 14:35:50 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:00:22 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,4 +237,5 @@ int			check_redirect(t_space *space, char *input);
 void		helper_redirect(t_space *space, char *input);
 char		*transform_to_1d_pipe(char **array);
 char		**split_wildcard(char **cmds);
+int			case_pipe(t_space *space);
 #endif
