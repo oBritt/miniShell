@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 12:21:48 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 12:05:47 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:27:07 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	is_numeric(char *str)
 			return (0);
 		i++;
 	}
+	if (i == 0)
+		return (0);
 	return (1);
 }
 

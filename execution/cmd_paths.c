@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 15:51:13 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:17:01 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void get_cmd_path(t_data *data, int cmd_index)
 
 	if ((data->t_cmds[cmd_index].cmd_path = find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index)))
 	{
-		printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
+		//printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
 		return ;
 	}
 	else
@@ -102,7 +102,7 @@ void get_cmd_path(t_data *data, int cmd_index)
 			data->t_cmds[cmd_index].cmd_is_path = 1;
 			data->t_cmds[cmd_index].cmd_path = data->t_cmds[cmd_index].cmd[0];
 	}
-	printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
+	//printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
 }
 
 // void get_cmd_path(t_data *data, int cmd_index)

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/28 15:21:46 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:02:41 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,24 @@ void	loop(t_data *data)
 		}
 		remove_useless_dollar(input);
 		parsing(data, input);
-		t_cmd *cmd = data->t_cmds;
-		for (int i = 0; cmd->amount > i; i++)
-		{
-			printf("command: ");
-			for (int e = 0; cmd[i].cmd[e]; e++)
-				printf(" -->%s<--", cmd[i].cmd[e]);
-			printf("\ninput  :");
-			for (int e = 0; cmd[i].input_redirect[e]; e++)
-				printf("%s %i    ", cmd[i].input_redirect[e], cmd[i].is_ambigious_input[e]);
-			printf("\noutput  :");
-			for (int e = 0; cmd[i].output_redirect[e]; e++)
-				printf("%s %i  %i    ", cmd[i].output_redirect[e], cmd[i].is_ambigious_output[e], cmd[i].is_output_append[e]);
-			printf("\ndelimiter   :" );
-			for (int e = 0; cmd[i].delimiter[e]; e++)
-				printf("-->%s<--    ", cmd[i].delimiter[e]);
-			printf("\n");
-			printf("\n");
-		}
+		// t_cmd *cmd = data->t_cmds;
+		// for (int i = 0; cmd->amount > i; i++)
+		// {
+		// 	printf("command: ");
+		// 	for (int e = 0; cmd[i].cmd[e]; e++)
+		// 		printf(" -->%s<--", cmd[i].cmd[e]);
+		// 	printf("\ninput  :");
+		// 	for (int e = 0; cmd[i].input_redirect[e]; e++)
+		// 		printf("%s %i    ", cmd[i].input_redirect[e], cmd[i].is_ambigious_input[e]);
+		// 	printf("\noutput  :");
+		// 	for (int e = 0; cmd[i].output_redirect[e]; e++)
+		// 		printf("%s %i  %i    ", cmd[i].output_redirect[e], cmd[i].is_ambigious_output[e], cmd[i].is_output_append[e]);
+		// 	printf("\ndelimiter   :" );
+		// 	for (int e = 0; cmd[i].delimiter[e]; e++)
+		// 		printf("-->%s<--    ", cmd[i].delimiter[e]);
+		// 	printf("\n");
+		// 	printf("\n");
+		// }
 		// write(1, input, str_len(input));
 		// write(1, "\n", 1);
 		free(input);

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:31:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 13:03:47 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:59:59 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	output_message_new_line(int err)
 		write(2, "<\'\n", 3);
 	else if (err == 4)
 		write(2, ">\'\n", 3);
+	else if (err == 5)
+		write(2, "|\'\n", 3);
 }
 
 int	check_pipes(t_space *space, char *input)

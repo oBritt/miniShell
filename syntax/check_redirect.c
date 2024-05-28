@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:51:25 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 13:24:52 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:59:29 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ int	check_redirect(t_space *space, char *input)
 				return (0);
 		if (input[space->pointer1] == '>' && input[space->pointer1 + 1] != '>')
 			if (!case_4(space))
+				return (0);
+		if (input[space->pointer1] == '|')
+			if (!case_pipe(space))
 				return (0);
 		if (input[space->pointer1] != '>' && input[space->pointer1] != '<')
 			helper_redirect(space, input);
