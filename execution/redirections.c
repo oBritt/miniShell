@@ -6,14 +6,14 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:19:12 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 21:14:04 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:47:22 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../executor.h"
 
-void open_file(t_cmd *command, int i, int redir_number)
+void open_file(t_cmd *command, int i, int redir_number, int *fail)
 {
 	//printf("--open_file--\n");
     int temp_fd;
@@ -27,6 +27,7 @@ void open_file(t_cmd *command, int i, int redir_number)
 		display_error(": ");
         display_error(strerror(errno));
         display_error("\n");
+		*fail = 1;
 		command->redir_failed = 1;
         //exit(EXIT_FAILURE);
     }
@@ -39,9 +40,11 @@ void open_file(t_cmd *command, int i, int redir_number)
 void redir_in_check(t_cmd *command)
 {
 	//printf("--redirect in check ---\n");
+	int		fail;
 	int		i;
 	int		redir_number;
 
+	fail = 0;
 	redir_number = 0;
 	while(command->input_redirect[redir_number])
 		redir_number++;
@@ -55,12 +58,13 @@ void redir_in_check(t_cmd *command)
 			display_error("\n");
 			//exit(EXIT_FAILURE);
 		}
-		open_file(command, i, redir_number);
+		if (!fail)
+			open_file(command, i, redir_number, &fail);
 		i++;
 	}
 }
 
-void	open_out_file(t_cmd *command, int i, int redir_number)
+void	open_out_file(t_cmd *command, int i, int redir_number, int *fail)
 {
 	//printf("--open out file ---\n");
 	int		fd;
@@ -73,8 +77,11 @@ void	open_out_file(t_cmd *command, int i, int redir_number)
 	if (fd == -1)
 	{
 		display_error("minishell: ");
+		display_error(command->output_redirect[i]);
+		display_error(": ");
 		display_error(strerror(errno));
 		display_error("\n");
+		*fail = 1;
 		command->redir_failed = 1;
 		//exit(EXIT_FAILURE);
 	}
@@ -90,7 +97,9 @@ void redir_out_check(t_cmd *command)
 	//printf("--redirect out check ---\n");
 	int		i;
 	int		redir_number;
+	int		fail;
 
+	fail = 0;
 	redir_number = 0;
 	while(command->output_redirect[redir_number])
 		redir_number++;
@@ -104,7 +113,8 @@ void redir_out_check(t_cmd *command)
 			display_error("\n");
 			//exit(EXIT_FAILURE);
 		}
-		open_out_file(command, i, redir_number);
+		if (!fail)
+			open_out_file(command, i, redir_number, &fail);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 19:24:12 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:47:34 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int			if_path_is_still_in_env(t_data *data);
 
 //redir in
 void		redir_in_check(t_cmd *command);
-void		open_file(t_cmd *command, int i, int redir_number);
+void		open_file(t_cmd *command, int i, int redir_number, int *fail);
 void		redir_out_check(t_cmd *command);
-void		open_out_file(t_cmd *command, int i, int redir_number);
+
 
 //heredoc
 void		heredoc_check(t_data *data);
@@ -50,7 +50,7 @@ void		take_n_write(t_cmd *command);
 
 //redir out
 void		redir_out_check(t_cmd *command);
-void		open_out_file(t_cmd *command, int i, int redir_number);
+void		open_out_file(t_cmd *command, int i, int redir_number, int *fail);
 
 //builtins
 int			builtin_cd(t_data *data, char **command, int is_main);
