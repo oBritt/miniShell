@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:54:58 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 13:37:25 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:39:43 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,36 @@ static char	*help(t_data *data, char *str)
 	return (out);
 }
 
+void	ft_encrypt(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 34)
+			str[i] = 4;
+		if (str[i] == 39)
+			str[i] = 3;
+		i++;
+	}
+}
+
+void	ft_decrypt(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 4)
+			str[i] = 34;
+		if (str[i] == 3)
+			str[i] = 39;
+		i++;
+	}
+}
+
 int	transform_path_variable(t_data *data, char **str)
 {
 	char	*input;
@@ -59,6 +89,7 @@ int	transform_path_variable(t_data *data, char **str)
 	temp = help(data, input);
 	if (!temp)
 		return (0);
+	ft_encrypt(temp);
 	free(*str);
 	*str = temp;
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/28 16:00:22 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:39:19 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ int			is_white_space(char c);
 int			check_wild_card(char **str, int *inf);
 int			find_nth_app_back_slash(char *str, int number);
 int			count_amount_path_back(char *str);
+void		ft_decrypt(char *str);
 char		**get_folders_in_that_dir(void);
 int			len_2d_array(char **array);
 int			check_if_same_wild(char *posible, char *wild, int *splitable);
