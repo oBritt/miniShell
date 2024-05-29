@@ -6,12 +6,19 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 15:16:05 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:44:43 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "executor.h"
+
+t_data	*get_data(void)
+{
+	static t_data	data;
+
+	return (&data);
+}
 
 void	loop(t_data *data)
 {
@@ -76,7 +83,8 @@ void	loop(t_data *data)
 		freeing_cmds(data->t_cmds);
 
 		get_signal()->is_execution = 0;
-		data->last_exit = data->waitpid_status;
+		if (data->last_exit == 0)
+			data->last_exit = data->waitpid_status;
 	}
 	if (!data->exit_printed)
 		write(1, "exit\n", 5);

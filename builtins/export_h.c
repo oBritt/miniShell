@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:45:53 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 15:24:22 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:17:49 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	export_handle(t_data *data, char **command, int is_main)
 		if (!ans)
 		{
 			error_output_export(command[i]);
+			data->waitpid_status = 1;
 			data->last_exit = 1;
 		}
 		else

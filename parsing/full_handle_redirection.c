@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:40:56 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 13:59:29 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:15:50 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ int	full_handle_redir(t_data *data, char **str, t_send *send, int i)
 	if (!ans)
 		return (0);
 	modify_ambigious(i, change_ambigious, ans);
-	return (1);
+	return (ft_decrypt(*str), 1);
 }

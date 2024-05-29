@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:04:41 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/26 11:03:50 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:47:44 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	handle_signals_c(int status)
 	}
 	else
 		write(1, "\n", 1);
+	get_data()->last_exit = 130;
 	free(str);
 	status--;
 }
@@ -83,6 +84,7 @@ void	handle_signals_b(int status)
 	sig = get_signal();
 	if (sig->is_execution)
 	{
+		get_data()->last_exit = 131;
 		write(2, "Quit: 3\n", 8);
 	}
 	else
@@ -98,8 +100,7 @@ void	handle_signals_b(int status)
 		rl_redisplay();
 		str[str_len(str) - 2] = 0;
 		rl_replace_line(str, 1);
-		rl_redisplay();
-		free(str);
+		return (free(str), rl_redisplay());
 	}
 }
 

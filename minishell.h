@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 15:39:19 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:41:02 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,4 +239,5 @@ void		helper_redirect(t_space *space, char *input);
 char		*transform_to_1d_pipe(char **array);
 char		**split_wildcard(char **cmds);
 int			case_pipe(t_space *space);
+t_data		*get_data(void);
 #endif
