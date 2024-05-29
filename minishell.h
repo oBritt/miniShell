@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/05/29 16:41:02 by obrittne         ###   ########.fr       */
-=======
-/*   Updated: 2024/05/29 16:43:02 by oemelyan         ###   ########.fr       */
->>>>>>> 6bb4abfaae43529f9c7b5c0301064b59d82e01a1
+/*   Updated: 2024/05/29 19:17:49 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,4 +240,8 @@ char		*transform_to_1d_pipe(char **array);
 char		**split_wildcard(char **cmds);
 int			case_pipe(t_space *space);
 t_data		*get_data(void);
+int			find_by_key_s(char **env, char *str);
+void		delete_plus(char *str);
+char		*get_key(char *str);
+int			helper_empty(t_data *data, char *str, char *copy);
 #endif

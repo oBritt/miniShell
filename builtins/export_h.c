@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:45:53 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 16:17:49 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:17:12 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int	export_change_value(t_data *data, char *str, int ans)
 	if (ans == 3)
 	{
 		delete_from_addition(data, copy);
-		if (!update_env_value(&data->addition_env, copy, \
-		len_2d_array(data->addition_env), 1))
+		if (!helper_empty(data, str, copy))
 			return (free(copy), 0);
 	}
 	if (ans == 2)

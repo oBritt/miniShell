@@ -6,22 +6,52 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:29:43 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 15:33:21 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:14:59 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	delete_plus(char *str)
+{
+	int	ptr1;
+	int	ptr2;
+	int	met;
+
+	ptr1 = 0;
+	ptr2 = 0;
+	met = 0;
+	while (str[ptr1])
+	{
+		if (str[ptr1] == '=')
+			met = 1;
+		if (!met && str[ptr1] == '+')
+		{
+			ptr1++;
+			met = 1;
+		}
+		else
+		{
+			str[ptr2] = str[ptr1];
+			ptr2++;
+			ptr1++;
+		}
+	}
+	str[ptr2] = 0;
+}
+
 int	find_by_key(char **env, char *str)
 {
 	int	len;
+	int	len1;
 	int	i;
 
 	i = 0;
+	len1 = find_first_app(str, '=', 0, 0);
 	while (env[i])
 	{
 		len = find_first_app(env[i], '=', 0, 0);
-		if (is_compare_strings_len(env[i], str, len))
+		if (len == len1 && is_compare_strings_len(env[i], str, len))
 			return (i + 1);
 		i++;
 	}

@@ -6,11 +6,24 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:32:39 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 16:20:53 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:17:36 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	helper_empty(t_data *data, char *str, char *copy)
+{
+	if (find_by_key(data->env, str))
+	{
+		free(copy);
+		return (1);
+	}
+	if (!update_env_value(&data->addition_env, copy, \
+		len_2d_array(data->addition_env), 1))
+		return (0);
+	return (1);
+}
 
 void	output_after_equal(char **combined, int i, int e, int fd)
 {

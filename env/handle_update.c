@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:58:02 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 11:43:03 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:18:32 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_key(char *str)
 	if (!key)
 		return (NULL);
 	ind = 0;
-	while (key[ind] != '=' && key[ind] != '+')
+	while (key[ind] != '=' && key[ind] != '+' && key[ind])
 		ind++;
 	key[ind] = 0;
 	return (key);
@@ -53,7 +53,7 @@ int	update_export(t_data *data, char *str)
 	char	*key;
 	int		i;
 
-
+	delete_plus(str);
 	key = get_key(str);
 	if (!key)
 		return (0);
