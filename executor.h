@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 16:47:34 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:59:04 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void		redir_out_check(t_cmd *command);
 
 //heredoc
 void		heredoc_check(t_data *data);
-void		set_heredoc(t_cmd *command);
-void		read_store_input(t_cmd *command, int nbr);
+void		set_heredoc(t_cmd *command, t_data *data);
+void		read_store_input(t_cmd *command, int nbr, t_data *data);
 void		skip_unused_delimiters(t_cmd *command, int nbr);
-void		do_4_two(t_cmd *command, int nbr);
+void		do_4_two(t_cmd *command, int nbr, t_data *data);
 int			reject_check(char *input, t_cmd *command, int nbr);
-void		take_n_write(t_cmd *command);
+void		take_n_write(t_cmd *command, t_data *data);
 
 //redir out
 void		redir_out_check(t_cmd *command);

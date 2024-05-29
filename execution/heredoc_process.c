@@ -6,14 +6,14 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:31:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 19:57:28 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:43:12 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 #include "../minishell.h"
 
-void take_n_write(t_cmd *command)
+void take_n_write(t_cmd *command, t_data *data)
 {
 	printf("--take n write--\n");
 	char	*input;
@@ -22,6 +22,9 @@ void take_n_write(t_cmd *command)
 	while (ft_strcmp(input, command->delimiter[0]))
 	{
 		//printf("--len of input: %zu, len of delim: %zu--\n", ft_strlen(input), ft_strlen(command->delimiter[0]));
+		if (!manage_dollar(data, &input))
+			exit(1);
+		
 		write(command->heredoc_fd[1], input, ft_strlen(input));
 		write(command->heredoc_fd[1], "\n", 1);
 		free(input);
@@ -46,8 +49,9 @@ int reject_check(char *input, t_cmd *command, int nbr)
 	return (0);
 }
 
-void do_4_two(t_cmd *command, int nbr)
+void do_4_two(t_cmd *command, int nbr, t_data *data)
 {
+	(void)data;
 	char		*input;
 
 	input = readline("> ");

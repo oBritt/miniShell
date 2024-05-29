@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 16:28:18 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:35:38 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 	return (NULL);
 }
 
-
 void	get_all_paths(t_data *data)
 {
 	//printf("--all paths search--\n");
@@ -82,7 +81,7 @@ void	get_all_paths(t_data *data)
 
 int if_path_is_still_in_env(t_data *data)
 {
-	printf("--find in env--\n");
+	//printf("--find in env--\n");
 	int		i;
 
 	i = 0;
@@ -97,13 +96,26 @@ int if_path_is_still_in_env(t_data *data)
 	}
 	return(0);
 }
+int path_in_env_check(t_data *data)
+{
+	if (!if_path_is_still_in_env(data))
+	{
+		write(2, "env: No such file or directory\n", 31);
+		data->waitpid_status = 127;
+	//	data->last_exit = 127;
+		return(0);
+	}
+	return (1);
+}
+
 void get_cmd_path(t_data *data, int cmd_index)
 {
 	//printf("--start path search--\n");
 	data->t_cmds[cmd_index].cmd_is_path = 0;
+	if (!path_in_env_check(data))
+		exit(127);
 	get_all_paths(data);
 	//it should be a check that the access is ok and it is a part of PATH
-
 	if ((data->t_cmds[cmd_index].cmd_path = find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index)))
 	{
 		//printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
