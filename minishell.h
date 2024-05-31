@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 19:17:49 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 11:20:05 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_sig
 	int		should_stop;
 	int		signal_type;
 	int		error;
+	int		hereidoc;
 }	t_sig;
 
 typedef struct command
