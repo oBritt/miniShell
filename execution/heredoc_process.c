@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_process.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:31:42 by oemelyan          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/05/31 14:27:09 by oemelyan         ###   ########.fr       */
-=======
-/*   Updated: 2024/05/31 13:52:06 by obrittne         ###   ########.fr       */
->>>>>>> 11b78a8dfb26251df72dc855079e390fb3c25a2b
+/*   Updated: 2024/05/31 14:30:19 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
