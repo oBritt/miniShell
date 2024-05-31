@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:04:41 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/31 11:24:52 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:13:13 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,22 @@ static char	*copy(char *str)
 void	handle_signals_c(int status)
 {
 	char	*str;
-	t_sig	*signal;
+	t_sig	*sig;
 
-	signal = get_signal();
+	sig = get_signal();
 	str = copy(rl_line_buffer);
 	if (!str)
 	{
-		signal->error = 1;
+		sig->error = 1;
 		return ;
 	}
-	if (signal->hereidoc)
-		signal->should_stop = 1;
-	else if (!signal->is_execution)
+	if (sig->hereidoc)
+	{
+		sig->should_stop = 1;
+		rl_done = 1;
+		rl_eof_found = 1;
+	}
+	if (!sig->is_execution)
 	{
 		rl_replace_line(str, 1);
 		rl_redisplay();
