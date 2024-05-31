@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:53:10 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/17 19:42:59 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:32:46 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,22 @@ void	display_error(char *s)
 		i++;
 	}
 }
+
+void	err_127(char *cmd, t_data *data, int nbr)
+{
+	display_error("minishell: command not found: ");
+	display_error(cmd);
+	display_error("\n");
+	data->t_cmds[nbr].path_failed = 1;
+	exit(127);
+}
+
+void	outfile_err(char *s)
+{
+	display_error("minishell: ");
+	display_error(s);
+	display_error(": ");
+	display_error(strerror(errno));
+	display_error("\n");
+}
+

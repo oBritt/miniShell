@@ -6,19 +6,18 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 10:31:08 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:22:39 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../executor.h"
 
-void set_redirections(t_data *data)
+void	set_redirections(t_data *data)
 {
-	//printf("---set redirect---\n");
 	int		i;
 
-	heredoc_check(data); //process all heredocs at once
+	heredoc_check(data);
 	i = 0;
 	while (i < data->t_cmds[0].amount)
 	{
@@ -31,7 +30,7 @@ void set_redirections(t_data *data)
 	}
 }
 
-void builtins_check(t_data *data)
+void	builtins_check(t_data *data)
 {
 	int		i;
 
@@ -40,7 +39,6 @@ void builtins_check(t_data *data)
 	{
 		data->t_cmds[i].is_builtin = 0;
 		data->t_cmds[i].is_builtin = check_if_builtin(data->t_cmds[i].cmd[0]);
-		//printf("builtin check from builtin_check: %d\n", data->t_cmds[i].is_builtin);
 		i++;
 	}
 }
@@ -54,17 +52,12 @@ void	ft_waitpid(t_data *data)
 	data->waitpid_status = (WEXITSTATUS(status));
 }
 
-void execute_cmd(t_data *data)
+void	execute_cmd(t_data *data)
 {
-	// printf("\n\n*********");
-	// printf("\n\n---**execution**---\n\n");
 	data->origin_stdin = STDIN_FILENO;
 	data->origin_stdout = STDOUT_FILENO;
 	builtins_check(data);
-	// if (data->t_cmds[0].cmd[0])
-	// 	get_paths(data);
 	set_redirections(data);
 	mult_execute(data);
 	ft_waitpid(data);
-
 }

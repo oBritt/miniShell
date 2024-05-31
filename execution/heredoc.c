@@ -6,17 +6,32 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 14:29:23 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:08:23 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 #include "../minishell.h"
 
-void read_store_input(t_cmd *command, int nbr, t_data *data) //to fix that if it's only heredoc not to find paths
+void	skip_unused_delimiters(t_cmd *command, int nbr)
 {
-	printf("nbr = %d\n", nbr);
+	int		count;
+	char	*input;
 
+	count = 0;
+	while (count != nbr - 2)
+	{
+		input = readline("> ");
+		if (!input_check(input))
+			break ;
+		if (!ft_strcmp(input, command->delimiter[count]))
+			count++;
+		free(input);
+	}
+}
+
+void	read_store_input(t_cmd *command, int nbr, t_data *data)
+{
 	if (nbr == 1)
 		take_n_write(command, data);
 	else if (nbr == 2)
@@ -28,9 +43,8 @@ void read_store_input(t_cmd *command, int nbr, t_data *data) //to fix that if it
 	}
 }
 
-void set_heredoc(t_cmd *command, t_data *data)
+void	set_heredoc(t_cmd *command, t_data *data)
 {
-	//printf("---set heredoc---\n");
 	int		nbr;
 
 	nbr = 0;
@@ -41,9 +55,8 @@ void set_heredoc(t_cmd *command, t_data *data)
 	get_signal()->hereidoc = 0;
 }
 
-void heredoc_check(t_data *data)
+void	heredoc_check(t_data *data)
 {
-	//printf("---heredoc check---\n");
 	int		i;
 	int		p;
 
@@ -55,7 +68,6 @@ void heredoc_check(t_data *data)
 		{
 			data->t_cmds[i].redir_failed = 0;
 			p = pipe(data->t_cmds[i].heredoc_fd);
-			//printf("read end fd: %d, write end fd: %d\n", data->t_cmds[i].heredoc_fd[0], data->t_cmds[i].heredoc_fd[1]);
 			p_check(p, data);
 			set_heredoc(&data->t_cmds[i], data);
 			close(data->t_cmds[i].heredoc_fd[1]);
