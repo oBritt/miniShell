@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 19:45:46 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:31:08 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void set_redirections(t_data *data)
 		data->t_cmds[i].in_fd = 0;
 		data->t_cmds[i].out_fd = 0;
 		data->t_cmds[i].redir_failed = 0;
-		redir_out_check(&data->t_cmds[i]);
 		redir_in_check(&data->t_cmds[i]);
+		redir_out_check(&data->t_cmds[i]);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:19:12 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/28 16:47:22 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:39:41 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ void redir_in_check(t_cmd *command)
 		if (command->is_ambigious_input[i])
 		{
 			display_error("minishell: ");
-			display_error(strerror(errno));
-			display_error("\n");
+			display_error(command->input_redirect[i]);
+			display_error(": ambiguous redirect\n");
+			command->redir_failed = 1;
+			fail = 1;
 			//exit(EXIT_FAILURE);
 		}
-		if (!fail)
+		else if (!fail)
 			open_file(command, i, redir_number, &fail);
 		i++;
 	}
@@ -70,7 +72,9 @@ void	open_out_file(t_cmd *command, int i, int redir_number, int *fail)
 	int		fd;
 
 	fd = 0;
-	if (command->is_output_append[i])
+	if (command->redir_failed == 1)
+		return ;
+	else if (command->is_output_append[i])
 		fd = open(command->output_redirect[i], O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
 		fd = open(command->output_redirect[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -109,11 +113,13 @@ void redir_out_check(t_cmd *command)
 		if (command->is_ambigious_output[i])
 		{
 			display_error("minishell: ");
-			display_error(strerror(errno));
-			display_error("\n");
+			display_error(command->input_redirect[i]);
+			display_error(": ambiguous redirect\n");
+			command->redir_failed = 1;
 			//exit(EXIT_FAILURE);
+			fail = 1;
 		}
-		if (!fail)
+		else if (!fail)
 			open_out_file(command, i, redir_number, &fail);
 		i++;
 	}

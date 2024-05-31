@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:31:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/29 16:43:12 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 11:03:31 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,18 @@ void take_n_write(t_cmd *command, t_data *data)
 	input = readline("> ");
 	while (ft_strcmp(input, command->delimiter[0]))
 	{
+		if(!input)
+			break ;
 		//printf("--len of input: %zu, len of delim: %zu--\n", ft_strlen(input), ft_strlen(command->delimiter[0]));
 		if (!manage_dollar(data, &input))
 			exit(1);
-		
+		ft_decrypt(input);
 		write(command->heredoc_fd[1], input, ft_strlen(input));
 		write(command->heredoc_fd[1], "\n", 1);
 		free(input);
 		input = readline("> ");
+		if(!input)
+			break ;
 	}
 	if (input)
 		free(input);
