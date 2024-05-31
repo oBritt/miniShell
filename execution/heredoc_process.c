@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_process.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:31:42 by oemelyan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/05/31 14:27:09 by oemelyan         ###   ########.fr       */
+=======
+/*   Updated: 2024/05/31 13:52:06 by obrittne         ###   ########.fr       */
+>>>>>>> 11b78a8dfb26251df72dc855079e390fb3c25a2b
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +34,14 @@ void take_n_write(t_cmd *command, t_data *data)
 	char	*input;
 
 	input = readline("> ");
-	if (!input_check(input))
-		return ;
-	while (ft_strcmp(input, command->delimiter[0]))
+	while (get_signal()->should_stop == 0 && ft_strcmp(input, command->delimiter[0]))
 	{
-		if (!manage_dollar(data, &input))
+		if(!input)
+			break ;
+		//printf("--len of input: %zu, len of delim: %zu--\n", ft_strlen(input), ft_strlen(command->delimiter[0]));
+		if (!manage_dollar(data, &input, 1))
 			exit(1);
-		ft_decrypt(input);
+		//ft_decrypt(input);
 		write(command->heredoc_fd[1], input, ft_strlen(input));
 		write(command->heredoc_fd[1], "\n", 1);
 		free(input);
@@ -44,6 +49,8 @@ void take_n_write(t_cmd *command, t_data *data)
 		if(!input_check(input))
 			break ;
 	}
+	if (get_signal()->should_stop == 1)
+		get_signal()->should_stop = 0;
 	if (input)
 		free(input);
 }

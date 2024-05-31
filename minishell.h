@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 19:17:49 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:48:05 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_sig
 	int		should_stop;
 	int		signal_type;
 	int		error;
+	int		hereidoc;
 }	t_sig;
 
 typedef struct command
@@ -193,7 +194,7 @@ void		trans(char *wild, int *splitable);
 void		detrans(char *wild);
 void		detranss(char **s);
 int			get_len_dollar(char *str);
-int			manage_dollar(t_data *data, char **str);
+int			manage_dollar(t_data *data, char **str, int exp);
 void		get_rid_of_parantheses(char *str);
 int			free_str_return_numb(char *str, int n);
 void		remove_first_and_last_one(char *str, char s);

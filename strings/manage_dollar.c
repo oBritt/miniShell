@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 19:29:10 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 15:41:09 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:58:29 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	fill_array_dollar(t_data *data, t_space *space, char *str, char **expended)
 	while (str[space->pointer2])
 	{
 		handle_quotes(space, str);
-		if (space->two == 0 && str[space->pointer2] == 39)
+		if (!space->one && space->two == 0 && str[space->pointer2] == 39)
 		{
 			if (!copy_up_to_now(space, str, expended))
 				return (0);
@@ -60,7 +60,7 @@ int	fill_array_dollar(t_data *data, t_space *space, char *str, char **expended)
 	return (f_dollar_last(space, str, expended));
 }
 
-int	manage_dollar(t_data *data, char **str)
+int	manage_dollar(t_data *data, char **str, int expand)
 {
 	int		amount;
 	char	*out;
@@ -68,8 +68,10 @@ int	manage_dollar(t_data *data, char **str)
 	t_space	space;
 
 	init_space(&space, *str);
+	space.one = expand;
 	amount = count_dollars(&space, *str);
 	init_space(&space, *str);
+	space.one = expand;
 	expanded = malloc((amount * 4 + 4) * sizeof(char *));
 	if (!expanded)
 		return (0);

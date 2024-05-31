@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:04:41 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 16:47:44 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:13:13 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_sig	*get_signal(void)
 	signal.should_stop = 0;
 	signal.signal_type = 0;
 	signal.error = 0;
+	signal.hereidoc = 0;
 	return (&signal);
 }
 
@@ -50,16 +51,22 @@ static char	*copy(char *str)
 void	handle_signals_c(int status)
 {
 	char	*str;
-	t_sig	*signal;
+	t_sig	*sig;
 
-	signal = get_signal();
+	sig = get_signal();
 	str = copy(rl_line_buffer);
 	if (!str)
 	{
-		signal->error = 1;
+		sig->error = 1;
 		return ;
 	}
-	if (!signal->is_execution)
+	if (sig->hereidoc)
+	{
+		sig->should_stop = 1;
+		rl_done = 1;
+		rl_eof_found = 1;
+	}
+	if (!sig->is_execution)
 	{
 		rl_replace_line(str, 1);
 		rl_redisplay();
@@ -82,7 +89,7 @@ void	handle_signals_b(int status)
 
 	status--;
 	sig = get_signal();
-	if (sig->is_execution)
+	if (sig->is_execution && !sig->hereidoc)
 	{
 		get_data()->last_exit = 131;
 		write(2, "Quit: 3\n", 8);

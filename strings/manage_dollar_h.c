@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:40:25 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/21 15:41:18 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:46:59 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	count_dollars(t_space *space, char *str)
 			else
 				space->two = 1;
 		}
-		if (space->two == 0 && str[space->pointer1] == 39)
+		if (!space->one && space->two == 0 && str[space->pointer1] == 39)
 		{
 			space->pointer1++;
 			while (str[space->pointer1] != 39)

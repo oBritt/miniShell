@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:40:56 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 16:15:50 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:49:11 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_if_expands_to_2words(t_data *data, char **str)
 	if (!copy)
 		return (-1);
 	only_dollar = consists_only_of_dollar(copy);
-	if (!manage_dollar(data, &copy))
+	if (!manage_dollar(data, &copy, 0))
 		return (free_str_return_numb(copy, -1));
 	if (only_dollar && !compare_strings("", copy))
 		return (free(copy), 1);

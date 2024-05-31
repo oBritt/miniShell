@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 11:28:29 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:29:23 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void set_heredoc(t_cmd *command, t_data *data)
 		nbr++;
 	printf("nbr from set heredoc: %d\n", nbr);
 	read_store_input(command, nbr, data);
+	get_signal()->hereidoc = 0;
 }
 
 void heredoc_check(t_data *data)
@@ -47,6 +48,7 @@ void heredoc_check(t_data *data)
 	int		p;
 
 	i = 0;
+	get_signal()->hereidoc = 1;
 	while (i < data->t_cmds[0].amount)
 	{
 		if (data->t_cmds[i].delimiter && data->t_cmds[i].delimiter[0])
