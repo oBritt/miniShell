@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 19:29:10 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/31 13:58:29 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:02:35 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	fill_array_dollar(t_data *data, t_space *space, char *str, char **expended)
 	}
 	return (f_dollar_last(space, str, expended));
 }
+
+// void	helper_init(t_space *space)
 
 int	manage_dollar(t_data *data, char **str, int expand)
 {

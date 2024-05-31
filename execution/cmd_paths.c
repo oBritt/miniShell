@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/29 12:35:38 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:07:44 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,10 @@ void get_cmd_path(t_data *data, int cmd_index)
 	else
 	{
 		if (access(data->t_cmds[cmd_index].cmd[0], X_OK) == 0)
+		{
 			data->t_cmds[cmd_index].cmd_is_path = 1;
 			data->t_cmds[cmd_index].cmd_path = data->t_cmds[cmd_index].cmd[0];
+		}
 	}
 	//printf("cmd path: %s\n", data->t_cmds[cmd_index].cmd_path);
 }

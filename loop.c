@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 16:49:40 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:31:01 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	loop(t_data *data)
 		}
 		remove_useless_dollar(input);
 		parsing(data, input);
+
 		t_cmd *cmd = data->t_cmds;
 		for (int i = 0; cmd->amount > i; i++)
 		{

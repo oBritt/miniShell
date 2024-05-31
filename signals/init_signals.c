@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:04:41 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/31 13:13:13 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:08:10 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	handle_signals_c(int status)
 	{
 		sig->should_stop = 1;
 		rl_done = 1;
-		rl_eof_found = 1;
 	}
 	if (!sig->is_execution)
 	{
