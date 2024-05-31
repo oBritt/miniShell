@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:27:39 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/17 19:18:56 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:01:43 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ char	*ft_strjoin(char *s1, char *s2)
 	ft_strlcat(joined_string, s2, total_size + 1);
 	return (joined_string);
 }
-

@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 18:35:35 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/27 19:22:30 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:02:27 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 size_t	ft_strlen(const char *str)
 {
-	//printf("the string is: %s\n", str);
 	size_t	i;
 
 	i = 0;
@@ -83,7 +82,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	ptr1 = (unsigned char *)s1;
 	ptr2 = (unsigned char *)s2;
 	if (ft_strlen(s1) != ft_strlen(s2))
-		return(1);
+		return (1);
 	i = ft_strlen(s1);
 	while (i-- > 0)
 	{
@@ -94,6 +93,5 @@ int	ft_strcmp(const char *s1, const char *s2)
 		ptr1++;
 		ptr2++;
 	}
-	printf("OK, delimiter n input are equal\n");
 	return (0);
 }

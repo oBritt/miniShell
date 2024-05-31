@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/29 12:59:04 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:34:34 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 # include <errno.h>
 # include <fcntl.h> //for O_WRONLY O_CREAT O_TRUNC flags
-#include "minishell.h"
+# include "minishell.h"
 
 //execution itself
 void		execute_cmd(t_data *data);
 void		get_cmd_path(t_data *data, int cmd_index);
-//void		get_paths(t_data *data);
 void		set_redirections(t_data *data);
-void 		mult_execute(t_data *data);
+void		mult_execute(t_data *data);
 void		child(t_data *data, int last_cmd, int i);
 void		parent(t_data *data, int last_cmd);
 void		p_check(int p, t_data *data);
@@ -33,11 +32,13 @@ void		last_cmd_check(t_data *data, int last_cmd, int i);
 int			execute_builtin(t_data *data, int i, int is_main);
 int			if_path_is_still_in_env(t_data *data);
 
+void		execve_check(t_data *data, int last_cmd, int i);
+void		first_child_checks(t_data *data, int last_cmd, int i);
+
 //redir in
 void		redir_in_check(t_cmd *command);
 void		open_file(t_cmd *command, int i, int redir_number, int *fail);
 void		redir_out_check(t_cmd *command);
-
 
 //heredoc
 void		heredoc_check(t_data *data);
@@ -47,6 +48,7 @@ void		skip_unused_delimiters(t_cmd *command, int nbr);
 void		do_4_two(t_cmd *command, int nbr, t_data *data);
 int			reject_check(char *input, t_cmd *command, int nbr);
 void		take_n_write(t_cmd *command, t_data *data);
+int			input_check(char *str);
 
 //redir out
 void		redir_out_check(t_cmd *command);
@@ -70,5 +72,7 @@ char		**ft_split1(char const *s, char c);
 
 //errors
 void		display_error(char *s);
+void		err_127(char *cmd, t_data *data, int nbr);
+void		outfile_err(char *s);
 
 #endif
