@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 15:08:23 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:03:32 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	skip_unused_delimiters(t_cmd *command, int nbr)
 	char	*input;
 
 	count = 0;
-	while (count != nbr - 2)
+	while (get_signal()->should_stop == 0 && count != nbr - 2)
 	{
 		input = readline("> ");
 		if (!input_check(input))
@@ -53,6 +53,7 @@ void	set_heredoc(t_cmd *command, t_data *data)
 	printf("nbr from set heredoc: %d\n", nbr);
 	read_store_input(command, nbr, data);
 	get_signal()->hereidoc = 0;
+	get_signal()->should_stop = 0;
 }
 
 void	heredoc_check(t_data *data)

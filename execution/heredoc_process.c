@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_process.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:31:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 14:59:53 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:02:31 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	take_n_write(t_cmd *command, t_data *data)
 {
 	char	*input;
 
+	if (get_signal()->should_stop)
+		return ;
 	input = readline("> ");
 	if (!input_check(input))
 		return ;
@@ -70,10 +72,13 @@ void	skip_second_last(t_cmd *command, int nbr)
 {
 	char		*input;
 
+	if (get_signal()->should_stop)
+		return ;
 	input = readline("> ");
 	if (!input_check(input))
 		return ;
-	while (ft_strcmp(input, command->delimiter[nbr - 2]))
+	while (get_signal()->should_stop == 0 && \
+	ft_strcmp(input, command->delimiter[nbr - 2]))
 	{
 		free(input);
 		input = readline("> ");
@@ -89,10 +94,13 @@ void	do_4_two(t_cmd *command, int nbr, t_data *data)
 	char		*input;
 
 	skip_second_last(command, nbr);
+	if (get_signal()->should_stop)
+		return ;
 	input = readline("> ");
 	if (!input_check(input))
 		return ;
-	while (ft_strcmp(input, command->delimiter[nbr - 1]))
+	while (get_signal()->should_stop == 0 && \
+	ft_strcmp(input, command->delimiter[nbr - 1]))
 	{
 		if (!reject_check(input, command, nbr))
 		{
