@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 18:03:32 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/01 20:49:16 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,18 @@ void	set_heredoc(t_cmd *command, t_data *data)
 		nbr++;
 	printf("nbr from set heredoc: %d\n", nbr);
 	read_store_input(command, nbr, data);
+	if (get_signal()->should_stop)
+	{
+		if (dup2(get_data()->fd_save, STDIN_FILENO) == -1)
+		{
+			//free exir
+		}
+		write(1, ">    \n", 6);
+	}
 	get_signal()->hereidoc = 0;
 	get_signal()->should_stop = 0;
+	close(data->fd_save);
+	signal(SIGINT, handle_signals_c);
 }
 
 void	heredoc_check(t_data *data)
@@ -62,7 +72,12 @@ void	heredoc_check(t_data *data)
 	int		p;
 
 	i = 0;
-	get_signal()->hereidoc = 1;
+	signal(SIGINT, handle_signals_c_h);
+	data->fd_save = dup(STDIN_FILENO);
+	if (data->fd_save == -1)
+	{
+		//free_the_stuff
+	}
 	while (i < data->t_cmds[0].amount)
 	{
 		if (data->t_cmds[i].delimiter && data->t_cmds[i].delimiter[0])

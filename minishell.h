@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/31 13:48:05 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/01 20:33:42 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_data
 	int		should_continue;
 	int		exit_printed;
 	int		exit;
+	int		fd_save;
 	t_sig	*signal;
 }	t_data;
 
@@ -245,4 +246,6 @@ int			find_by_key_s(char **env, char *str);
 void		delete_plus(char *str);
 char		*get_key(char *str);
 int			helper_empty(t_data *data, char *str, char *copy);
+void		handle_signals_c_h(int status);
+void		handle_signals_c(int status);
 #endif

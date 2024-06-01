@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:31:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 18:02:31 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/01 20:47:20 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	take_n_write(t_cmd *command, t_data *data)
 		if (!input_check(input))
 			break ;
 	}
-	if (get_signal()->should_stop == 1)
-		get_signal()->should_stop = 0;
 	if (input)
 		free(input);
 }
