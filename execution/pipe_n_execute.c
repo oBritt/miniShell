@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_n_execute.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:09:45 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 15:18:59 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/02 17:16:53 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ void	first_child_checks(t_data *data, int last_cmd, int i)
 	last_cmd_check(data, last_cmd, i);
 	if (data->t_cmds[i].delimiter && data->t_cmds[i].delimiter[0])
 	{
-		dup2(data->t_cmds[i].heredoc_fd[0], 0);
+		if (dup2(data->t_cmds[i].heredoc_fd[0], 0) == -1)
+			return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 		close(data->t_cmds[i].heredoc_fd[0]);
 	}
 	else if (data->t_cmds[i].in_fd)
-		dup2(data->t_cmds[i].in_fd, 0);
+	{
+		if (dup2(data->t_cmds[i].in_fd, 0) == -1)
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
+	}
 }
 
 void	child(t_data *data, int last_cmd, int i)
@@ -74,7 +78,7 @@ void	normal_exe(t_data *data, int last_cmd, int i)
 	if (data->process_id == -1)
 	{
 		perror("fork");
-		exit(EXIT_FAILURE);
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 	}
 	if (data->process_id == 0)
 		child(data, last_cmd, i);

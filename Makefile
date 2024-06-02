@@ -16,7 +16,7 @@ env/check_if_in.c env/sort_env.c env/update_env.c env/handle_update.c \
 execution/exe_start.c execution/cmd_paths.c execution/pipe_n_execute.c execution/execution.c execution/heredoc_process.c \
 execution/exe_utils/error_msg.c execution/exe_utils/ft_split.c execution/exe_utils/ft_strjoin.c execution/exe_utils/ft_strnstr.c \
 execution/exe_utils/libft.c execution/heredoc.c execution/redirections.c execution/pipe_n_execute2.c\
-signals/init_signals.c
+signals/init_signals.c signals/init_signals_h.c 
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:04:41 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/01 20:43:24 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/02 17:25:08 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,13 @@ void	handle_signals_c(int status)
 {
 	char	*str;
 	t_sig	*sig;
+	t_data	*data;
 
+	data = get_data();
 	sig = get_signal();
 	str = copy(rl_line_buffer);
 	if (!str)
-	{
-		sig->error = 1;
-		return ;
-	}
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 	if (!sig->is_execution)
 	{
 		rl_replace_line(str, 1);
@@ -76,20 +75,16 @@ void	handle_signals_c(int status)
 	status--;
 }
 
-void	handle_signals_c_h(int status)
-{
-	close(STDIN_FILENO);
-	status++;
-	get_data()->last_exit = 130;
-	get_signal()->should_stop = 1;
-}
+
 
 void	handle_signals_b(int status)
 {
 	t_sig	*sig;
 	char	*str;
+	t_data	*data;
 
 	status--;
+	data = get_data();
 	sig = get_signal();
 	if (sig->is_execution && !sig->hereidoc)
 	{
@@ -100,10 +95,7 @@ void	handle_signals_b(int status)
 	{
 		str = copy(rl_line_buffer);
 		if (!str)
-		{
-			sig->error = 1;
-			return ;
-		}
+			return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 		str[str_len(str)] = 0;
 		rl_replace_line(str, 1);
 		rl_redisplay();
@@ -119,12 +111,12 @@ void	init_signals(t_data *data)
 	if (signal(SIGINT, handle_signals_c) == SIG_ERR)
 	{
 		write(2, "Erorr signal issue\n", 19);
-		exit(1);
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 	}
 	if (signal(SIGQUIT, handle_signals_b) == SIG_ERR)
 	{
 		write(2, "Erorr signal issue\n", 19);
-		exit(1);
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 	}
 	return ;
 }
