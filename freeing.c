@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 11:11:30 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/31 14:26:56 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/02 16:46:17 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	freeing_cmds(t_cmd *cmd)
 			freeing(cmd[e].cmd);
 		if (cmd[e].is_output_append)
 			free(cmd[e].is_output_append);
-		// if (cmd[e].cmd_path)
-		// 	free(cmd[e].cmd_path);
 		e++;
 	}
 	free(cmd);

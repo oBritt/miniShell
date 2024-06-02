@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/01 20:49:16 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/02 17:03:01 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	set_heredoc(t_cmd *command, t_data *data)
 	{
 		if (dup2(get_data()->fd_save, STDIN_FILENO) == -1)
 		{
-			//free exir
+			return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 		}
 		write(1, ">    \n", 6);
 	}
@@ -76,7 +76,7 @@ void	heredoc_check(t_data *data)
 	data->fd_save = dup(STDIN_FILENO);
 	if (data->fd_save == -1)
 	{
-		//free_the_stuff
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 	}
 	while (i < data->t_cmds[0].amount)
 	{

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/31 14:31:01 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/02 16:57:45 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_data	*get_data(void)
 
 	return (&data);
 }
+
 
 void	loop(t_data *data)
 {
@@ -50,7 +51,8 @@ void	loop(t_data *data)
 			continue ;
 		}
 		remove_useless_dollar(input);
-		parsing(data, input);
+		if (!parsing(data, input))
+			return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 
 		t_cmd *cmd = data->t_cmds;
 		for (int i = 0; cmd->amount > i; i++)
@@ -81,6 +83,8 @@ void	loop(t_data *data)
 		free(data->last_arg);
 		data->last_arg = data->cur_last;
 		data->cur_last = malloc(2);
+		if (!data->cur_last)
+			return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 		freeing_cmds(data->t_cmds);
 
 		get_signal()->is_execution = 0;

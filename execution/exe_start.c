@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 15:22:39 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/02 17:00:23 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	builtins_check(t_data *data)
 void	ft_waitpid(t_data *data)
 {
 	int	status;
+	int	temp;
 
-	while (data->t_cmds[0].amount--)
+	temp = data->t_cmds[0].amount;
+	while (temp--)
 		wait(&status);
 	data->waitpid_status = (WEXITSTATUS(status));
 }

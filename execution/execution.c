@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:45:43 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 15:27:00 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/02 17:04:46 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	p_check(int p, t_data *data)
 	if (p == -1)
 	{
 		perror("pipe");
-		exit(EXIT_FAILURE);
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 	}
 }
