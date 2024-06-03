@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 19:29:10 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/31 14:02:35 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:31:41 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ int	fill_array_dollar(t_data *data, t_space *space, char *str, char **expended)
 	return (f_dollar_last(space, str, expended));
 }
 
-// void	helper_init(t_space *space)
+void	helper_init(t_space *space, int expand)
+{
+	init_space(space, "");
+	space->one = expand;
+}
 
 int	manage_dollar(t_data *data, char **str, int expand)
 {
@@ -69,11 +73,9 @@ int	manage_dollar(t_data *data, char **str, int expand)
 	char	**expanded;
 	t_space	space;
 
-	init_space(&space, *str);
-	space.one = expand;
+	helper_init(&space, expand);
 	amount = count_dollars(&space, *str);
-	init_space(&space, *str);
-	space.one = expand;
+	helper_init(&space, expand);
 	expanded = malloc((amount * 4 + 4) * sizeof(char *));
 	if (!expanded)
 		return (0);

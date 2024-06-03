@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:04:41 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/02 17:25:08 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:26:59 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	handle_signals_c(int status)
 	free(str);
 	status--;
 }
-
-
 
 void	handle_signals_b(int status)
 {

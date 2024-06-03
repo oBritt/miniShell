@@ -6,11 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:12:21 by obrittne          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/03 15:41:01 by obrittne         ###   ########.fr       */
-=======
-/*   Updated: 2024/06/03 15:02:24 by oemelyan         ###   ########.fr       */
->>>>>>> cf4111741acc6f98b90357de23c11b092c2385ff
+/*   Updated: 2024/06/03 16:24:37 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +96,6 @@ int	handle_err_cd(t_data *data, char *str, int is_main)
 
 int	builtin_cd(t_data *data, char **command, int is_main)
 {
-	printf("--exe cd--\n");
 	char	*str;
 	DIR		*dir;
 

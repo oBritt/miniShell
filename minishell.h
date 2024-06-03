@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/01 20:33:42 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:24:23 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <errno.h>
 # include <dirent.h>
 # include <sys/wait.h>
-
 
 typedef struct s_sig
 {
@@ -64,12 +63,12 @@ typedef struct s_data
 	char	*oldpwd;
 	char	**original_env;
 	char	**addition_env;
-	int		last_exit; //to store exit status of last cmd - for echo
-	int		origin_stdin; //for execution of several cmds
-	int		origin_stdout; //for execution of several cmds
-	int		waitpid_status; // status of the last cmd will be stored
-	int		fd_arr[2]; // for piping
-	int		process_id; // for piping
+	int		last_exit;
+	int		origin_stdin;
+	int		origin_stdout;
+	int		waitpid_status;
+	int		fd_arr[2];
+	int		process_id;
 	char	*last_arg;
 	char	*cur_last;
 	t_cmd	*t_cmds;

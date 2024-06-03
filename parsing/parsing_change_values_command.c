@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:48:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/31 13:48:23 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:26:47 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static int	get_last(t_data *data, char **cmds)
 		data->cur_last = ft_str_dup("");
 	else
 		data->cur_last = ft_str_dup(cmds[i - 1]);
-
 	if (!data->cur_last)
 		return (0);
 	return (1);
@@ -60,10 +59,8 @@ int	change_values_command(char **command, t_data *data, t_cmd *cmd)
 	i = 0;
 	while (command[i])
 	{
-
 		if (!manage_dollar(data, &command[i], 0))
 			return (0);
-
 		if (!change_only_one(&command[i], data, &cmd[i]))
 			return (0);
 		i++;

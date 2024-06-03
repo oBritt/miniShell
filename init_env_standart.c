@@ -6,12 +6,11 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 13:01:43 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/24 13:04:49 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:18:09 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	**original_env2(char **env_standart)
 {
@@ -37,7 +36,6 @@ char	**original_env2(char **env_standart)
 	env_standart[33] = NULL;
 	return (env_standart);
 }
-
 
 char	**original_env(void)
 {

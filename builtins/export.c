@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:32:39 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 19:17:36 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:25:21 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	output_export(t_data *data, int fd)
 
 int	builtin_export(t_data *data, char **command, int fd, int is_main)
 {
-	//printf("--export builtin start--\n");
 	if (len_2d_array(command) == 1)
 	{
 		if (!output_export(data, fd))

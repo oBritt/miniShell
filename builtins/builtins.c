@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:54:51 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 14:56:41 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:25:41 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	init_array(char **array)
 
 int	check_if_builtin(char *str)
 {
-	printf("---builtins check, str: %s--\n", str);
 	char	*built_ins[7];
 	int		i;
 
@@ -58,4 +57,3 @@ int	check_if_builtin(char *str)
 	}
 	return (0);
 }
-

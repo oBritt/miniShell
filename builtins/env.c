@@ -3,15 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:06:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 12:45:46 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:23:54 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../executor.h"
+
+void	env_multiple(t_data *data, int is_main)
+{
+	write(2, "env: can not take any options or argimetns\n", 43);
+	if (!is_main)
+		exit(126);
+	data->last_exit = 126;
+}
+
+void	env_not_reachable(t_data *data, int is_main)
+{
+	write(2, "env: No such file or directory\n", 31);
+	if (!is_main)
+		exit(127);
+	data->last_exit = 127;
+}
 
 int	builtin_env(t_data *data, char **command, int fd, int is_main)
 {
@@ -19,29 +35,9 @@ int	builtin_env(t_data *data, char **command, int fd, int is_main)
 	int		i;
 
 	if (len_2d_array(command) != 1)
-	{
-		write(2, "env: can not take any options or argimetns\n", 43);
-		if (!is_main)
-		{
-			data->waitpid_status = 126;
-			exit(126);
-		}
-		data->waitpid_status = 126;
-		data->last_exit = 126;
-		return(0);
-	}
+		env_multiple(data, is_main);
 	else if (!if_path_is_still_in_env(data))
-	{
-		write(2, "env: No such file or directory\n", 31);
-		if (!is_main)
-		{
-			data->waitpid_status = 127;
-			exit(127);
-		}
-		data->waitpid_status = 127;
-		data->last_exit = 127;
-		return(0);
-	}
+		env_not_reachable(data, is_main);
 	else
 	{
 		i = 0;
@@ -53,7 +49,7 @@ int	builtin_env(t_data *data, char **command, int fd, int is_main)
 			i++;
 		}
 		if (!is_main)
-			exit(0); //exit the child
+			exit(0);
 		data->last_exit = 0;
 	}
 	return (1);
