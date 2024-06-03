@@ -8,6 +8,10 @@
 		"__locale": "c",
 		"locale": "c",
 		"cstdlib": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c"
 	}
 }

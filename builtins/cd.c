@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:12:21 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 14:28:44 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:41:01 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	handle_err_cd(t_data *data, char *str, int is_main)
 		exit(1);
 	data->last_exit = 1;
 	free(str);
-	return (0);
+	return (1);
 }
 
 int	builtin_cd(t_data *data, char **command, int is_main)

@@ -6,11 +6,18 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:05 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/29 16:41:58 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:01:11 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_data	*get_data(void)
+{
+	static t_data	data;
+
+	return (&data);
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -33,6 +40,4 @@ int	main(int argc, char **argv, char **env)
 
 	if (data->exit)
 		exit(data->exit);
-	//system("leaks ./minishell");
-	//exit(0);
 }
