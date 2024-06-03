@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/02 17:00:23 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:58:01 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	builtins_check(t_data *data)
 	{
 		data->t_cmds[i].is_builtin = 0;
 		data->t_cmds[i].is_builtin = check_if_builtin(data->t_cmds[i].cmd[0]);
+		printf("builtin nbr: %d\n", data->t_cmds[i].is_builtin);
 		i++;
 	}
 }
@@ -56,6 +57,7 @@ void	ft_waitpid(t_data *data)
 
 void	execute_cmd(t_data *data)
 {
+	//printf("execute_cmd start\n");
 	data->origin_stdin = STDIN_FILENO;
 	data->origin_stdout = STDOUT_FILENO;
 	builtins_check(data);
