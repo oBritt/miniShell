@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:54:51 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 16:25:41 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:19:22 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ int	check_if_builtin(char *str)
 	init_array(built_ins);
 	while (i < 7)
 	{
-		printf("i is: %d, arrai is: %s\n", i, built_ins[i]);
 		if (!compare_strings(str, built_ins[i]))
 		{
-			printf("str is: %s, arr[i] is: %s\n", str, built_ins[i]);
 			return (i + 1);
 		}
 		i++;

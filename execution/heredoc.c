@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/02 17:17:40 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:19:58 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	set_heredoc(t_cmd *command, t_data *data)
 	nbr = 0;
 	while (command->delimiter[nbr])
 		nbr++;
-	printf("nbr from set heredoc: %d\n", nbr);
 	read_store_input(command, nbr, data);
 	if (get_signal()->should_stop)
 	{

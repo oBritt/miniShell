@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:48:59 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 16:26:47 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:15:55 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	change_values_command(char **command, t_data *data, t_cmd *cmd)
 			return (0);
 		if (!change_only_one(&command[i], data, &cmd[i]))
 			return (0);
+		cmd[i].open = 0;
 		i++;
 	}
 	return (1);

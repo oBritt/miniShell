@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 16:24:23 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:15:01 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct command
 	int			path_failed;
 	int			execve_result;
 	int			cmd_is_path;
+	int			open;
 }	t_cmd;
 
 typedef struct s_data

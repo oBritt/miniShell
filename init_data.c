@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:26:01 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 10:31:52 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:09:38 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	update_under_score(t_data *data)
 	char	*joined;
 	int		t;
 
-	t = find_by_key(data->env, "_") - 1;
+	t = find_by_key(data->env, "_");
 	str = get_cwd();
 	if (!str)
 		return (freeing(data->env), 0);
@@ -102,10 +102,10 @@ int	init_data(t_data *data, char **env)
 		return (0);
 	data->original_env = original_env();
 	sort_to_original(env, data->original_env);
-	ind = find_by_key(data->env, "SHLVL") - 1;
+	ind = find_by_key(data->env, "SHLVL");
 	if (ind)
 	{
-		if (!handle_update_shlvl(&data->env[ind]))
+		if (!handle_update_shlvl(&data->env[ind - 1]))
 			return (freeing(data->env), 0);
 	}
 	else

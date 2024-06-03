@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_n_execute2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:14:13 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/03 13:35:02 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:21:07 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	last_cmd_check(t_data *data, int last_cmd, int i)
 
 void	execve_check(t_data *data, int last_cmd, int i)
 {
-	printf("execve result: %d\n", data->t_cmds[i].execve_result);
 	(void)last_cmd;
 	if (data->t_cmds[i].execve_result == -1)
 	{

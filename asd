@@ -57,3 +57,29 @@ start2.sh
 strings
 syntax
 wildcard
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd
+exe builtin
+asd

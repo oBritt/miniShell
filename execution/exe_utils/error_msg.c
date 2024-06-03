@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:53:10 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 15:32:46 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:22:30 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ void	outfile_err(char *s)
 	display_error(strerror(errno));
 	display_error("\n");
 }
-

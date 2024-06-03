@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/03 14:44:36 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:24:22 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 char	*find_in_envp(char *cmd, t_data *data, int nbr)
 {
-	printf("--find in env---\n");
 	char	*temp;
 	char	*cmd_path;
 	int		i;
@@ -32,10 +31,7 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 		if (!cmd_path)
 			return (freeing_cmds(data->t_cmds), free_data(data), exit(1), NULL);
 		if (access(cmd_path, X_OK) == 0)
-		{
-			free(temp);
-			return (cmd_path);
-		}
+			return (free(temp), cmd_path);
 		free(temp);
 		free(cmd_path);
 		i++;
@@ -48,7 +44,6 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 
 void	get_all_paths(t_data *data)
 {
-	printf("--get all path--\n");
 	int		i;
 
 	i = 0;
@@ -91,7 +86,6 @@ int	path_in_env_check(t_data *data)
 
 void	get_cmd_path(t_data *data, int cmd_index)
 {
-	//printf("--get cmd path---\n");
 	data->t_cmds[cmd_index].cmd_is_path = 0;
 	if (!path_in_env_check(data))
 		exit(127);
@@ -100,7 +94,6 @@ void	get_cmd_path(t_data *data, int cmd_index)
 	{
 		data->t_cmds[cmd_index].cmd_path = \
 			find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index);
-		//printf("cmd path is: %s\n", data->t_cmds[cmd_index].cmd_path);
 		return ;
 	}
 	else

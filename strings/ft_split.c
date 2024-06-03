@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 20:16:06 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/10 21:41:33 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:21:17 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,3 @@ char	**ft_split(char const *s, char c)
 	words[len] = 0;
 	return (words);
 }
-
-// #include <stdio.h>
-
-// int main(){
-// 	char **ptr;
-// 	char *str = "I like bear";
-// 	char c = 'i';
-// 	ptr = ft_split(str, c);
-// 	for (int i = 0; ptr[i]; i++){
-// 		printf("%s\n", ptr[i]);
-// 	}
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:45:43 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/03 15:02:07 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:19:54 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 int	execute_builtin(t_data *data, int i, int is_main)
 {
-	printf("exe builtin\n");
 	if (!data->t_cmds[i].out_fd)
 		data->t_cmds[i].out_fd = data->origin_stdout;
 	if (data->t_cmds[i].redir_failed && data->t_cmds[0].amount > 1)
@@ -45,7 +44,6 @@ int	execute_builtin(t_data *data, int i, int is_main)
 
 void	the_only_one_builtin_exe(t_data *data, int i)
 {
-	printf("the only builtin exe\n");
 	int	t;
 
 	if (data->t_cmds[i].out_fd)

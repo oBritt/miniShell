@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:19:12 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 15:33:11 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:16:41 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	open_out_file(t_cmd *command, int i, int redir_number, int *fail)
 	{
 		command->out_fd = fd;
 	}
+	command->open = 1;
 	return ;
 }
 
