@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:29:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 17:15:01 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 21:34:25 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,4 +248,8 @@ char		*get_key(char *str);
 int			helper_empty(t_data *data, char *str, char *copy);
 void		handle_signals_c_h(int status);
 void		handle_signals_c(int status);
+void		helper_function_append(t_data *data, char *copy, int t);
+void		sig_ignore(int status);
+void		handle_signals_b(int status);
+void		sig_get_b(int status);
 #endif

@@ -1,0 +1,18 @@
+c*c*c**c
+echo ******i*m
+exit --
+" echo $?"
+ctrl quit
+exit code after "enter" && command
+
+ls
+env: No such file or directory
+
+
+minishell > ls  | << 22 | >111 | chmod 000 33
+> ^C>
+env: No such file or directory
+env: No such file or directory
+- ctrl C - should stop workign
+
+env -i ./minishell or unset PATH: still need to execute files with relative path or given absolute path.

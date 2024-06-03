@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 16:08:57 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 21:57:41 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	should_continue(t_data *data, char *input)
 	if (!compare_strings("", input))
 	{
 		free(input);
+		data->last_exit = 0;
 		return (1);
 	}
 	add_history(input);

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:06:45 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 16:23:54 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:34:18 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	builtin_env(t_data *data, char **command, int fd, int is_main)
 
 	if (len_2d_array(command) != 1)
 		env_multiple(data, is_main);
-	else if (!if_path_is_still_in_env(data))
-		env_not_reachable(data, is_main);
 	else
 	{
 		i = 0;

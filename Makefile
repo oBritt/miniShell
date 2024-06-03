@@ -1,6 +1,6 @@
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
-SRCS = main.c loop.c  init_data.c init_env_standart.c freeing.c \
+SRCS = main.c loop.c  init_data.c init_env_standart.c freeing.c init_data_h.c \
 strings/strings_utils.c strings/put_nbr_fd.c strings/atoll.c strings/find_value.c strings/quotes.c  strings/transform2dto1d.c  strings/ft_split_respect_quotes_help.c \
 strings/utils_string_alocation_env.c strings/remove_spaces.c strings/strings_utils2.c strings/single_quotes.c strings/ft_split_respect_quotes.c \
 strings/full_handle_quotes.c strings/full_handle_quotes_h.c strings/transform_path_variable.c  strings/quotes_dollar.c strings/quotes_no.c \
@@ -16,7 +16,7 @@ env/check_if_in.c env/sort_env.c env/update_env.c env/handle_update.c \
 execution/exe_start.c execution/cmd_paths.c execution/pipe_n_execute.c execution/execution.c execution/heredoc_process.c \
 execution/exe_utils/error_msg.c execution/exe_utils/ft_split.c execution/exe_utils/ft_strjoin.c execution/exe_utils/ft_strnstr.c \
 execution/exe_utils/libft.c execution/heredoc.c execution/redirections.c execution/pipe_n_execute2.c\
-signals/init_signals.c signals/init_signals_h.c 
+signals/init_signals.c signals/init_signals_h.c
 
 OBJS = $(SRCS:.c=.o)
 

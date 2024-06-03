@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/03 17:19:58 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:59:04 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,6 @@ void	set_heredoc(t_cmd *command, t_data *data)
 		}
 		write(1, ">    \n", 6);
 	}
-	get_signal()->hereidoc = 0;
-	get_signal()->should_stop = 0;
-	close(data->fd_save);
-	signal(SIGINT, handle_signals_c);
 }
 
 void	heredoc_check(t_data *data)
@@ -89,4 +85,8 @@ void	heredoc_check(t_data *data)
 		}
 		i++;
 	}
+	get_signal()->hereidoc = 0;
+	get_signal()->should_stop = 0;
+	close(data->fd_save);
+	signal(SIGINT, handle_signals_c);
 }

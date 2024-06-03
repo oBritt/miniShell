@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_signals_h.c                                   :+:      :+:    :+:   */
+/*   init_data_h.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/02 17:25:21 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 21:58:48 by obrittne         ###   ########.fr       */
+/*   Created: 2024/06/03 19:47:51 by obrittne          #+#    #+#             */
+/*   Updated: 2024/06/03 19:50:31 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-void	handle_signals_c_h(int status)
+void	helper_function_append(t_data *data, char *copy, int t)
 {
-	close(STDIN_FILENO);
-	status++;
-	get_data()->last_exit = 130;
-	get_signal()->should_stop = 1;
+	if (!t)
+	{
+		if (!update_env_value(&data->env, copy, t, 1))
+			return (free(data), exit(1));
+	}
+	else
+		update_env_value(&data->env, copy, t - 1, 0);
 }

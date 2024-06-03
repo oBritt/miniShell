@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:45:43 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/03 17:19:54 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:59:18 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	the_only_one_builtin_exe(t_data *data, int i)
 {
 	int	t;
 
+	if (data->t_cmds[i].redir_failed)
+		return ;
 	if (data->t_cmds[i].out_fd)
 	{
 		if (dup2(data->t_cmds[i].out_fd, 1) == -1)

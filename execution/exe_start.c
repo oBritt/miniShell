@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/03 17:19:46 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 21:56:38 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ void	ft_waitpid(t_data *data)
 		if (data->t_cmds[temp].open)
 			close(data->t_cmds[temp].out_fd);
 	}
+	if (status == 3)
+	{
+		write(1, "Quit\n", 5);
+		data->last_exit = 131;
+	}
+	else if (status == 2)
+	{
+		write(1, "\n", 1);
+		data->last_exit = 130;
+	}
 	data->waitpid_status = (WEXITSTATUS(status));
 }
 
@@ -67,5 +77,14 @@ void	execute_cmd(t_data *data)
 	builtins_check(data);
 	set_redirections(data);
 	mult_execute(data);
+	get_signal()->signal_type = 0;
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 	ft_waitpid(data);
+	if (signal(SIGINT, handle_signals_c) == SIG_ERR)
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
+	if (signal(SIGQUIT, handle_signals_b) == SIG_ERR)
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 }

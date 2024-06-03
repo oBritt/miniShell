@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 11:11:30 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 17:21:38 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:50:06 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	free_data(t_data *data)
 		free(data->last_arg);
 	if (data->cur_last)
 		free(data->cur_last);
+	data += 0;
 }

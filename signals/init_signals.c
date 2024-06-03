@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:04:41 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 16:26:59 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 21:38:31 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,16 @@ void	handle_signals_b(int status)
 	status--;
 	data = get_data();
 	sig = get_signal();
-	if (sig->is_execution && !sig->hereidoc)
-	{
-		get_data()->last_exit = 131;
-		write(2, "Quit: 3\n", 8);
-	}
-	else
-	{
-		str = copy(rl_line_buffer);
-		if (!str)
-			return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
-		str[str_len(str)] = 0;
-		rl_replace_line(str, 1);
-		rl_redisplay();
-		str[str_len(str) - 2] = 0;
-		rl_replace_line(str, 1);
-		return (free(str), rl_redisplay());
-	}
+	sig->error += 0;
+	str = copy(rl_line_buffer);
+	if (!str)
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
+	str[str_len(str)] = 0;
+	rl_replace_line(str, 1);
+	rl_redisplay();
+	str[str_len(str) - 2] = 0;
+	rl_replace_line(str, 1);
+	return (free(str), rl_redisplay());
 }
 
 void	init_signals(t_data *data)

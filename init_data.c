@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:26:01 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 17:09:38 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:49:24 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	update_under_score(t_data *data)
 	copy = ft_str_dup("_=/usr/bin/env");
 	if (!copy)
 		return (freeing(data->env), 0);
-	update_env_value(&data->env, copy, t, 0);
+	helper_function_append(data, copy, t);
 	data->last_arg = joined;
 	data->cur_last = malloc(2);
 	if (!data->cur_last)
