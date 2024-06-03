@@ -6,7 +6,7 @@
 /*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:12:21 by obrittne          #+#    #+#             */
-/*   Updated: 2024/05/27 14:28:44 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:02:24 by oemelyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	handle_err_cd(t_data *data, char *str, int is_main)
 
 int	builtin_cd(t_data *data, char **command, int is_main)
 {
+	printf("--exe cd--\n");
 	char	*str;
 	DIR		*dir;
 
