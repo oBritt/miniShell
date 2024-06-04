@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = main.c loop.c  init_data.c init_env_standart.c freeing.c init_data_h.c \
 strings/strings_utils.c strings/put_nbr_fd.c strings/atoll.c strings/find_value.c strings/quotes.c  strings/transform2dto1d.c  strings/ft_split_respect_quotes_help.c \
