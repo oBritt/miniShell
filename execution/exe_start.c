@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:06:18 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/03 21:56:38 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:34:17 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_waitpid(t_data *data)
 	int	status;
 	int	temp;
 
+	status = 0;
 	temp = data->t_cmds[0].amount;
 	while (temp--)
 		wait(&status);

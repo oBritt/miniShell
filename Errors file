@@ -1,6 +1,6 @@
 c*c*c**c
 echo ******i*m
-exit --
+
 " echo $?"
 ctrl quit
 exit code after "enter" && command

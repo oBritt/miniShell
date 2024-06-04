@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:03:51 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 16:29:39 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:45:57 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	get_total_len_space(char **array)
 		}
 		i++;
 	}
+	if (counter == -1)
+		return (1);
 	return (counter);
 }
 
@@ -42,11 +44,15 @@ static void	helper_25_lines(int *i, char *output, int *counter, int len)
 		*counter += 1;
 }
 
-char	*transform_to_1d_pipe(char **array)
+static char	*return_empty(char *str)
+{
+	str[0] = 0;
+	return (str);
+}
+
+char	*transform_to_1d_pipe(char **array, int i, int e)
 {
 	char	*output;
-	int		i;
-	int		e;
 	int		counter;
 	int		len;
 
@@ -54,6 +60,8 @@ char	*transform_to_1d_pipe(char **array)
 	output = malloc((len + 1) * sizeof(char));
 	if (!output)
 		return (NULL);
+	if (len == 0)
+		return (return_empty(output));
 	i = 0;
 	counter = 0;
 	while (array[i])

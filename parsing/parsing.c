@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:43:44 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 15:53:16 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:29:24 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	parsing(t_data *data, char *input)
 	char	**commands;
 	int		i;
 
+	remove_useless_spaces(input);
 	remove_useless_dollar(input);
 	commands = ft_split_respect_quotes(input, '|');
 	if (!commands)
