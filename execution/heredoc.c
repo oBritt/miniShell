@@ -6,12 +6,19 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:29:04 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/03 19:59:04 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:03:22 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 #include "../minishell.h"
+
+void	do_4_helper(t_cmd *command, char *input)
+{
+	close(command->heredoc_fd[1]);
+	if (input)
+		free(input);
+}
 
 void	skip_unused_delimiters(t_cmd *command, int nbr)
 {
@@ -57,7 +64,7 @@ void	set_heredoc(t_cmd *command, t_data *data)
 		{
 			return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 		}
-		write(1, ">    \n", 6);
+		write(1, "\n", 1);
 	}
 }
 
@@ -70,9 +77,7 @@ void	heredoc_check(t_data *data)
 	signal(SIGINT, handle_signals_c_h);
 	data->fd_save = dup(STDIN_FILENO);
 	if (data->fd_save == -1)
-	{
 		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
-	}
 	while (i < data->t_cmds[0].amount)
 	{
 		if (data->t_cmds[i].delimiter && data->t_cmds[i].delimiter[0])

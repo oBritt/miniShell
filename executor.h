@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oemelyan <oemelyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:03:34 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/05/31 15:34:34 by oemelyan         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:55:34 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		do_4_two(t_cmd *command, int nbr, t_data *data);
 int			reject_check(char *input, t_cmd *command, int nbr);
 void		take_n_write(t_cmd *command, t_data *data);
 int			input_check(char *str);
+void		do_4_helper(t_cmd *command, char *input);
 
 //redir out
 void		redir_out_check(t_cmd *command);

@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:25:20 by obrittne          #+#    #+#             */
-/*   Updated: 2024/06/03 21:57:41 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:08:29 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ int	should_continue(t_data *data, char *input)
 	}
 	add_history(input);
 	if (!check_syntaxes(data, input))
+	{
+		free(input);
+		return (1);
+	}
+	remove_useless_spaces(input);
+	if (*input == 0)
 	{
 		free(input);
 		return (1);

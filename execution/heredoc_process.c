@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:31:42 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/01 20:47:20 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:55:40 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	input_check(char *str)
 {
 	if (!str)
 	{
-		free (str);
+		free(str);
 		return (0);
 	}
 	else
@@ -33,8 +33,8 @@ void	take_n_write(t_cmd *command, t_data *data)
 	input = readline("> ");
 	if (!input_check(input))
 		return ;
-	while (get_signal()->should_stop == 0 && \
-		ft_strcmp(input, command->delimiter[0]))
+	while (get_signal()->should_stop == 0 && ft_strcmp(input,
+			command->delimiter[0]))
 	{
 		if (!input_check(input))
 			break ;
@@ -53,7 +53,7 @@ void	take_n_write(t_cmd *command, t_data *data)
 
 int	reject_check(char *input, t_cmd *command, int nbr)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < nbr - 2)
@@ -68,15 +68,15 @@ int	reject_check(char *input, t_cmd *command, int nbr)
 
 void	skip_second_last(t_cmd *command, int nbr)
 {
-	char		*input;
+	char	*input;
 
 	if (get_signal()->should_stop)
 		return ;
 	input = readline("> ");
 	if (!input_check(input))
 		return ;
-	while (get_signal()->should_stop == 0 && \
-	ft_strcmp(input, command->delimiter[nbr - 2]))
+	while (get_signal()->should_stop == 0 && ft_strcmp(input,
+			command->delimiter[nbr - 2]))
 	{
 		free(input);
 		input = readline("> ");
@@ -89,7 +89,7 @@ void	skip_second_last(t_cmd *command, int nbr)
 
 void	do_4_two(t_cmd *command, int nbr, t_data *data)
 {
-	char		*input;
+	char	*input;
 
 	skip_second_last(command, nbr);
 	if (get_signal()->should_stop)
@@ -97,8 +97,8 @@ void	do_4_two(t_cmd *command, int nbr, t_data *data)
 	input = readline("> ");
 	if (!input_check(input))
 		return ;
-	while (get_signal()->should_stop == 0 && \
-	ft_strcmp(input, command->delimiter[nbr - 1]))
+	while (get_signal()->should_stop == 0 && ft_strcmp(input,
+			command->delimiter[nbr - 1]))
 	{
 		if (!reject_check(input, command, nbr))
 		{
@@ -113,7 +113,5 @@ void	do_4_two(t_cmd *command, int nbr, t_data *data)
 		if (!input_check(input))
 			break ;
 	}
-	close (command->heredoc_fd[1]);
-	if (input)
-		free(input);
+	do_4_helper(command, input);
 }

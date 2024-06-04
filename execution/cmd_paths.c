@@ -6,7 +6,7 @@
 /*   By: obrittne <obrittne@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:03:09 by oemelyan          #+#    #+#             */
-/*   Updated: 2024/06/03 17:24:22 by obrittne         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:47:37 by obrittne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,39 @@ char	*find_in_envp(char *cmd, t_data *data, int nbr)
 	return (NULL);
 }
 
+char	**get_empty_a(void)
+{
+	char	**out;
+
+	out = malloc(sizeof(char *));
+	if (!out)
+		return (NULL);
+	out[0] = NULL;
+	return (out);
+}
+
 void	get_all_paths(t_data *data)
 {
 	int		i;
+	int		t;
 
 	i = 0;
+	t = 0;
 	while (data->env[i])
 	{
 		if (ft_strnstr(data->env[i], "PATH", 4) != 0)
+		{
 			data->all_env_paths = ft_split1(data->env[i] + 5, ':');
+			t = 1;
+		}
 		i++;
 	}
+	if (t == 0)
+	{
+		data->all_env_paths = get_empty_a();
+	}
 	if (!data->all_env_paths)
-		exit(1);
+		return (freeing_cmds(data->t_cmds), free_data(data), exit(1));
 }
 
 int	if_path_is_still_in_env(t_data *data)
@@ -73,22 +93,9 @@ int	if_path_is_still_in_env(t_data *data)
 	return (0);
 }
 
-int	path_in_env_check(t_data *data)
-{
-	if (!if_path_is_still_in_env(data))
-	{
-		write(2, "env: No such file or directory\n", 31);
-		data->waitpid_status = 127;
-		return (0);
-	}
-	return (1);
-}
-
 void	get_cmd_path(t_data *data, int cmd_index)
 {
 	data->t_cmds[cmd_index].cmd_is_path = 0;
-	if (!path_in_env_check(data))
-		exit(127);
 	get_all_paths(data);
 	if (find_in_envp(data->t_cmds[cmd_index].cmd[0], data, cmd_index))
 	{
